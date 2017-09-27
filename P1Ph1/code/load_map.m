@@ -19,12 +19,26 @@ fileID = fopen(filename);
 fileDat = textscan(fileID,'%s %f %f %f %f %f %f %f %f %f','CommentStyle','#');
 fclose(fileID);
 %% START YOUR CODE HERE %%
-i=length(fileDat{1});
-data=fileDat(1,2:10);
-limits=cell2mat(data);
-bound=limits(1,1:6);
-limits(1,:)=[];
-blocks=limits;
+%i=length(fileDat{1});
+% data=fileDat(1,2:10);
+% limits=cell2mat(data);
+% bound=limits(1,1:6);
+% limits(1,:)=[];
+% 
+% blocks=limits;
+
+c = 1;
+for i = 1:size(fileDat{1,1}, 1)
+    if ismember(fileDat{1}{i}, 'boundary')
+        bound(1,:) = [fileDat{2}(i), fileDat{3}(i), fileDat{4}(i),...
+                         fileDat{5}(i), fileDat{6}(i), fileDat{7}(i)];
+    else
+        blocks(c,:) = [fileDat{2}(i), fileDat{3}(i), fileDat{4}(i),...
+                         fileDat{5}(i), fileDat{6}(i), fileDat{7}(i)];
+        c = c + 1;
+    end
+end
+
 n_x=((bound(4)-bound(1))/xy_res)+1;
 n_y=((bound(5)-bound(2))/xy_res)+1;
 n_z=((bound(6)-bound(3))/z_res)+1;
@@ -40,6 +54,8 @@ Z=linspace(bound(3),bound(6),n_z);
 %        
 %    end
 % end
+
+
 grid=zeros(length(X),length(Y),length(Z));
 for j=1:i-1
     if rem(((blocks(j,1)-X(1))/xy_res),1)== 0
@@ -69,7 +85,10 @@ for j=1:i-1
             z_b=((blocks(j,3)-Z(1))/z_res)-rem(((blocks(j,3)-Z(1))/z_res),1);
         end
     end
-    grid(x_b+1:int16(((blocks(j,4)-X(1))/xy_res))+1,y_b+1:int16((blocks(j,5)-Y(1))/xy_res)+1,z_b+1:int16((blocks(j,6)-Z(1))/z_res)+1)=1;
+   grid(    x_b+1:floor((blocks(j,4)-X(1))/ xy_res)+1,...
+            y_b+1:floor((blocks(j,5)-Y(1))/ xy_res)+1,...
+            z_b+1:floor((blocks(j,6)-Z(1))/ z_res )+1 ) =1;
+   %grid(x_b+1:((blocks(j,4)-X(1))/xy_res)+1,y_b+1:((blocks(j,5)-Y(1))/xy_res)+1,z_b+1:((blocks(j,6)-Z(1))/z_res)+1)=1;
 end
 %% END YOUR CODE HERE %%
 map=cell(1,6);

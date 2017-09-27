@@ -128,6 +128,7 @@ else
 %     [PATH,NUM_EXPANDED]=[final_path,source];
     path=[final_path;source];
     path=flipud(path);
+    points=path;
     [num_expanded,dd]=size(path);
 end
     
@@ -202,6 +203,7 @@ end
     else
 %     [PATH,NUM_EXPANDED]=[visited(:,1:3),lengt] ; 
         path=visited(:,1:3);
+        points=path;
         num_expanded=lengt;
     end
 end

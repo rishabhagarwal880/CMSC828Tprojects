@@ -20,26 +20,40 @@ for i=1:M
                 mapco(c,1)=i;
                 mapco(c,2)=j;
                 mapco(c,3)=k;
+                mapcoo(c,1)=i;
+                mapcoo(c,2)=j;
+                mapcoo(c,3)=k;
                 mapco(c,4)=grid(i,j,k);
                c=c+1;
         end
     end
 end
-[O,P]=size(path);
+[O,P]=size(points);
 [Q,R]=size(mapco);
-while true
-    for i=1:O
-        for j=1:Q
-           if mapco(j,1:3)==path(i,1:3)
-               if mapco(j,4)==1
-                    C(i)=1;
-               else
-                   C(i)=0; 
-               end
-           end
+% while true
+%     for i=1:O
+%         for j=1:Q
+%            if mapco(j,1:3)==points(i,1:3)
+%                if mapco(j,4)==1
+%                     C(i)=1;
+%                else
+%                    C(i)=0; 
+%                end
+%            end
+%         end
+%     end
+% end
+
+[A,ia,ib] = intersect(mapcoo,points,'rows');
+C=zeros(O,1);
+
+if isempty(ia)==0
+    for v=1:length(ia)
+        if mapco(ia,4)==1
+            C(ia(i))=1;
         end
     end
-
-    %% END YOUR CODE HERE %%
 end
+    %% END YOUR CODE HERE %%
+
 end
