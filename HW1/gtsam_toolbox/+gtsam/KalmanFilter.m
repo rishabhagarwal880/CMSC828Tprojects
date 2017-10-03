@@ -24,9 +24,9 @@ classdef KalmanFilter < handle
     function obj = KalmanFilter(varargin)
       if nargin == 2 && isa(varargin{1}, 'uint64') && varargin{1} == uint64(5139824614673773682)
         my_ptr = varargin{2};
-        gtsam_wrapper(906, my_ptr);
+        gtsam_wrapper(946, my_ptr);
       elseif nargin == 1 && isa(varargin{1},'numeric')
-        my_ptr = gtsam_wrapper(907, varargin{1});
+        my_ptr = gtsam_wrapper(947, varargin{1});
       else
         error('Arguments do not match any overload of gtsam.KalmanFilter constructor');
       end
@@ -34,7 +34,7 @@ classdef KalmanFilter < handle
     end
 
     function delete(obj)
-      gtsam_wrapper(908, obj.ptr_gtsamKalmanFilter);
+      gtsam_wrapper(948, obj.ptr_gtsamKalmanFilter);
     end
 
     function display(obj), obj.print(''); end
@@ -45,7 +45,7 @@ classdef KalmanFilter < handle
       % INIT usage: init(Vector x0, Matrix P0) : returns gtsam::GaussianDensity
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'double') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(909, this, varargin{:});
+        varargout{1} = gtsam_wrapper(949, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.KalmanFilter.init');
       end
@@ -55,7 +55,7 @@ classdef KalmanFilter < handle
       % PREDICT usage: predict(GaussianDensity p, Matrix F, Matrix B, Vector u, Diagonal modelQ) : returns gtsam::GaussianDensity
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 5 && isa(varargin{1},'gtsam.GaussianDensity') && isa(varargin{2},'double') && isa(varargin{3},'double') && isa(varargin{4},'double') && isa(varargin{5},'gtsam.noiseModel.Diagonal')
-        varargout{1} = gtsam_wrapper(910, this, varargin{:});
+        varargout{1} = gtsam_wrapper(950, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.KalmanFilter.predict');
       end
@@ -65,7 +65,7 @@ classdef KalmanFilter < handle
       % PREDICT2 usage: predict2(GaussianDensity p, Matrix A0, Matrix A1, Vector b, Diagonal model) : returns gtsam::GaussianDensity
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 5 && isa(varargin{1},'gtsam.GaussianDensity') && isa(varargin{2},'double') && isa(varargin{3},'double') && isa(varargin{4},'double') && isa(varargin{5},'gtsam.noiseModel.Diagonal')
-        varargout{1} = gtsam_wrapper(911, this, varargin{:});
+        varargout{1} = gtsam_wrapper(951, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.KalmanFilter.predict2');
       end
@@ -75,7 +75,7 @@ classdef KalmanFilter < handle
       % PREDICTQ usage: predictQ(GaussianDensity p, Matrix F, Matrix B, Vector u, Matrix Q) : returns gtsam::GaussianDensity
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 5 && isa(varargin{1},'gtsam.GaussianDensity') && isa(varargin{2},'double') && isa(varargin{3},'double') && isa(varargin{4},'double') && isa(varargin{5},'double')
-        varargout{1} = gtsam_wrapper(912, this, varargin{:});
+        varargout{1} = gtsam_wrapper(952, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.KalmanFilter.predictQ');
       end
@@ -85,7 +85,7 @@ classdef KalmanFilter < handle
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(913, this, varargin{:});
+        gtsam_wrapper(953, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.KalmanFilter.print');
       end
@@ -95,7 +95,7 @@ classdef KalmanFilter < handle
       % UPDATE usage: update(GaussianDensity p, Matrix H, Vector z, Diagonal model) : returns gtsam::GaussianDensity
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 4 && isa(varargin{1},'gtsam.GaussianDensity') && isa(varargin{2},'double') && isa(varargin{3},'double') && isa(varargin{4},'gtsam.noiseModel.Diagonal')
-        varargout{1} = gtsam_wrapper(914, this, varargin{:});
+        varargout{1} = gtsam_wrapper(954, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.KalmanFilter.update');
       end
@@ -105,7 +105,7 @@ classdef KalmanFilter < handle
       % UPDATEQ usage: updateQ(GaussianDensity p, Matrix H, Vector z, Matrix Q) : returns gtsam::GaussianDensity
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 4 && isa(varargin{1},'gtsam.GaussianDensity') && isa(varargin{2},'double') && isa(varargin{3},'double') && isa(varargin{4},'double')
-        varargout{1} = gtsam_wrapper(915, this, varargin{:});
+        varargout{1} = gtsam_wrapper(955, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.KalmanFilter.updateQ');
       end
@@ -121,7 +121,7 @@ classdef KalmanFilter < handle
       % Usage
       % STEP(GaussianDensity p)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.GaussianDensity')
-        varargout{1} = gtsam_wrapper(916, varargin{:});
+        varargout{1} = gtsam_wrapper(956, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.KalmanFilter.Step');
       end

@@ -17,6 +17,10 @@
 %printKeys(string s) : returns void
 %size() : returns size_t
 %
+%-------Serialization Interface-------
+%string_serialize() : returns string
+%string_deserialize(string serialized) : returns NonlinearEqualityStereoPoint2
+%
 classdef NonlinearEqualityStereoPoint2 < gtsam.NoiseModelFactor
   properties
     ptr_gtsamNonlinearEqualityStereoPoint2 = 0
@@ -27,13 +31,13 @@ classdef NonlinearEqualityStereoPoint2 < gtsam.NoiseModelFactor
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(1770, varargin{2});
+          my_ptr = gtsam_wrapper(1878, varargin{2});
         end
-        base_ptr = gtsam_wrapper(1769, my_ptr);
+        base_ptr = gtsam_wrapper(1877, my_ptr);
       elseif nargin == 2 && isa(varargin{1},'numeric') && isa(varargin{2},'gtsam.StereoPoint2')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1771, varargin{1}, varargin{2});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(1879, varargin{1}, varargin{2});
       elseif nargin == 3 && isa(varargin{1},'numeric') && isa(varargin{2},'gtsam.StereoPoint2') && isa(varargin{3},'double')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1772, varargin{1}, varargin{2}, varargin{3});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(1880, varargin{1}, varargin{2}, varargin{3});
       else
         error('Arguments do not match any overload of gtsam.NonlinearEqualityStereoPoint2 constructor');
       end
@@ -42,7 +46,7 @@ classdef NonlinearEqualityStereoPoint2 < gtsam.NoiseModelFactor
     end
 
     function delete(obj)
-      gtsam_wrapper(1773, obj.ptr_gtsamNonlinearEqualityStereoPoint2);
+      gtsam_wrapper(1881, obj.ptr_gtsamNonlinearEqualityStereoPoint2);
     end
 
     function display(obj), obj.print(''); end
@@ -53,7 +57,7 @@ classdef NonlinearEqualityStereoPoint2 < gtsam.NoiseModelFactor
       % ACTIVE usage: active(Values c) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1774, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1882, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearEqualityStereoPoint2.active');
       end
@@ -62,20 +66,20 @@ classdef NonlinearEqualityStereoPoint2 < gtsam.NoiseModelFactor
     function varargout = clone(this, varargin)
       % CLONE usage: clone() : returns gtsam::NonlinearFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1775, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1883, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1776, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1884, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(NonlinearFactor other, double tol) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.NonlinearFactor') && isa(varargin{2},'double')
-        gtsam_wrapper(1777, this, varargin{:});
+        gtsam_wrapper(1885, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearEqualityStereoPoint2.equals');
       end
@@ -85,7 +89,7 @@ classdef NonlinearEqualityStereoPoint2 < gtsam.NoiseModelFactor
       % ERROR usage: error(Values c) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1778, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1886, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearEqualityStereoPoint2.error');
       end
@@ -94,14 +98,14 @@ classdef NonlinearEqualityStereoPoint2 < gtsam.NoiseModelFactor
     function varargout = keys(this, varargin)
       % KEYS usage: keys() : returns gtsam::KeyVector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1779, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1887, this, varargin{:});
     end
 
     function varargout = linearize(this, varargin)
       % LINEARIZE usage: linearize(Values c) : returns gtsam::GaussianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1780, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1888, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearEqualityStereoPoint2.linearize');
       end
@@ -111,7 +115,7 @@ classdef NonlinearEqualityStereoPoint2 < gtsam.NoiseModelFactor
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1781, this, varargin{:});
+        gtsam_wrapper(1889, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearEqualityStereoPoint2.print');
       end
@@ -121,7 +125,7 @@ classdef NonlinearEqualityStereoPoint2 < gtsam.NoiseModelFactor
       % PRINTKEYS usage: printKeys(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1782, this, varargin{:});
+        gtsam_wrapper(1890, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearEqualityStereoPoint2.printKeys');
       end
@@ -130,11 +134,39 @@ classdef NonlinearEqualityStereoPoint2 < gtsam.NoiseModelFactor
     function varargout = size(this, varargin)
       % SIZE usage: size() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1783, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1891, this, varargin{:});
     end
 
+    function varargout = string_serialize(this, varargin)
+      % STRING_SERIALIZE usage: string_serialize() : returns string
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 0
+        varargout{1} = gtsam_wrapper(1892, this, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.NonlinearEqualityStereoPoint2.string_serialize');
+      end
+    end
+
+    function sobj = saveobj(obj)
+      % SAVEOBJ Saves the object to a matlab-readable format
+      sobj = obj.string_serialize();
+    end
   end
 
   methods(Static = true)
+    function varargout = string_deserialize(varargin)
+      % STRING_DESERIALIZE usage: string_deserialize() : returns gtsam.NonlinearEqualityStereoPoint2
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 1
+        varargout{1} = gtsam_wrapper(1893, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.NonlinearEqualityStereoPoint2.string_deserialize');
+      end
+    end
+
+    function obj = loadobj(sobj)
+      % LOADOBJ Saves the object to a matlab-readable format
+      obj = gtsam.NonlinearEqualityStereoPoint2.string_deserialize(sobj);
+    end
   end
 end

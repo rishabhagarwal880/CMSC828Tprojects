@@ -27,13 +27,13 @@ classdef Unit3 < gtsam.Value
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(261, varargin{2});
+          my_ptr = gtsam_wrapper(279, varargin{2});
         end
-        base_ptr = gtsam_wrapper(260, my_ptr);
+        base_ptr = gtsam_wrapper(278, my_ptr);
       elseif nargin == 0
-        [ my_ptr, base_ptr ] = gtsam_wrapper(262);
+        [ my_ptr, base_ptr ] = gtsam_wrapper(280);
       elseif nargin == 1 && isa(varargin{1},'gtsam.Point3')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(263, varargin{1});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(281, varargin{1});
       else
         error('Arguments do not match any overload of gtsam.Unit3 constructor');
       end
@@ -42,7 +42,7 @@ classdef Unit3 < gtsam.Value
     end
 
     function delete(obj)
-      gtsam_wrapper(264, obj.ptr_gtsamUnit3);
+      gtsam_wrapper(282, obj.ptr_gtsamUnit3);
     end
 
     function display(obj), obj.print(''); end
@@ -52,20 +52,20 @@ classdef Unit3 < gtsam.Value
     function varargout = basis(this, varargin)
       % BASIS usage: basis() : returns Matrix
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(265, this, varargin{:});
+      varargout{1} = gtsam_wrapper(283, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(266, this, varargin{:});
+      varargout{1} = gtsam_wrapper(284, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(Unit3 pose, double tol) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.Unit3') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(267, this, varargin{:});
+        varargout{1} = gtsam_wrapper(285, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Unit3.equals');
       end
@@ -75,7 +75,7 @@ classdef Unit3 < gtsam.Value
       % LOCALCOORDINATES usage: localCoordinates(Unit3 s) : returns Vector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Unit3')
-        varargout{1} = gtsam_wrapper(268, this, varargin{:});
+        varargout{1} = gtsam_wrapper(286, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Unit3.localCoordinates');
       end
@@ -85,7 +85,7 @@ classdef Unit3 < gtsam.Value
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(269, this, varargin{:});
+        gtsam_wrapper(287, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Unit3.print');
       end
@@ -95,7 +95,7 @@ classdef Unit3 < gtsam.Value
       % RETRACT usage: retract(Vector v) : returns gtsam::Unit3
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(270, this, varargin{:});
+        varargout{1} = gtsam_wrapper(288, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Unit3.retract');
       end
@@ -104,7 +104,7 @@ classdef Unit3 < gtsam.Value
     function varargout = skew(this, varargin)
       % SKEW usage: skew() : returns Matrix
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(271, this, varargin{:});
+      varargout{1} = gtsam_wrapper(289, this, varargin{:});
     end
 
   end
@@ -117,7 +117,7 @@ classdef Unit3 < gtsam.Value
       % Usage
       % DIM()
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(272, varargin{:});
+        varargout{1} = gtsam_wrapper(290, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Unit3.Dim');
       end

@@ -19,9 +19,9 @@ classdef NonlinearOptimizer < handle
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(1203, varargin{2});
+          my_ptr = gtsam_wrapper(1255, varargin{2});
         end
-        gtsam_wrapper(1202, my_ptr);
+        gtsam_wrapper(1254, my_ptr);
       else
         error('Arguments do not match any overload of gtsam.NonlinearOptimizer constructor');
       end
@@ -29,7 +29,7 @@ classdef NonlinearOptimizer < handle
     end
 
     function delete(obj)
-      gtsam_wrapper(1204, obj.ptr_gtsamNonlinearOptimizer);
+      gtsam_wrapper(1256, obj.ptr_gtsamNonlinearOptimizer);
     end
 
     function display(obj), obj.print(''); end
@@ -39,37 +39,37 @@ classdef NonlinearOptimizer < handle
     function varargout = error(this, varargin)
       % ERROR usage: error() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1205, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1257, this, varargin{:});
     end
 
     function varargout = iterate(this, varargin)
       % ITERATE usage: iterate() : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1206, this, varargin{:});
+      gtsam_wrapper(1258, this, varargin{:});
     end
 
     function varargout = iterations(this, varargin)
       % ITERATIONS usage: iterations() : returns int
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1207, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1259, this, varargin{:});
     end
 
     function varargout = optimize(this, varargin)
       % OPTIMIZE usage: optimize() : returns gtsam::Values
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1208, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1260, this, varargin{:});
     end
 
     function varargout = optimizeSafely(this, varargin)
       % OPTIMIZESAFELY usage: optimizeSafely() : returns gtsam::Values
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1209, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1261, this, varargin{:});
     end
 
     function varargout = values(this, varargin)
       % VALUES usage: values() : returns gtsam::Values
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1210, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1262, this, varargin{:});
     end
 
   end

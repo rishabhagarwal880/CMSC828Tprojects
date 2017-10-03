@@ -17,6 +17,10 @@
 %printKeys(string s) : returns void
 %size() : returns size_t
 %
+%-------Serialization Interface-------
+%string_serialize() : returns string
+%string_deserialize(string serialized) : returns BetweenFactorLieMatrix
+%
 classdef BetweenFactorLieMatrix < gtsam.NoiseModelFactor
   properties
     ptr_gtsamBetweenFactorLieMatrix = 0
@@ -27,11 +31,11 @@ classdef BetweenFactorLieMatrix < gtsam.NoiseModelFactor
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(1590, varargin{2});
+          my_ptr = gtsam_wrapper(1674, varargin{2});
         end
-        base_ptr = gtsam_wrapper(1589, my_ptr);
+        base_ptr = gtsam_wrapper(1673, my_ptr);
       elseif nargin == 4 && isa(varargin{1},'numeric') && isa(varargin{2},'numeric') && isa(varargin{3},'gtsam.LieMatrix') && isa(varargin{4},'gtsam.noiseModel.Base')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1591, varargin{1}, varargin{2}, varargin{3}, varargin{4});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(1675, varargin{1}, varargin{2}, varargin{3}, varargin{4});
       else
         error('Arguments do not match any overload of gtsam.BetweenFactorLieMatrix constructor');
       end
@@ -40,7 +44,7 @@ classdef BetweenFactorLieMatrix < gtsam.NoiseModelFactor
     end
 
     function delete(obj)
-      gtsam_wrapper(1592, obj.ptr_gtsamBetweenFactorLieMatrix);
+      gtsam_wrapper(1676, obj.ptr_gtsamBetweenFactorLieMatrix);
     end
 
     function display(obj), obj.print(''); end
@@ -51,7 +55,7 @@ classdef BetweenFactorLieMatrix < gtsam.NoiseModelFactor
       % ACTIVE usage: active(Values c) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1593, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1677, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.BetweenFactorLieMatrix.active');
       end
@@ -60,20 +64,20 @@ classdef BetweenFactorLieMatrix < gtsam.NoiseModelFactor
     function varargout = clone(this, varargin)
       % CLONE usage: clone() : returns gtsam::NonlinearFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1594, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1678, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1595, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1679, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(NonlinearFactor other, double tol) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.NonlinearFactor') && isa(varargin{2},'double')
-        gtsam_wrapper(1596, this, varargin{:});
+        gtsam_wrapper(1680, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.BetweenFactorLieMatrix.equals');
       end
@@ -83,7 +87,7 @@ classdef BetweenFactorLieMatrix < gtsam.NoiseModelFactor
       % ERROR usage: error(Values c) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1597, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1681, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.BetweenFactorLieMatrix.error');
       end
@@ -92,14 +96,14 @@ classdef BetweenFactorLieMatrix < gtsam.NoiseModelFactor
     function varargout = keys(this, varargin)
       % KEYS usage: keys() : returns gtsam::KeyVector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1598, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1682, this, varargin{:});
     end
 
     function varargout = linearize(this, varargin)
       % LINEARIZE usage: linearize(Values c) : returns gtsam::GaussianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1599, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1683, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.BetweenFactorLieMatrix.linearize');
       end
@@ -108,14 +112,14 @@ classdef BetweenFactorLieMatrix < gtsam.NoiseModelFactor
     function varargout = measured(this, varargin)
       % MEASURED usage: measured() : returns gtsam::LieMatrix
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1600, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1684, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1601, this, varargin{:});
+        gtsam_wrapper(1685, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.BetweenFactorLieMatrix.print');
       end
@@ -125,7 +129,7 @@ classdef BetweenFactorLieMatrix < gtsam.NoiseModelFactor
       % PRINTKEYS usage: printKeys(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1602, this, varargin{:});
+        gtsam_wrapper(1686, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.BetweenFactorLieMatrix.printKeys');
       end
@@ -134,11 +138,39 @@ classdef BetweenFactorLieMatrix < gtsam.NoiseModelFactor
     function varargout = size(this, varargin)
       % SIZE usage: size() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1603, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1687, this, varargin{:});
     end
 
+    function varargout = string_serialize(this, varargin)
+      % STRING_SERIALIZE usage: string_serialize() : returns string
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 0
+        varargout{1} = gtsam_wrapper(1688, this, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.BetweenFactorLieMatrix.string_serialize');
+      end
+    end
+
+    function sobj = saveobj(obj)
+      % SAVEOBJ Saves the object to a matlab-readable format
+      sobj = obj.string_serialize();
+    end
   end
 
   methods(Static = true)
+    function varargout = string_deserialize(varargin)
+      % STRING_DESERIALIZE usage: string_deserialize() : returns gtsam.BetweenFactorLieMatrix
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 1
+        varargout{1} = gtsam_wrapper(1689, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.BetweenFactorLieMatrix.string_deserialize');
+      end
+    end
+
+    function obj = loadobj(sobj)
+      % LOADOBJ Saves the object to a matlab-readable format
+      obj = gtsam.BetweenFactorLieMatrix.string_deserialize(sobj);
+    end
   end
 end

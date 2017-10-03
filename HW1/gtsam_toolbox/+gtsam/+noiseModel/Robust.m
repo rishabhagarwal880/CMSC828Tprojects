@@ -20,11 +20,11 @@ classdef Robust < gtsam.noiseModel.Base
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(602, varargin{2});
+          my_ptr = gtsam_wrapper(632, varargin{2});
         end
-        base_ptr = gtsam_wrapper(601, my_ptr);
+        base_ptr = gtsam_wrapper(631, my_ptr);
       elseif nargin == 2 && isa(varargin{1},'gtsam.noiseModel.mEstimator.Base') && isa(varargin{2},'gtsam.noiseModel.Base')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(603, varargin{1}, varargin{2});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(633, varargin{1}, varargin{2});
       else
         error('Arguments do not match any overload of gtsam.noiseModel.Robust constructor');
       end
@@ -33,7 +33,7 @@ classdef Robust < gtsam.noiseModel.Base
     end
 
     function delete(obj)
-      gtsam_wrapper(604, obj.ptr_gtsamnoiseModelRobust);
+      gtsam_wrapper(634, obj.ptr_gtsamnoiseModelRobust);
     end
 
     function display(obj), obj.print(''); end
@@ -44,7 +44,7 @@ classdef Robust < gtsam.noiseModel.Base
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(605, this, varargin{:});
+        gtsam_wrapper(635, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Robust.print');
       end
@@ -60,7 +60,7 @@ classdef Robust < gtsam.noiseModel.Base
       % Usage
       % CREATE(Base robust, Base noise)
       if length(varargin) == 2 && isa(varargin{1},'gtsam.noiseModel.mEstimator.Base') && isa(varargin{2},'gtsam.noiseModel.Base')
-        varargout{1} = gtsam_wrapper(606, varargin{:});
+        varargout{1} = gtsam_wrapper(636, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Robust.Create');
       end

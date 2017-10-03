@@ -29,11 +29,11 @@ classdef ConjugateGradientParameters < gtsam.IterativeOptimizationParameters
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(877, varargin{2});
+          my_ptr = gtsam_wrapper(917, varargin{2});
         end
-        base_ptr = gtsam_wrapper(876, my_ptr);
+        base_ptr = gtsam_wrapper(916, my_ptr);
       elseif nargin == 0
-        [ my_ptr, base_ptr ] = gtsam_wrapper(878);
+        [ my_ptr, base_ptr ] = gtsam_wrapper(918);
       else
         error('Arguments do not match any overload of gtsam.ConjugateGradientParameters constructor');
       end
@@ -42,7 +42,7 @@ classdef ConjugateGradientParameters < gtsam.IterativeOptimizationParameters
     end
 
     function delete(obj)
-      gtsam_wrapper(879, obj.ptr_gtsamConjugateGradientParameters);
+      gtsam_wrapper(919, obj.ptr_gtsamConjugateGradientParameters);
     end
 
     function display(obj), obj.print(''); end
@@ -52,80 +52,80 @@ classdef ConjugateGradientParameters < gtsam.IterativeOptimizationParameters
     function varargout = getEpsilon_abs(this, varargin)
       % GETEPSILON_ABS usage: getEpsilon_abs() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(880, this, varargin{:});
+      varargout{1} = gtsam_wrapper(920, this, varargin{:});
     end
 
     function varargout = getEpsilon_rel(this, varargin)
       % GETEPSILON_REL usage: getEpsilon_rel() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(881, this, varargin{:});
+      varargout{1} = gtsam_wrapper(921, this, varargin{:});
     end
 
     function varargout = getMaxIterations(this, varargin)
       % GETMAXITERATIONS usage: getMaxIterations() : returns int
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(882, this, varargin{:});
+      varargout{1} = gtsam_wrapper(922, this, varargin{:});
     end
 
     function varargout = getMinIterations(this, varargin)
       % GETMINITERATIONS usage: getMinIterations() : returns int
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(883, this, varargin{:});
+      varargout{1} = gtsam_wrapper(923, this, varargin{:});
     end
 
     function varargout = getReset(this, varargin)
       % GETRESET usage: getReset() : returns int
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(884, this, varargin{:});
+      varargout{1} = gtsam_wrapper(924, this, varargin{:});
     end
 
     function varargout = getVerbosity(this, varargin)
       % GETVERBOSITY usage: getVerbosity() : returns string
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(885, this, varargin{:});
+      varargout{1} = gtsam_wrapper(925, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print() : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(886, this, varargin{:});
+      gtsam_wrapper(926, this, varargin{:});
     end
 
     function varargout = setEpsilon_abs(this, varargin)
       % SETEPSILON_ABS usage: setEpsilon_abs(double value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(887, this, varargin{:});
+      gtsam_wrapper(927, this, varargin{:});
     end
 
     function varargout = setEpsilon_rel(this, varargin)
       % SETEPSILON_REL usage: setEpsilon_rel(double value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(888, this, varargin{:});
+      gtsam_wrapper(928, this, varargin{:});
     end
 
     function varargout = setMaxIterations(this, varargin)
       % SETMAXITERATIONS usage: setMaxIterations(int value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(889, this, varargin{:});
+      gtsam_wrapper(929, this, varargin{:});
     end
 
     function varargout = setMinIterations(this, varargin)
       % SETMINITERATIONS usage: setMinIterations(int value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(890, this, varargin{:});
+      gtsam_wrapper(930, this, varargin{:});
     end
 
     function varargout = setReset(this, varargin)
       % SETRESET usage: setReset(int value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(891, this, varargin{:});
+      gtsam_wrapper(931, this, varargin{:});
     end
 
     function varargout = setVerbosity(this, varargin)
       % SETVERBOSITY usage: setVerbosity(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(892, this, varargin{:});
+        gtsam_wrapper(932, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.ConjugateGradientParameters.setVerbosity');
       end

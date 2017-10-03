@@ -35,13 +35,13 @@ classdef LinearContainerFactor < gtsam.NonlinearFactor
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(1078, varargin{2});
+          my_ptr = gtsam_wrapper(1130, varargin{2});
         end
-        base_ptr = gtsam_wrapper(1077, my_ptr);
+        base_ptr = gtsam_wrapper(1129, my_ptr);
       elseif nargin == 2 && isa(varargin{1},'gtsam.GaussianFactor') && isa(varargin{2},'gtsam.Values')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1079, varargin{1}, varargin{2});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(1131, varargin{1}, varargin{2});
       elseif nargin == 1 && isa(varargin{1},'gtsam.GaussianFactor')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1080, varargin{1});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(1132, varargin{1});
       else
         error('Arguments do not match any overload of gtsam.LinearContainerFactor constructor');
       end
@@ -50,7 +50,7 @@ classdef LinearContainerFactor < gtsam.NonlinearFactor
     end
 
     function delete(obj)
-      gtsam_wrapper(1081, obj.ptr_gtsamLinearContainerFactor);
+      gtsam_wrapper(1133, obj.ptr_gtsamLinearContainerFactor);
     end
 
     function display(obj), obj.print(''); end
@@ -61,7 +61,7 @@ classdef LinearContainerFactor < gtsam.NonlinearFactor
       % ACTIVE usage: active(Values c) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1082, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1134, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.LinearContainerFactor.active');
       end
@@ -70,20 +70,20 @@ classdef LinearContainerFactor < gtsam.NonlinearFactor
     function varargout = clone(this, varargin)
       % CLONE usage: clone() : returns gtsam::NonlinearFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1083, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1135, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1084, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1136, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(NonlinearFactor other, double tol) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.NonlinearFactor') && isa(varargin{2},'double')
-        gtsam_wrapper(1085, this, varargin{:});
+        gtsam_wrapper(1137, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.LinearContainerFactor.equals');
       end
@@ -93,7 +93,7 @@ classdef LinearContainerFactor < gtsam.NonlinearFactor
       % ERROR usage: error(Values c) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1086, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1138, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.LinearContainerFactor.error');
       end
@@ -102,26 +102,26 @@ classdef LinearContainerFactor < gtsam.NonlinearFactor
     function varargout = factor(this, varargin)
       % FACTOR usage: factor() : returns gtsam::GaussianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1087, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1139, this, varargin{:});
     end
 
     function varargout = isJacobian(this, varargin)
       % ISJACOBIAN usage: isJacobian() : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1088, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1140, this, varargin{:});
     end
 
     function varargout = keys(this, varargin)
       % KEYS usage: keys() : returns gtsam::KeyVector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1089, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1141, this, varargin{:});
     end
 
     function varargout = linearize(this, varargin)
       % LINEARIZE usage: linearize(Values c) : returns gtsam::GaussianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1090, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1142, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.LinearContainerFactor.linearize');
       end
@@ -131,7 +131,7 @@ classdef LinearContainerFactor < gtsam.NonlinearFactor
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1091, this, varargin{:});
+        gtsam_wrapper(1143, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.LinearContainerFactor.print');
       end
@@ -141,7 +141,7 @@ classdef LinearContainerFactor < gtsam.NonlinearFactor
       % PRINTKEYS usage: printKeys(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1092, this, varargin{:});
+        gtsam_wrapper(1144, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.LinearContainerFactor.printKeys');
       end
@@ -150,19 +150,19 @@ classdef LinearContainerFactor < gtsam.NonlinearFactor
     function varargout = size(this, varargin)
       % SIZE usage: size() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1093, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1145, this, varargin{:});
     end
 
     function varargout = toHessian(this, varargin)
       % TOHESSIAN usage: toHessian() : returns gtsam::HessianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1094, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1146, this, varargin{:});
     end
 
     function varargout = toJacobian(this, varargin)
       % TOJACOBIAN usage: toJacobian() : returns gtsam::JacobianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1095, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1147, this, varargin{:});
     end
 
   end
@@ -176,9 +176,9 @@ classdef LinearContainerFactor < gtsam.NonlinearFactor
       % CONVERTLINEARGRAPH(GaussianFactorGraph linear_graph, Values linearizationPoint)
       % CONVERTLINEARGRAPH(GaussianFactorGraph linear_graph)
       if length(varargin) == 2 && isa(varargin{1},'gtsam.GaussianFactorGraph') && isa(varargin{2},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1096, varargin{:});
+        varargout{1} = gtsam_wrapper(1148, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.GaussianFactorGraph')
-        varargout{1} = gtsam_wrapper(1097, varargin{:});
+        varargout{1} = gtsam_wrapper(1149, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.LinearContainerFactor.ConvertLinearGraph');
       end

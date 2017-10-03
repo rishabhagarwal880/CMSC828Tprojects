@@ -29,13 +29,13 @@ classdef ImuFactor < gtsam.NonlinearFactor
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(1980, varargin{2});
+          my_ptr = gtsam_wrapper(2110, varargin{2});
         end
-        base_ptr = gtsam_wrapper(1979, my_ptr);
+        base_ptr = gtsam_wrapper(2109, my_ptr);
       elseif nargin == 8 && isa(varargin{1},'numeric') && isa(varargin{2},'numeric') && isa(varargin{3},'numeric') && isa(varargin{4},'numeric') && isa(varargin{5},'numeric') && isa(varargin{6},'gtsam.ImuFactorPreintegratedMeasurements') && isa(varargin{7},'double') && isa(varargin{8},'double')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1981, varargin{1}, varargin{2}, varargin{3}, varargin{4}, varargin{5}, varargin{6}, varargin{7}, varargin{8});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(2111, varargin{1}, varargin{2}, varargin{3}, varargin{4}, varargin{5}, varargin{6}, varargin{7}, varargin{8});
       elseif nargin == 9 && isa(varargin{1},'numeric') && isa(varargin{2},'numeric') && isa(varargin{3},'numeric') && isa(varargin{4},'numeric') && isa(varargin{5},'numeric') && isa(varargin{6},'gtsam.ImuFactorPreintegratedMeasurements') && isa(varargin{7},'double') && isa(varargin{8},'double') && isa(varargin{9},'gtsam.Pose3')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1982, varargin{1}, varargin{2}, varargin{3}, varargin{4}, varargin{5}, varargin{6}, varargin{7}, varargin{8}, varargin{9});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(2112, varargin{1}, varargin{2}, varargin{3}, varargin{4}, varargin{5}, varargin{6}, varargin{7}, varargin{8}, varargin{9});
       else
         error('Arguments do not match any overload of gtsam.ImuFactor constructor');
       end
@@ -44,7 +44,7 @@ classdef ImuFactor < gtsam.NonlinearFactor
     end
 
     function delete(obj)
-      gtsam_wrapper(1983, obj.ptr_gtsamImuFactor);
+      gtsam_wrapper(2113, obj.ptr_gtsamImuFactor);
     end
 
     function display(obj), obj.print(''); end
@@ -55,7 +55,7 @@ classdef ImuFactor < gtsam.NonlinearFactor
       % PREDICT usage: Predict(Pose3 pose_i, LieVector vel_i, Pose3 pose_j, LieVector vel_j, ConstantBias bias, ImuFactorPreintegratedMeasurements preintegratedMeasurements, Vector gravity, Vector omegaCoriolis) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 8 && isa(varargin{1},'gtsam.Pose3') && isa(varargin{2},'gtsam.LieVector') && isa(varargin{3},'gtsam.Pose3') && isa(varargin{4},'gtsam.LieVector') && isa(varargin{5},'gtsam.imuBias.ConstantBias') && isa(varargin{6},'gtsam.ImuFactorPreintegratedMeasurements') && isa(varargin{7},'double') && isa(varargin{8},'double')
-        gtsam_wrapper(1984, this, varargin{:});
+        gtsam_wrapper(2114, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.ImuFactor.Predict');
       end
@@ -65,7 +65,7 @@ classdef ImuFactor < gtsam.NonlinearFactor
       % ACTIVE usage: active(Values c) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1985, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2115, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.ImuFactor.active');
       end
@@ -74,20 +74,20 @@ classdef ImuFactor < gtsam.NonlinearFactor
     function varargout = clone(this, varargin)
       % CLONE usage: clone() : returns gtsam::NonlinearFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1986, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2116, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1987, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2117, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(NonlinearFactor other, double tol) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.NonlinearFactor') && isa(varargin{2},'double')
-        gtsam_wrapper(1988, this, varargin{:});
+        gtsam_wrapper(2118, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.ImuFactor.equals');
       end
@@ -97,7 +97,7 @@ classdef ImuFactor < gtsam.NonlinearFactor
       % ERROR usage: error(Values c) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1989, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2119, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.ImuFactor.error');
       end
@@ -106,14 +106,14 @@ classdef ImuFactor < gtsam.NonlinearFactor
     function varargout = keys(this, varargin)
       % KEYS usage: keys() : returns gtsam::KeyVector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1990, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2120, this, varargin{:});
     end
 
     function varargout = linearize(this, varargin)
       % LINEARIZE usage: linearize(Values c) : returns gtsam::GaussianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1991, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2121, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.ImuFactor.linearize');
       end
@@ -122,14 +122,14 @@ classdef ImuFactor < gtsam.NonlinearFactor
     function varargout = preintegratedMeasurements(this, varargin)
       % PREINTEGRATEDMEASUREMENTS usage: preintegratedMeasurements() : returns gtsam::ImuFactorPreintegratedMeasurements
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1992, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2122, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1993, this, varargin{:});
+        gtsam_wrapper(2123, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.ImuFactor.print');
       end
@@ -139,7 +139,7 @@ classdef ImuFactor < gtsam.NonlinearFactor
       % PRINTKEYS usage: printKeys(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1994, this, varargin{:});
+        gtsam_wrapper(2124, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.ImuFactor.printKeys');
       end
@@ -148,7 +148,7 @@ classdef ImuFactor < gtsam.NonlinearFactor
     function varargout = size(this, varargin)
       % SIZE usage: size() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1995, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2125, this, varargin{:});
     end
 
   end

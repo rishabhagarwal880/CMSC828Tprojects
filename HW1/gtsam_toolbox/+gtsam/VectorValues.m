@@ -29,6 +29,10 @@
 %-------Static Methods-------
 %Zero(VectorValues model) : returns gtsam::VectorValues
 %
+%-------Serialization Interface-------
+%string_serialize() : returns string
+%string_deserialize(string serialized) : returns VectorValues
+%
 classdef VectorValues < handle
   properties
     ptr_gtsamVectorValues = 0
@@ -37,11 +41,11 @@ classdef VectorValues < handle
     function obj = VectorValues(varargin)
       if nargin == 2 && isa(varargin{1}, 'uint64') && varargin{1} == uint64(5139824614673773682)
         my_ptr = varargin{2};
-        gtsam_wrapper(617, my_ptr);
+        gtsam_wrapper(647, my_ptr);
       elseif nargin == 0
-        my_ptr = gtsam_wrapper(618);
+        my_ptr = gtsam_wrapper(648);
       elseif nargin == 1 && isa(varargin{1},'gtsam.VectorValues')
-        my_ptr = gtsam_wrapper(619, varargin{1});
+        my_ptr = gtsam_wrapper(649, varargin{1});
       else
         error('Arguments do not match any overload of gtsam.VectorValues constructor');
       end
@@ -49,7 +53,7 @@ classdef VectorValues < handle
     end
 
     function delete(obj)
-      gtsam_wrapper(620, obj.ptr_gtsamVectorValues);
+      gtsam_wrapper(650, obj.ptr_gtsamVectorValues);
     end
 
     function display(obj), obj.print(''); end
@@ -60,7 +64,7 @@ classdef VectorValues < handle
       % ADD usage: add(VectorValues c) : returns gtsam::VectorValues
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        varargout{1} = gtsam_wrapper(621, this, varargin{:});
+        varargout{1} = gtsam_wrapper(651, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.VectorValues.add');
       end
@@ -70,7 +74,7 @@ classdef VectorValues < handle
       % ADDINPLACE usage: addInPlace(VectorValues c) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        gtsam_wrapper(622, this, varargin{:});
+        gtsam_wrapper(652, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.VectorValues.addInPlace');
       end
@@ -79,20 +83,20 @@ classdef VectorValues < handle
     function varargout = at(this, varargin)
       % AT usage: at(size_t j) : returns Vector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(623, this, varargin{:});
+      varargout{1} = gtsam_wrapper(653, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim(size_t j) : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(624, this, varargin{:});
+      varargout{1} = gtsam_wrapper(654, this, varargin{:});
     end
 
     function varargout = dot(this, varargin)
       % DOT usage: dot(VectorValues V) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        varargout{1} = gtsam_wrapper(625, this, varargin{:});
+        varargout{1} = gtsam_wrapper(655, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.VectorValues.dot');
       end
@@ -102,7 +106,7 @@ classdef VectorValues < handle
       % EQUALS usage: equals(VectorValues expected, double tol) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.VectorValues') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(626, this, varargin{:});
+        varargout{1} = gtsam_wrapper(656, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.VectorValues.equals');
       end
@@ -111,14 +115,14 @@ classdef VectorValues < handle
     function varargout = exists(this, varargin)
       % EXISTS usage: exists(size_t j) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(627, this, varargin{:});
+      varargout{1} = gtsam_wrapper(657, this, varargin{:});
     end
 
     function varargout = hasSameStructure(this, varargin)
       % HASSAMESTRUCTURE usage: hasSameStructure(VectorValues other) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        varargout{1} = gtsam_wrapper(628, this, varargin{:});
+        varargout{1} = gtsam_wrapper(658, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.VectorValues.hasSameStructure');
       end
@@ -128,7 +132,7 @@ classdef VectorValues < handle
       % INSERT usage: insert(size_t j, Vector value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'numeric') && isa(varargin{2},'double')
-        gtsam_wrapper(629, this, varargin{:});
+        gtsam_wrapper(659, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.VectorValues.insert');
       end
@@ -137,14 +141,14 @@ classdef VectorValues < handle
     function varargout = norm(this, varargin)
       % NORM usage: norm() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(630, this, varargin{:});
+      varargout{1} = gtsam_wrapper(660, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(631, this, varargin{:});
+        gtsam_wrapper(661, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.VectorValues.print');
       end
@@ -153,38 +157,38 @@ classdef VectorValues < handle
     function varargout = scale(this, varargin)
       % SCALE usage: scale(double a) : returns gtsam::VectorValues
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(632, this, varargin{:});
+      varargout{1} = gtsam_wrapper(662, this, varargin{:});
     end
 
     function varargout = scaleInPlace(this, varargin)
       % SCALEINPLACE usage: scaleInPlace(double a) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(633, this, varargin{:});
+      gtsam_wrapper(663, this, varargin{:});
     end
 
     function varargout = setZero(this, varargin)
       % SETZERO usage: setZero() : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(634, this, varargin{:});
+      gtsam_wrapper(664, this, varargin{:});
     end
 
     function varargout = size(this, varargin)
       % SIZE usage: size() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(635, this, varargin{:});
+      varargout{1} = gtsam_wrapper(665, this, varargin{:});
     end
 
     function varargout = squaredNorm(this, varargin)
       % SQUAREDNORM usage: squaredNorm() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(636, this, varargin{:});
+      varargout{1} = gtsam_wrapper(666, this, varargin{:});
     end
 
     function varargout = subtract(this, varargin)
       % SUBTRACT usage: subtract(VectorValues c) : returns gtsam::VectorValues
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        varargout{1} = gtsam_wrapper(637, this, varargin{:});
+        varargout{1} = gtsam_wrapper(667, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.VectorValues.subtract');
       end
@@ -194,7 +198,7 @@ classdef VectorValues < handle
       % UPDATE usage: update(VectorValues values) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        gtsam_wrapper(638, this, varargin{:});
+        gtsam_wrapper(668, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.VectorValues.update');
       end
@@ -203,9 +207,23 @@ classdef VectorValues < handle
     function varargout = vector(this, varargin)
       % VECTOR usage: vector() : returns Vector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(639, this, varargin{:});
+      varargout{1} = gtsam_wrapper(669, this, varargin{:});
     end
 
+    function varargout = string_serialize(this, varargin)
+      % STRING_SERIALIZE usage: string_serialize() : returns string
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 0
+        varargout{1} = gtsam_wrapper(670, this, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.VectorValues.string_serialize');
+      end
+    end
+
+    function sobj = saveobj(obj)
+      % SAVEOBJ Saves the object to a matlab-readable format
+      sobj = obj.string_serialize();
+    end
   end
 
   methods(Static = true)
@@ -216,11 +234,25 @@ classdef VectorValues < handle
       % Usage
       % ZERO(VectorValues model)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        varargout{1} = gtsam_wrapper(640, varargin{:});
+        varargout{1} = gtsam_wrapper(671, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.VectorValues.Zero');
       end
     end
 
+    function varargout = string_deserialize(varargin)
+      % STRING_DESERIALIZE usage: string_deserialize() : returns gtsam.VectorValues
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 1
+        varargout{1} = gtsam_wrapper(672, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.VectorValues.string_deserialize');
+      end
+    end
+
+    function obj = loadobj(sobj)
+      % LOADOBJ Saves the object to a matlab-readable format
+      obj = gtsam.VectorValues.string_deserialize(sobj);
+    end
   end
 end

@@ -19,11 +19,11 @@ classdef SubgraphSolverParameters < gtsam.ConjugateGradientParameters
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(894, varargin{2});
+          my_ptr = gtsam_wrapper(934, varargin{2});
         end
-        base_ptr = gtsam_wrapper(893, my_ptr);
+        base_ptr = gtsam_wrapper(933, my_ptr);
       elseif nargin == 0
-        [ my_ptr, base_ptr ] = gtsam_wrapper(895);
+        [ my_ptr, base_ptr ] = gtsam_wrapper(935);
       else
         error('Arguments do not match any overload of gtsam.SubgraphSolverParameters constructor');
       end
@@ -32,7 +32,7 @@ classdef SubgraphSolverParameters < gtsam.ConjugateGradientParameters
     end
 
     function delete(obj)
-      gtsam_wrapper(896, obj.ptr_gtsamSubgraphSolverParameters);
+      gtsam_wrapper(936, obj.ptr_gtsamSubgraphSolverParameters);
     end
 
     function display(obj), obj.print(''); end
@@ -42,20 +42,20 @@ classdef SubgraphSolverParameters < gtsam.ConjugateGradientParameters
     function varargout = getVerbosity(this, varargin)
       % GETVERBOSITY usage: getVerbosity() : returns string
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(897, this, varargin{:});
+      varargout{1} = gtsam_wrapper(937, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print() : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(898, this, varargin{:});
+      gtsam_wrapper(938, this, varargin{:});
     end
 
     function varargout = setVerbosity(this, varargin)
       % SETVERBOSITY usage: setVerbosity(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(899, this, varargin{:});
+        gtsam_wrapper(939, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.SubgraphSolverParameters.setVerbosity');
       end

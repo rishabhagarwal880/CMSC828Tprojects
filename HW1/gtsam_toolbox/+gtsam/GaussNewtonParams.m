@@ -35,11 +35,11 @@ classdef GaussNewtonParams < gtsam.NonlinearOptimizerParams
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(1122, varargin{2});
+          my_ptr = gtsam_wrapper(1174, varargin{2});
         end
-        base_ptr = gtsam_wrapper(1121, my_ptr);
+        base_ptr = gtsam_wrapper(1173, my_ptr);
       elseif nargin == 0
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1123);
+        [ my_ptr, base_ptr ] = gtsam_wrapper(1175);
       else
         error('Arguments do not match any overload of gtsam.GaussNewtonParams constructor');
       end
@@ -48,7 +48,7 @@ classdef GaussNewtonParams < gtsam.NonlinearOptimizerParams
     end
 
     function delete(obj)
-      gtsam_wrapper(1124, obj.ptr_gtsamGaussNewtonParams);
+      gtsam_wrapper(1176, obj.ptr_gtsamGaussNewtonParams);
     end
 
     function display(obj), obj.print(''); end
@@ -58,68 +58,68 @@ classdef GaussNewtonParams < gtsam.NonlinearOptimizerParams
     function varargout = getAbsoluteErrorTol(this, varargin)
       % GETABSOLUTEERRORTOL usage: getAbsoluteErrorTol() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1125, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1177, this, varargin{:});
     end
 
     function varargout = getErrorTol(this, varargin)
       % GETERRORTOL usage: getErrorTol() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1126, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1178, this, varargin{:});
     end
 
     function varargout = getLinearSolverType(this, varargin)
       % GETLINEARSOLVERTYPE usage: getLinearSolverType() : returns string
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1127, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1179, this, varargin{:});
     end
 
     function varargout = getMaxIterations(this, varargin)
       % GETMAXITERATIONS usage: getMaxIterations() : returns int
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1128, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1180, this, varargin{:});
     end
 
     function varargout = getRelativeErrorTol(this, varargin)
       % GETRELATIVEERRORTOL usage: getRelativeErrorTol() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1129, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1181, this, varargin{:});
     end
 
     function varargout = getVerbosity(this, varargin)
       % GETVERBOSITY usage: getVerbosity() : returns string
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1130, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1182, this, varargin{:});
     end
 
     function varargout = isCholmod(this, varargin)
       % ISCHOLMOD usage: isCholmod() : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1131, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1183, this, varargin{:});
     end
 
     function varargout = isIterative(this, varargin)
       % ISITERATIVE usage: isIterative() : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1132, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1184, this, varargin{:});
     end
 
     function varargout = isMultifrontal(this, varargin)
       % ISMULTIFRONTAL usage: isMultifrontal() : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1133, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1185, this, varargin{:});
     end
 
     function varargout = isSequential(this, varargin)
       % ISSEQUENTIAL usage: isSequential() : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1134, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1186, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1135, this, varargin{:});
+        gtsam_wrapper(1187, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussNewtonParams.print');
       end
@@ -128,20 +128,20 @@ classdef GaussNewtonParams < gtsam.NonlinearOptimizerParams
     function varargout = setAbsoluteErrorTol(this, varargin)
       % SETABSOLUTEERRORTOL usage: setAbsoluteErrorTol(double value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1136, this, varargin{:});
+      gtsam_wrapper(1188, this, varargin{:});
     end
 
     function varargout = setErrorTol(this, varargin)
       % SETERRORTOL usage: setErrorTol(double value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1137, this, varargin{:});
+      gtsam_wrapper(1189, this, varargin{:});
     end
 
     function varargout = setIterativeParams(this, varargin)
       % SETITERATIVEPARAMS usage: setIterativeParams(IterativeOptimizationParameters params) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.IterativeOptimizationParameters')
-        gtsam_wrapper(1138, this, varargin{:});
+        gtsam_wrapper(1190, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussNewtonParams.setIterativeParams');
       end
@@ -151,7 +151,7 @@ classdef GaussNewtonParams < gtsam.NonlinearOptimizerParams
       % SETLINEARSOLVERTYPE usage: setLinearSolverType(string solver) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1139, this, varargin{:});
+        gtsam_wrapper(1191, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussNewtonParams.setLinearSolverType');
       end
@@ -160,14 +160,14 @@ classdef GaussNewtonParams < gtsam.NonlinearOptimizerParams
     function varargout = setMaxIterations(this, varargin)
       % SETMAXITERATIONS usage: setMaxIterations(int value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1140, this, varargin{:});
+      gtsam_wrapper(1192, this, varargin{:});
     end
 
     function varargout = setOrdering(this, varargin)
       % SETORDERING usage: setOrdering(Ordering ordering) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Ordering')
-        gtsam_wrapper(1141, this, varargin{:});
+        gtsam_wrapper(1193, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussNewtonParams.setOrdering');
       end
@@ -176,14 +176,14 @@ classdef GaussNewtonParams < gtsam.NonlinearOptimizerParams
     function varargout = setRelativeErrorTol(this, varargin)
       % SETRELATIVEERRORTOL usage: setRelativeErrorTol(double value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1142, this, varargin{:});
+      gtsam_wrapper(1194, this, varargin{:});
     end
 
     function varargout = setVerbosity(this, varargin)
       % SETVERBOSITY usage: setVerbosity(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1143, this, varargin{:});
+        gtsam_wrapper(1195, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussNewtonParams.setVerbosity');
       end

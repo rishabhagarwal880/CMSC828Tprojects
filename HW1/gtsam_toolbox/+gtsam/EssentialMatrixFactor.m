@@ -26,11 +26,11 @@ classdef EssentialMatrixFactor < gtsam.NoiseModelFactor
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(1935, varargin{2});
+          my_ptr = gtsam_wrapper(2065, varargin{2});
         end
-        base_ptr = gtsam_wrapper(1934, my_ptr);
+        base_ptr = gtsam_wrapper(2064, my_ptr);
       elseif nargin == 4 && isa(varargin{1},'numeric') && isa(varargin{2},'gtsam.Point2') && isa(varargin{3},'gtsam.Point2') && isa(varargin{4},'gtsam.noiseModel.Base')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1936, varargin{1}, varargin{2}, varargin{3}, varargin{4});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(2066, varargin{1}, varargin{2}, varargin{3}, varargin{4});
       else
         error('Arguments do not match any overload of gtsam.EssentialMatrixFactor constructor');
       end
@@ -39,7 +39,7 @@ classdef EssentialMatrixFactor < gtsam.NoiseModelFactor
     end
 
     function delete(obj)
-      gtsam_wrapper(1937, obj.ptr_gtsamEssentialMatrixFactor);
+      gtsam_wrapper(2067, obj.ptr_gtsamEssentialMatrixFactor);
     end
 
     function display(obj), obj.print(''); end
@@ -50,7 +50,7 @@ classdef EssentialMatrixFactor < gtsam.NoiseModelFactor
       % ACTIVE usage: active(Values c) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1938, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2068, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.EssentialMatrixFactor.active');
       end
@@ -59,20 +59,20 @@ classdef EssentialMatrixFactor < gtsam.NoiseModelFactor
     function varargout = clone(this, varargin)
       % CLONE usage: clone() : returns gtsam::NonlinearFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1939, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2069, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1940, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2070, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(NonlinearFactor other, double tol) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.NonlinearFactor') && isa(varargin{2},'double')
-        gtsam_wrapper(1941, this, varargin{:});
+        gtsam_wrapper(2071, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.EssentialMatrixFactor.equals');
       end
@@ -82,7 +82,7 @@ classdef EssentialMatrixFactor < gtsam.NoiseModelFactor
       % ERROR usage: error(Values c) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1942, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2072, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.EssentialMatrixFactor.error');
       end
@@ -91,14 +91,14 @@ classdef EssentialMatrixFactor < gtsam.NoiseModelFactor
     function varargout = keys(this, varargin)
       % KEYS usage: keys() : returns gtsam::KeyVector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1943, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2073, this, varargin{:});
     end
 
     function varargout = linearize(this, varargin)
       % LINEARIZE usage: linearize(Values c) : returns gtsam::GaussianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1944, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2074, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.EssentialMatrixFactor.linearize');
       end
@@ -108,7 +108,7 @@ classdef EssentialMatrixFactor < gtsam.NoiseModelFactor
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1945, this, varargin{:});
+        gtsam_wrapper(2075, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.EssentialMatrixFactor.print');
       end
@@ -118,7 +118,7 @@ classdef EssentialMatrixFactor < gtsam.NoiseModelFactor
       % PRINTKEYS usage: printKeys(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1946, this, varargin{:});
+        gtsam_wrapper(2076, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.EssentialMatrixFactor.printKeys');
       end
@@ -127,7 +127,7 @@ classdef EssentialMatrixFactor < gtsam.NoiseModelFactor
     function varargout = size(this, varargin)
       % SIZE usage: size() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1947, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2077, this, varargin{:});
     end
 
   end

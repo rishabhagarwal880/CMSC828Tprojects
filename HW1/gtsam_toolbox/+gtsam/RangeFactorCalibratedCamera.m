@@ -26,11 +26,11 @@ classdef RangeFactorCalibratedCamera < gtsam.NoiseModelFactor
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(2106, varargin{2});
+          my_ptr = gtsam_wrapper(2236, varargin{2});
         end
-        base_ptr = gtsam_wrapper(2105, my_ptr);
+        base_ptr = gtsam_wrapper(2235, my_ptr);
       elseif nargin == 4 && isa(varargin{1},'numeric') && isa(varargin{2},'numeric') && isa(varargin{3},'double') && isa(varargin{4},'gtsam.noiseModel.Base')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(2107, varargin{1}, varargin{2}, varargin{3}, varargin{4});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(2237, varargin{1}, varargin{2}, varargin{3}, varargin{4});
       else
         error('Arguments do not match any overload of gtsam.RangeFactorCalibratedCamera constructor');
       end
@@ -39,7 +39,7 @@ classdef RangeFactorCalibratedCamera < gtsam.NoiseModelFactor
     end
 
     function delete(obj)
-      gtsam_wrapper(2108, obj.ptr_gtsamRangeFactorCalibratedCamera);
+      gtsam_wrapper(2238, obj.ptr_gtsamRangeFactorCalibratedCamera);
     end
 
     function display(obj), obj.print(''); end
@@ -50,7 +50,7 @@ classdef RangeFactorCalibratedCamera < gtsam.NoiseModelFactor
       % ACTIVE usage: active(Values c) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(2109, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2239, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.RangeFactorCalibratedCamera.active');
       end
@@ -59,20 +59,20 @@ classdef RangeFactorCalibratedCamera < gtsam.NoiseModelFactor
     function varargout = clone(this, varargin)
       % CLONE usage: clone() : returns gtsam::NonlinearFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(2110, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2240, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(2111, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2241, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(NonlinearFactor other, double tol) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.NonlinearFactor') && isa(varargin{2},'double')
-        gtsam_wrapper(2112, this, varargin{:});
+        gtsam_wrapper(2242, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.RangeFactorCalibratedCamera.equals');
       end
@@ -82,7 +82,7 @@ classdef RangeFactorCalibratedCamera < gtsam.NoiseModelFactor
       % ERROR usage: error(Values c) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(2113, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2243, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.RangeFactorCalibratedCamera.error');
       end
@@ -91,14 +91,14 @@ classdef RangeFactorCalibratedCamera < gtsam.NoiseModelFactor
     function varargout = keys(this, varargin)
       % KEYS usage: keys() : returns gtsam::KeyVector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(2114, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2244, this, varargin{:});
     end
 
     function varargout = linearize(this, varargin)
       % LINEARIZE usage: linearize(Values c) : returns gtsam::GaussianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(2115, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2245, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.RangeFactorCalibratedCamera.linearize');
       end
@@ -108,7 +108,7 @@ classdef RangeFactorCalibratedCamera < gtsam.NoiseModelFactor
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(2116, this, varargin{:});
+        gtsam_wrapper(2246, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.RangeFactorCalibratedCamera.print');
       end
@@ -118,7 +118,7 @@ classdef RangeFactorCalibratedCamera < gtsam.NoiseModelFactor
       % PRINTKEYS usage: printKeys(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(2117, this, varargin{:});
+        gtsam_wrapper(2247, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.RangeFactorCalibratedCamera.printKeys');
       end
@@ -127,7 +127,7 @@ classdef RangeFactorCalibratedCamera < gtsam.NoiseModelFactor
     function varargout = size(this, varargin)
       % SIZE usage: size() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(2118, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2248, this, varargin{:});
     end
 
   end

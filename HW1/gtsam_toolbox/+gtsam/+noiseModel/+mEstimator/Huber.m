@@ -20,11 +20,11 @@ classdef Huber < gtsam.noiseModel.mEstimator.Base
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(590, varargin{2});
+          my_ptr = gtsam_wrapper(620, varargin{2});
         end
-        base_ptr = gtsam_wrapper(589, my_ptr);
+        base_ptr = gtsam_wrapper(619, my_ptr);
       elseif nargin == 1 && isa(varargin{1},'double')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(591, varargin{1});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(621, varargin{1});
       else
         error('Arguments do not match any overload of gtsam.noiseModel.mEstimator.Huber constructor');
       end
@@ -33,7 +33,7 @@ classdef Huber < gtsam.noiseModel.mEstimator.Base
     end
 
     function delete(obj)
-      gtsam_wrapper(592, obj.ptr_gtsamnoiseModelmEstimatorHuber);
+      gtsam_wrapper(622, obj.ptr_gtsamnoiseModelmEstimatorHuber);
     end
 
     function display(obj), obj.print(''); end
@@ -44,7 +44,7 @@ classdef Huber < gtsam.noiseModel.mEstimator.Base
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(593, this, varargin{:});
+        gtsam_wrapper(623, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.mEstimator.Huber.print');
       end
@@ -60,7 +60,7 @@ classdef Huber < gtsam.noiseModel.mEstimator.Base
       % Usage
       % CREATE(double k)
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(594, varargin{:});
+        varargout{1} = gtsam_wrapper(624, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.mEstimator.Huber.Create');
       end

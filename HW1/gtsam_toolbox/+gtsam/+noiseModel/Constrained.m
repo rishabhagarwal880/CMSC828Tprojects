@@ -24,9 +24,9 @@ classdef Constrained < gtsam.noiseModel.Diagonal
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(551, varargin{2});
+          my_ptr = gtsam_wrapper(581, varargin{2});
         end
-        base_ptr = gtsam_wrapper(550, my_ptr);
+        base_ptr = gtsam_wrapper(580, my_ptr);
       else
         error('Arguments do not match any overload of gtsam.noiseModel.Constrained constructor');
       end
@@ -35,7 +35,7 @@ classdef Constrained < gtsam.noiseModel.Diagonal
     end
 
     function delete(obj)
-      gtsam_wrapper(552, obj.ptr_gtsamnoiseModelConstrained);
+      gtsam_wrapper(582, obj.ptr_gtsamnoiseModelConstrained);
     end
 
     function display(obj), obj.print(''); end
@@ -45,7 +45,7 @@ classdef Constrained < gtsam.noiseModel.Diagonal
     function varargout = unit(this, varargin)
       % UNIT usage: unit() : returns gtsam::noiseModel::Constrained
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(553, this, varargin{:});
+      varargout{1} = gtsam_wrapper(583, this, varargin{:});
     end
 
   end
@@ -59,9 +59,9 @@ classdef Constrained < gtsam.noiseModel.Diagonal
       % ALL(size_t dim)
       % ALL(size_t dim, double mu)
       if length(varargin) == 1 && isa(varargin{1},'numeric')
-        varargout{1} = gtsam_wrapper(554, varargin{:});
+        varargout{1} = gtsam_wrapper(584, varargin{:});
       elseif length(varargin) == 2 && isa(varargin{1},'numeric') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(555, varargin{:});
+        varargout{1} = gtsam_wrapper(585, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Constrained.All');
       end
@@ -75,9 +75,9 @@ classdef Constrained < gtsam.noiseModel.Diagonal
       % MIXEDPRECISIONS(Vector mu, Vector precisions)
       % MIXEDPRECISIONS(Vector precisions)
       if length(varargin) == 2 && isa(varargin{1},'double') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(556, varargin{:});
+        varargout{1} = gtsam_wrapper(586, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(557, varargin{:});
+        varargout{1} = gtsam_wrapper(587, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Constrained.MixedPrecisions');
       end
@@ -91,9 +91,9 @@ classdef Constrained < gtsam.noiseModel.Diagonal
       % MIXEDSIGMAS(Vector mu, Vector sigmas)
       % MIXEDSIGMAS(double m, Vector sigmas)
       if length(varargin) == 2 && isa(varargin{1},'double') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(558, varargin{:});
+        varargout{1} = gtsam_wrapper(588, varargin{:});
       elseif length(varargin) == 2 && isa(varargin{1},'double') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(559, varargin{:});
+        varargout{1} = gtsam_wrapper(589, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Constrained.MixedSigmas');
       end
@@ -107,9 +107,9 @@ classdef Constrained < gtsam.noiseModel.Diagonal
       % MIXEDVARIANCES(Vector mu, Vector variances)
       % MIXEDVARIANCES(Vector variances)
       if length(varargin) == 2 && isa(varargin{1},'double') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(560, varargin{:});
+        varargout{1} = gtsam_wrapper(590, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(561, varargin{:});
+        varargout{1} = gtsam_wrapper(591, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Constrained.MixedVariances');
       end

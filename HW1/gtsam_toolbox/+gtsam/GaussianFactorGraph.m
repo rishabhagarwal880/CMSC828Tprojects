@@ -55,6 +55,10 @@
 %size() : returns size_t
 %sparseJacobian_() : returns Matrix
 %
+%-------Serialization Interface-------
+%string_serialize() : returns string
+%string_deserialize(string serialized) : returns GaussianFactorGraph
+%
 classdef GaussianFactorGraph < handle
   properties
     ptr_gtsamGaussianFactorGraph = 0
@@ -63,13 +67,13 @@ classdef GaussianFactorGraph < handle
     function obj = GaussianFactorGraph(varargin)
       if nargin == 2 && isa(varargin{1}, 'uint64') && varargin{1} == uint64(5139824614673773682)
         my_ptr = varargin{2};
-        gtsam_wrapper(717, my_ptr);
+        gtsam_wrapper(753, my_ptr);
       elseif nargin == 0
-        my_ptr = gtsam_wrapper(718);
+        my_ptr = gtsam_wrapper(754);
       elseif nargin == 1 && isa(varargin{1},'gtsam.GaussianBayesNet')
-        my_ptr = gtsam_wrapper(719, varargin{1});
+        my_ptr = gtsam_wrapper(755, varargin{1});
       elseif nargin == 1 && isa(varargin{1},'gtsam.GaussianBayesTree')
-        my_ptr = gtsam_wrapper(720, varargin{1});
+        my_ptr = gtsam_wrapper(756, varargin{1});
       else
         error('Arguments do not match any overload of gtsam.GaussianFactorGraph constructor');
       end
@@ -77,7 +81,7 @@ classdef GaussianFactorGraph < handle
     end
 
     function delete(obj)
-      gtsam_wrapper(721, obj.ptr_gtsamGaussianFactorGraph);
+      gtsam_wrapper(757, obj.ptr_gtsamGaussianFactorGraph);
     end
 
     function display(obj), obj.print(''); end
@@ -95,15 +99,15 @@ classdef GaussianFactorGraph < handle
       % add(size_t key1, Matrix A1, size_t key2, Matrix A2, Vector b, Diagonal model)
       % add(size_t key1, Matrix A1, size_t key2, Matrix A2, size_t key3, Matrix A3, Vector b, Diagonal model)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.GaussianFactor')
-        gtsam_wrapper(722, this, varargin{:});
+        gtsam_wrapper(758, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'double')
-        gtsam_wrapper(723, this, varargin{:});
+        gtsam_wrapper(759, this, varargin{:});
       elseif length(varargin) == 4 && isa(varargin{1},'numeric') && isa(varargin{2},'double') && isa(varargin{3},'double') && isa(varargin{4},'gtsam.noiseModel.Diagonal')
-        gtsam_wrapper(724, this, varargin{:});
+        gtsam_wrapper(760, this, varargin{:});
       elseif length(varargin) == 6 && isa(varargin{1},'numeric') && isa(varargin{2},'double') && isa(varargin{3},'numeric') && isa(varargin{4},'double') && isa(varargin{5},'double') && isa(varargin{6},'gtsam.noiseModel.Diagonal')
-        gtsam_wrapper(725, this, varargin{:});
+        gtsam_wrapper(761, this, varargin{:});
       elseif length(varargin) == 8 && isa(varargin{1},'numeric') && isa(varargin{2},'double') && isa(varargin{3},'numeric') && isa(varargin{4},'double') && isa(varargin{5},'numeric') && isa(varargin{6},'double') && isa(varargin{7},'double') && isa(varargin{8},'gtsam.noiseModel.Diagonal')
-        gtsam_wrapper(726, this, varargin{:});
+        gtsam_wrapper(762, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.add');
       end
@@ -112,7 +116,7 @@ classdef GaussianFactorGraph < handle
     function varargout = at(this, varargin)
       % AT usage: at(size_t idx) : returns gtsam::GaussianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(727, this, varargin{:});
+      varargout{1} = gtsam_wrapper(763, this, varargin{:});
     end
 
     function varargout = augmentedHessian(this, varargin)
@@ -123,9 +127,9 @@ classdef GaussianFactorGraph < handle
       % augmentedHessian()
       % augmentedHessian(Ordering ordering)
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(728, this, varargin{:});
+        varargout{1} = gtsam_wrapper(764, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.Ordering')
-        varargout{1} = gtsam_wrapper(729, this, varargin{:});
+        varargout{1} = gtsam_wrapper(765, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.augmentedHessian');
       end
@@ -139,9 +143,9 @@ classdef GaussianFactorGraph < handle
       % augmentedJacobian()
       % augmentedJacobian(Ordering ordering)
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(730, this, varargin{:});
+        varargout{1} = gtsam_wrapper(766, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.Ordering')
-        varargout{1} = gtsam_wrapper(731, this, varargin{:});
+        varargout{1} = gtsam_wrapper(767, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.augmentedJacobian');
       end
@@ -150,7 +154,7 @@ classdef GaussianFactorGraph < handle
     function varargout = clone(this, varargin)
       % CLONE usage: clone() : returns gtsam::GaussianFactorGraph
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(732, this, varargin{:});
+      varargout{1} = gtsam_wrapper(768, this, varargin{:});
     end
 
     function varargout = eliminateMultifrontal(this, varargin)
@@ -161,9 +165,9 @@ classdef GaussianFactorGraph < handle
       % eliminateMultifrontal()
       % eliminateMultifrontal(Ordering ordering)
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(733, this, varargin{:});
+        varargout{1} = gtsam_wrapper(769, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.Ordering')
-        varargout{1} = gtsam_wrapper(734, this, varargin{:});
+        varargout{1} = gtsam_wrapper(770, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.eliminateMultifrontal');
       end
@@ -177,9 +181,9 @@ classdef GaussianFactorGraph < handle
       % eliminatePartialMultifrontal(Ordering ordering)
       % eliminatePartialMultifrontal(KeyVector keys)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Ordering')
-        [ varargout{1} varargout{2} ] = gtsam_wrapper(735, this, varargin{:});
+        [ varargout{1} varargout{2} ] = gtsam_wrapper(771, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.KeyVector')
-        [ varargout{1} varargout{2} ] = gtsam_wrapper(736, this, varargin{:});
+        [ varargout{1} varargout{2} ] = gtsam_wrapper(772, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.eliminatePartialMultifrontal');
       end
@@ -193,9 +197,9 @@ classdef GaussianFactorGraph < handle
       % eliminatePartialSequential(Ordering ordering)
       % eliminatePartialSequential(KeyVector keys)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Ordering')
-        [ varargout{1} varargout{2} ] = gtsam_wrapper(737, this, varargin{:});
+        [ varargout{1} varargout{2} ] = gtsam_wrapper(773, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.KeyVector')
-        [ varargout{1} varargout{2} ] = gtsam_wrapper(738, this, varargin{:});
+        [ varargout{1} varargout{2} ] = gtsam_wrapper(774, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.eliminatePartialSequential');
       end
@@ -209,9 +213,9 @@ classdef GaussianFactorGraph < handle
       % eliminateSequential()
       % eliminateSequential(Ordering ordering)
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(739, this, varargin{:});
+        varargout{1} = gtsam_wrapper(775, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.Ordering')
-        varargout{1} = gtsam_wrapper(740, this, varargin{:});
+        varargout{1} = gtsam_wrapper(776, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.eliminateSequential');
       end
@@ -221,7 +225,7 @@ classdef GaussianFactorGraph < handle
       % EQUALS usage: equals(GaussianFactorGraph lfgraph, double tol) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.GaussianFactorGraph') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(741, this, varargin{:});
+        varargout{1} = gtsam_wrapper(777, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.equals');
       end
@@ -231,7 +235,7 @@ classdef GaussianFactorGraph < handle
       % ERROR usage: error(VectorValues c) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        varargout{1} = gtsam_wrapper(742, this, varargin{:});
+        varargout{1} = gtsam_wrapper(778, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.error');
       end
@@ -240,14 +244,14 @@ classdef GaussianFactorGraph < handle
     function varargout = exists(this, varargin)
       % EXISTS usage: exists(size_t idx) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(743, this, varargin{:});
+      varargout{1} = gtsam_wrapper(779, this, varargin{:});
     end
 
     function varargout = gradient(this, varargin)
       % GRADIENT usage: gradient(VectorValues x0) : returns gtsam::VectorValues
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        varargout{1} = gtsam_wrapper(744, this, varargin{:});
+        varargout{1} = gtsam_wrapper(780, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.gradient');
       end
@@ -256,7 +260,7 @@ classdef GaussianFactorGraph < handle
     function varargout = gradientAtZero(this, varargin)
       % GRADIENTATZERO usage: gradientAtZero() : returns gtsam::VectorValues
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(745, this, varargin{:});
+      varargout{1} = gtsam_wrapper(781, this, varargin{:});
     end
 
     function varargout = hessian(this, varargin)
@@ -267,9 +271,9 @@ classdef GaussianFactorGraph < handle
       % hessian()
       % hessian(Ordering ordering)
       if length(varargin) == 0
-        [ varargout{1} varargout{2} ] = gtsam_wrapper(746, this, varargin{:});
+        [ varargout{1} varargout{2} ] = gtsam_wrapper(782, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.Ordering')
-        [ varargout{1} varargout{2} ] = gtsam_wrapper(747, this, varargin{:});
+        [ varargout{1} varargout{2} ] = gtsam_wrapper(783, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.hessian');
       end
@@ -283,9 +287,9 @@ classdef GaussianFactorGraph < handle
       % jacobian()
       % jacobian(Ordering ordering)
       if length(varargin) == 0
-        [ varargout{1} varargout{2} ] = gtsam_wrapper(748, this, varargin{:});
+        [ varargout{1} varargout{2} ] = gtsam_wrapper(784, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.Ordering')
-        [ varargout{1} varargout{2} ] = gtsam_wrapper(749, this, varargin{:});
+        [ varargout{1} varargout{2} ] = gtsam_wrapper(785, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.jacobian');
       end
@@ -294,14 +298,14 @@ classdef GaussianFactorGraph < handle
     function varargout = keys(this, varargin)
       % KEYS usage: keys() : returns gtsam::KeySet
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(750, this, varargin{:});
+      varargout{1} = gtsam_wrapper(786, this, varargin{:});
     end
 
     function varargout = marginal(this, varargin)
       % MARGINAL usage: marginal(KeyVector variables) : returns gtsam::GaussianFactorGraph
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.KeyVector')
-        varargout{1} = gtsam_wrapper(751, this, varargin{:});
+        varargout{1} = gtsam_wrapper(787, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.marginal');
       end
@@ -317,13 +321,13 @@ classdef GaussianFactorGraph < handle
       % marginalMultifrontalBayesNet(Ordering variables, Ordering marginalizedVariableOrdering)
       % marginalMultifrontalBayesNet(KeyVector variables, Ordering marginalizedVariableOrdering)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Ordering')
-        varargout{1} = gtsam_wrapper(752, this, varargin{:});
+        varargout{1} = gtsam_wrapper(788, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.KeyVector')
-        varargout{1} = gtsam_wrapper(753, this, varargin{:});
+        varargout{1} = gtsam_wrapper(789, this, varargin{:});
       elseif length(varargin) == 2 && isa(varargin{1},'gtsam.Ordering') && isa(varargin{2},'gtsam.Ordering')
-        varargout{1} = gtsam_wrapper(754, this, varargin{:});
+        varargout{1} = gtsam_wrapper(790, this, varargin{:});
       elseif length(varargin) == 2 && isa(varargin{1},'gtsam.KeyVector') && isa(varargin{2},'gtsam.Ordering')
-        varargout{1} = gtsam_wrapper(755, this, varargin{:});
+        varargout{1} = gtsam_wrapper(791, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.marginalMultifrontalBayesNet');
       end
@@ -332,7 +336,7 @@ classdef GaussianFactorGraph < handle
     function varargout = negate(this, varargin)
       % NEGATE usage: negate() : returns gtsam::GaussianFactorGraph
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(756, this, varargin{:});
+      varargout{1} = gtsam_wrapper(792, this, varargin{:});
     end
 
     function varargout = optimize(this, varargin)
@@ -343,9 +347,9 @@ classdef GaussianFactorGraph < handle
       % optimize()
       % optimize(Ordering ordering)
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(757, this, varargin{:});
+        varargout{1} = gtsam_wrapper(793, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.Ordering')
-        varargout{1} = gtsam_wrapper(758, this, varargin{:});
+        varargout{1} = gtsam_wrapper(794, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.optimize');
       end
@@ -354,14 +358,14 @@ classdef GaussianFactorGraph < handle
     function varargout = optimizeGradientSearch(this, varargin)
       % OPTIMIZEGRADIENTSEARCH usage: optimizeGradientSearch() : returns gtsam::VectorValues
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(759, this, varargin{:});
+      varargout{1} = gtsam_wrapper(795, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(760, this, varargin{:});
+        gtsam_wrapper(796, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.print');
       end
@@ -371,7 +375,7 @@ classdef GaussianFactorGraph < handle
       % PROBPRIME usage: probPrime(VectorValues c) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        varargout{1} = gtsam_wrapper(761, this, varargin{:});
+        varargout{1} = gtsam_wrapper(797, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.probPrime');
       end
@@ -388,15 +392,15 @@ classdef GaussianFactorGraph < handle
       % push_back(GaussianBayesNet bayesNet)
       % push_back(GaussianBayesTree bayesTree)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.GaussianFactor')
-        gtsam_wrapper(762, this, varargin{:});
+        gtsam_wrapper(798, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.GaussianConditional')
-        gtsam_wrapper(763, this, varargin{:});
+        gtsam_wrapper(799, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.GaussianFactorGraph')
-        gtsam_wrapper(764, this, varargin{:});
+        gtsam_wrapper(800, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.GaussianBayesNet')
-        gtsam_wrapper(765, this, varargin{:});
+        gtsam_wrapper(801, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.GaussianBayesTree')
-        gtsam_wrapper(766, this, varargin{:});
+        gtsam_wrapper(802, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.push_back');
       end
@@ -405,17 +409,45 @@ classdef GaussianFactorGraph < handle
     function varargout = size(this, varargin)
       % SIZE usage: size() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(767, this, varargin{:});
+      varargout{1} = gtsam_wrapper(803, this, varargin{:});
     end
 
     function varargout = sparseJacobian_(this, varargin)
       % SPARSEJACOBIAN_ usage: sparseJacobian_() : returns Matrix
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(768, this, varargin{:});
+      varargout{1} = gtsam_wrapper(804, this, varargin{:});
     end
 
+    function varargout = string_serialize(this, varargin)
+      % STRING_SERIALIZE usage: string_serialize() : returns string
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 0
+        varargout{1} = gtsam_wrapper(805, this, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.string_serialize');
+      end
+    end
+
+    function sobj = saveobj(obj)
+      % SAVEOBJ Saves the object to a matlab-readable format
+      sobj = obj.string_serialize();
+    end
   end
 
   methods(Static = true)
+    function varargout = string_deserialize(varargin)
+      % STRING_DESERIALIZE usage: string_deserialize() : returns gtsam.GaussianFactorGraph
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 1
+        varargout{1} = gtsam_wrapper(806, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.GaussianFactorGraph.string_deserialize');
+      end
+    end
+
+    function obj = loadobj(sobj)
+      % LOADOBJ Saves the object to a matlab-readable format
+      obj = gtsam.GaussianFactorGraph.string_deserialize(sobj);
+    end
   end
 end

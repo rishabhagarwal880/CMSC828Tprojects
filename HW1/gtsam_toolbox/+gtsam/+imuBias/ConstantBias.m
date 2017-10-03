@@ -36,13 +36,13 @@ classdef ConstantBias < gtsam.Value
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(1949, varargin{2});
+          my_ptr = gtsam_wrapper(2079, varargin{2});
         end
-        base_ptr = gtsam_wrapper(1948, my_ptr);
+        base_ptr = gtsam_wrapper(2078, my_ptr);
       elseif nargin == 0
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1950);
+        [ my_ptr, base_ptr ] = gtsam_wrapper(2080);
       elseif nargin == 2 && isa(varargin{1},'double') && isa(varargin{2},'double')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1951, varargin{1}, varargin{2});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(2081, varargin{1}, varargin{2});
       else
         error('Arguments do not match any overload of gtsam.imuBias.ConstantBias constructor');
       end
@@ -51,7 +51,7 @@ classdef ConstantBias < gtsam.Value
     end
 
     function delete(obj)
-      gtsam_wrapper(1952, obj.ptr_gtsamimuBiasConstantBias);
+      gtsam_wrapper(2082, obj.ptr_gtsamimuBiasConstantBias);
     end
 
     function display(obj), obj.print(''); end
@@ -61,14 +61,14 @@ classdef ConstantBias < gtsam.Value
     function varargout = accelerometer(this, varargin)
       % ACCELEROMETER usage: accelerometer() : returns Vector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1953, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2083, this, varargin{:});
     end
 
     function varargout = between(this, varargin)
       % BETWEEN usage: between(ConstantBias b) : returns gtsam::imuBias::ConstantBias
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.imuBias.ConstantBias')
-        varargout{1} = gtsam_wrapper(1954, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2084, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.imuBias.ConstantBias.between');
       end
@@ -78,7 +78,7 @@ classdef ConstantBias < gtsam.Value
       % COMPOSE usage: compose(ConstantBias b) : returns gtsam::imuBias::ConstantBias
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.imuBias.ConstantBias')
-        varargout{1} = gtsam_wrapper(1955, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2085, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.imuBias.ConstantBias.compose');
       end
@@ -88,7 +88,7 @@ classdef ConstantBias < gtsam.Value
       % CORRECTACCELEROMETER usage: correctAccelerometer(Vector measurement) : returns Vector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(1956, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2086, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.imuBias.ConstantBias.correctAccelerometer');
       end
@@ -98,7 +98,7 @@ classdef ConstantBias < gtsam.Value
       % CORRECTGYROSCOPE usage: correctGyroscope(Vector measurement) : returns Vector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(1957, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2087, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.imuBias.ConstantBias.correctGyroscope');
       end
@@ -107,14 +107,14 @@ classdef ConstantBias < gtsam.Value
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1958, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2088, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(ConstantBias expected, double tol) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.imuBias.ConstantBias') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(1959, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2089, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.imuBias.ConstantBias.equals');
       end
@@ -123,20 +123,20 @@ classdef ConstantBias < gtsam.Value
     function varargout = gyroscope(this, varargin)
       % GYROSCOPE usage: gyroscope() : returns Vector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1960, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2090, this, varargin{:});
     end
 
     function varargout = inverse(this, varargin)
       % INVERSE usage: inverse() : returns gtsam::imuBias::ConstantBias
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1961, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2091, this, varargin{:});
     end
 
     function varargout = localCoordinates(this, varargin)
       % LOCALCOORDINATES usage: localCoordinates(ConstantBias b) : returns Vector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.imuBias.ConstantBias')
-        varargout{1} = gtsam_wrapper(1962, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2092, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.imuBias.ConstantBias.localCoordinates');
       end
@@ -146,7 +146,7 @@ classdef ConstantBias < gtsam.Value
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1963, this, varargin{:});
+        gtsam_wrapper(2093, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.imuBias.ConstantBias.print');
       end
@@ -156,7 +156,7 @@ classdef ConstantBias < gtsam.Value
       % RETRACT usage: retract(Vector v) : returns gtsam::imuBias::ConstantBias
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(1964, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2094, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.imuBias.ConstantBias.retract');
       end
@@ -165,7 +165,7 @@ classdef ConstantBias < gtsam.Value
     function varargout = vector(this, varargin)
       % VECTOR usage: vector() : returns Vector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1965, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2095, this, varargin{:});
     end
 
   end
@@ -178,7 +178,7 @@ classdef ConstantBias < gtsam.Value
       % Usage
       % DIM()
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(1966, varargin{:});
+        varargout{1} = gtsam_wrapper(2096, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.imuBias.ConstantBias.Dim');
       end
@@ -191,7 +191,7 @@ classdef ConstantBias < gtsam.Value
       % Usage
       % EXPMAP(Vector v)
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(1967, varargin{:});
+        varargout{1} = gtsam_wrapper(2097, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.imuBias.ConstantBias.Expmap');
       end
@@ -204,7 +204,7 @@ classdef ConstantBias < gtsam.Value
       % Usage
       % LOGMAP(ConstantBias b)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.imuBias.ConstantBias')
-        varargout{1} = gtsam_wrapper(1968, varargin{:});
+        varargout{1} = gtsam_wrapper(2098, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.imuBias.ConstantBias.Logmap');
       end
@@ -217,7 +217,7 @@ classdef ConstantBias < gtsam.Value
       % Usage
       % IDENTITY()
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(1969, varargin{:});
+        varargout{1} = gtsam_wrapper(2099, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.imuBias.ConstantBias.Identity');
       end

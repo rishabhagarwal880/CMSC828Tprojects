@@ -19,9 +19,9 @@ classdef Marginals < handle
     function obj = Marginals(varargin)
       if nargin == 2 && isa(varargin{1}, 'uint64') && varargin{1} == uint64(5139824614673773682)
         my_ptr = varargin{2};
-        gtsam_wrapper(1063, my_ptr);
+        gtsam_wrapper(1115, my_ptr);
       elseif nargin == 2 && isa(varargin{1},'gtsam.NonlinearFactorGraph') && isa(varargin{2},'gtsam.Values')
-        my_ptr = gtsam_wrapper(1064, varargin{1}, varargin{2});
+        my_ptr = gtsam_wrapper(1116, varargin{1}, varargin{2});
       else
         error('Arguments do not match any overload of gtsam.Marginals constructor');
       end
@@ -29,7 +29,7 @@ classdef Marginals < handle
     end
 
     function delete(obj)
-      gtsam_wrapper(1065, obj.ptr_gtsamMarginals);
+      gtsam_wrapper(1117, obj.ptr_gtsamMarginals);
     end
 
     function display(obj), obj.print(''); end
@@ -40,7 +40,7 @@ classdef Marginals < handle
       % JOINTMARGINALCOVARIANCE usage: jointMarginalCovariance(KeyVector variables) : returns gtsam::JointMarginal
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.KeyVector')
-        varargout{1} = gtsam_wrapper(1066, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1118, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Marginals.jointMarginalCovariance');
       end
@@ -50,7 +50,7 @@ classdef Marginals < handle
       % JOINTMARGINALINFORMATION usage: jointMarginalInformation(KeyVector variables) : returns gtsam::JointMarginal
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.KeyVector')
-        varargout{1} = gtsam_wrapper(1067, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1119, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Marginals.jointMarginalInformation');
       end
@@ -59,20 +59,20 @@ classdef Marginals < handle
     function varargout = marginalCovariance(this, varargin)
       % MARGINALCOVARIANCE usage: marginalCovariance(size_t variable) : returns Matrix
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1068, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1120, this, varargin{:});
     end
 
     function varargout = marginalInformation(this, varargin)
       % MARGINALINFORMATION usage: marginalInformation(size_t variable) : returns Matrix
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1069, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1121, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1070, this, varargin{:});
+        gtsam_wrapper(1122, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Marginals.print');
       end

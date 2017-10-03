@@ -33,6 +33,10 @@
 %identity() : returns gtsam::Rot2
 %relativeBearing(Point2 d) : returns gtsam::Rot2
 %
+%-------Serialization Interface-------
+%string_serialize() : returns string
+%string_deserialize(string serialized) : returns Rot2
+%
 classdef Rot2 < gtsam.Value
   properties
     ptr_gtsamRot2 = 0
@@ -43,13 +47,13 @@ classdef Rot2 < gtsam.Value
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(123, varargin{2});
+          my_ptr = gtsam_wrapper(133, varargin{2});
         end
-        base_ptr = gtsam_wrapper(122, my_ptr);
+        base_ptr = gtsam_wrapper(132, my_ptr);
       elseif nargin == 0
-        [ my_ptr, base_ptr ] = gtsam_wrapper(124);
+        [ my_ptr, base_ptr ] = gtsam_wrapper(134);
       elseif nargin == 1 && isa(varargin{1},'double')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(125, varargin{1});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(135, varargin{1});
       else
         error('Arguments do not match any overload of gtsam.Rot2 constructor');
       end
@@ -58,7 +62,7 @@ classdef Rot2 < gtsam.Value
     end
 
     function delete(obj)
-      gtsam_wrapper(126, obj.ptr_gtsamRot2);
+      gtsam_wrapper(136, obj.ptr_gtsamRot2);
     end
 
     function display(obj), obj.print(''); end
@@ -69,7 +73,7 @@ classdef Rot2 < gtsam.Value
       % BETWEEN usage: between(Rot2 p2) : returns gtsam::Rot2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Rot2')
-        varargout{1} = gtsam_wrapper(127, this, varargin{:});
+        varargout{1} = gtsam_wrapper(137, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.between');
       end
@@ -78,14 +82,14 @@ classdef Rot2 < gtsam.Value
     function varargout = c(this, varargin)
       % C usage: c() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(128, this, varargin{:});
+      varargout{1} = gtsam_wrapper(138, this, varargin{:});
     end
 
     function varargout = compose(this, varargin)
       % COMPOSE usage: compose(Rot2 p2) : returns gtsam::Rot2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Rot2')
-        varargout{1} = gtsam_wrapper(129, this, varargin{:});
+        varargout{1} = gtsam_wrapper(139, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.compose');
       end
@@ -94,20 +98,20 @@ classdef Rot2 < gtsam.Value
     function varargout = degrees(this, varargin)
       % DEGREES usage: degrees() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(130, this, varargin{:});
+      varargout{1} = gtsam_wrapper(140, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(131, this, varargin{:});
+      varargout{1} = gtsam_wrapper(141, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(Rot2 rot, double tol) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.Rot2') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(132, this, varargin{:});
+        varargout{1} = gtsam_wrapper(142, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.equals');
       end
@@ -116,14 +120,14 @@ classdef Rot2 < gtsam.Value
     function varargout = inverse(this, varargin)
       % INVERSE usage: inverse() : returns gtsam::Rot2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(133, this, varargin{:});
+      varargout{1} = gtsam_wrapper(143, this, varargin{:});
     end
 
     function varargout = localCoordinates(this, varargin)
       % LOCALCOORDINATES usage: localCoordinates(Rot2 p) : returns Vector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Rot2')
-        varargout{1} = gtsam_wrapper(134, this, varargin{:});
+        varargout{1} = gtsam_wrapper(144, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.localCoordinates');
       end
@@ -132,14 +136,14 @@ classdef Rot2 < gtsam.Value
     function varargout = matrix(this, varargin)
       % MATRIX usage: matrix() : returns Matrix
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(135, this, varargin{:});
+      varargout{1} = gtsam_wrapper(145, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(136, this, varargin{:});
+        gtsam_wrapper(146, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.print');
       end
@@ -149,7 +153,7 @@ classdef Rot2 < gtsam.Value
       % RETRACT usage: retract(Vector v) : returns gtsam::Rot2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(137, this, varargin{:});
+        varargout{1} = gtsam_wrapper(147, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.retract');
       end
@@ -159,7 +163,7 @@ classdef Rot2 < gtsam.Value
       % ROTATE usage: rotate(Point2 point) : returns gtsam::Point2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Point2')
-        varargout{1} = gtsam_wrapper(138, this, varargin{:});
+        varargout{1} = gtsam_wrapper(148, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.rotate');
       end
@@ -168,25 +172,39 @@ classdef Rot2 < gtsam.Value
     function varargout = s(this, varargin)
       % S usage: s() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(139, this, varargin{:});
+      varargout{1} = gtsam_wrapper(149, this, varargin{:});
     end
 
     function varargout = theta(this, varargin)
       % THETA usage: theta() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(140, this, varargin{:});
+      varargout{1} = gtsam_wrapper(150, this, varargin{:});
     end
 
     function varargout = unrotate(this, varargin)
       % UNROTATE usage: unrotate(Point2 point) : returns gtsam::Point2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Point2')
-        varargout{1} = gtsam_wrapper(141, this, varargin{:});
+        varargout{1} = gtsam_wrapper(151, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.unrotate');
       end
     end
 
+    function varargout = string_serialize(this, varargin)
+      % STRING_SERIALIZE usage: string_serialize() : returns string
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 0
+        varargout{1} = gtsam_wrapper(152, this, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.Rot2.string_serialize');
+      end
+    end
+
+    function sobj = saveobj(obj)
+      % SAVEOBJ Saves the object to a matlab-readable format
+      sobj = obj.string_serialize();
+    end
   end
 
   methods(Static = true)
@@ -197,7 +215,7 @@ classdef Rot2 < gtsam.Value
       % Usage
       % DIM()
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(142, varargin{:});
+        varargout{1} = gtsam_wrapper(153, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.Dim');
       end
@@ -210,7 +228,7 @@ classdef Rot2 < gtsam.Value
       % Usage
       % EXPMAP(Vector v)
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(143, varargin{:});
+        varargout{1} = gtsam_wrapper(154, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.Expmap');
       end
@@ -223,7 +241,7 @@ classdef Rot2 < gtsam.Value
       % Usage
       % LOGMAP(Rot2 p)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Rot2')
-        varargout{1} = gtsam_wrapper(144, varargin{:});
+        varargout{1} = gtsam_wrapper(155, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.Logmap');
       end
@@ -236,7 +254,7 @@ classdef Rot2 < gtsam.Value
       % Usage
       % ATAN2(double y, double x)
       if length(varargin) == 2 && isa(varargin{1},'double') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(145, varargin{:});
+        varargout{1} = gtsam_wrapper(156, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.Atan2');
       end
@@ -249,7 +267,7 @@ classdef Rot2 < gtsam.Value
       % Usage
       % FROMANGLE(double theta)
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(146, varargin{:});
+        varargout{1} = gtsam_wrapper(157, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.FromAngle');
       end
@@ -262,7 +280,7 @@ classdef Rot2 < gtsam.Value
       % Usage
       % FROMCOSSIN(double c, double s)
       if length(varargin) == 2 && isa(varargin{1},'double') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(147, varargin{:});
+        varargout{1} = gtsam_wrapper(158, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.FromCosSin');
       end
@@ -275,7 +293,7 @@ classdef Rot2 < gtsam.Value
       % Usage
       % FROMDEGREES(double theta)
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(148, varargin{:});
+        varargout{1} = gtsam_wrapper(159, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.FromDegrees');
       end
@@ -288,7 +306,7 @@ classdef Rot2 < gtsam.Value
       % Usage
       % IDENTITY()
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(149, varargin{:});
+        varargout{1} = gtsam_wrapper(160, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.Identity');
       end
@@ -301,11 +319,25 @@ classdef Rot2 < gtsam.Value
       % Usage
       % RELATIVEBEARING(Point2 d)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Point2')
-        varargout{1} = gtsam_wrapper(150, varargin{:});
+        varargout{1} = gtsam_wrapper(161, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.Rot2.RelativeBearing');
       end
     end
 
+    function varargout = string_deserialize(varargin)
+      % STRING_DESERIALIZE usage: string_deserialize() : returns gtsam.Rot2
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 1
+        varargout{1} = gtsam_wrapper(162, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.Rot2.string_deserialize');
+      end
+    end
+
+    function obj = loadobj(sobj)
+      % LOADOBJ Saves the object to a matlab-readable format
+      obj = gtsam.Rot2.string_deserialize(sobj);
+    end
   end
 end

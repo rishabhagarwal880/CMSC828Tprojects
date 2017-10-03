@@ -27,11 +27,11 @@ classdef NonlinearISAM < handle
     function obj = NonlinearISAM(varargin)
       if nargin == 2 && isa(varargin{1}, 'uint64') && varargin{1} == uint64(5139824614673773682)
         my_ptr = varargin{2};
-        gtsam_wrapper(1333, my_ptr);
+        gtsam_wrapper(1385, my_ptr);
       elseif nargin == 0
-        my_ptr = gtsam_wrapper(1334);
+        my_ptr = gtsam_wrapper(1386);
       elseif nargin == 1 && isa(varargin{1},'numeric')
-        my_ptr = gtsam_wrapper(1335, varargin{1});
+        my_ptr = gtsam_wrapper(1387, varargin{1});
       else
         error('Arguments do not match any overload of gtsam.NonlinearISAM constructor');
       end
@@ -39,7 +39,7 @@ classdef NonlinearISAM < handle
     end
 
     function delete(obj)
-      gtsam_wrapper(1336, obj.ptr_gtsamNonlinearISAM);
+      gtsam_wrapper(1388, obj.ptr_gtsamNonlinearISAM);
     end
 
     function display(obj), obj.print(''); end
@@ -49,38 +49,38 @@ classdef NonlinearISAM < handle
     function varargout = bayesTree(this, varargin)
       % BAYESTREE usage: bayesTree() : returns gtsam::GaussianISAM
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1337, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1389, this, varargin{:});
     end
 
     function varargout = estimate(this, varargin)
       % ESTIMATE usage: estimate() : returns gtsam::Values
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1338, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1390, this, varargin{:});
     end
 
     function varargout = getFactorsUnsafe(this, varargin)
       % GETFACTORSUNSAFE usage: getFactorsUnsafe() : returns gtsam::NonlinearFactorGraph
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1339, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1391, this, varargin{:});
     end
 
     function varargout = getLinearizationPoint(this, varargin)
       % GETLINEARIZATIONPOINT usage: getLinearizationPoint() : returns gtsam::Values
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1340, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1392, this, varargin{:});
     end
 
     function varargout = marginalCovariance(this, varargin)
       % MARGINALCOVARIANCE usage: marginalCovariance(size_t key) : returns Matrix
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1341, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1393, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1342, this, varargin{:});
+        gtsam_wrapper(1394, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearISAM.print');
       end
@@ -89,32 +89,32 @@ classdef NonlinearISAM < handle
     function varargout = printStats(this, varargin)
       % PRINTSTATS usage: printStats() : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1343, this, varargin{:});
+      gtsam_wrapper(1395, this, varargin{:});
     end
 
     function varargout = reorderCounter(this, varargin)
       % REORDERCOUNTER usage: reorderCounter() : returns int
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1344, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1396, this, varargin{:});
     end
 
     function varargout = reorderInterval(this, varargin)
       % REORDERINTERVAL usage: reorderInterval() : returns int
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1345, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1397, this, varargin{:});
     end
 
     function varargout = reorder_relinearize(this, varargin)
       % REORDER_RELINEARIZE usage: reorder_relinearize() : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1346, this, varargin{:});
+      gtsam_wrapper(1398, this, varargin{:});
     end
 
     function varargout = saveGraph(this, varargin)
       % SAVEGRAPH usage: saveGraph(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1347, this, varargin{:});
+        gtsam_wrapper(1399, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearISAM.saveGraph');
       end
@@ -124,7 +124,7 @@ classdef NonlinearISAM < handle
       % UPDATE usage: update(NonlinearFactorGraph newFactors, Values initialValues) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.NonlinearFactorGraph') && isa(varargin{2},'gtsam.Values')
-        gtsam_wrapper(1348, this, varargin{:});
+        gtsam_wrapper(1400, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearISAM.update');
       end

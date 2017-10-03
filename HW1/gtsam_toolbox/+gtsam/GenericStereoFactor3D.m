@@ -28,11 +28,11 @@ classdef GenericStereoFactor3D < gtsam.NoiseModelFactor
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(2252, varargin{2});
+          my_ptr = gtsam_wrapper(2382, varargin{2});
         end
-        base_ptr = gtsam_wrapper(2251, my_ptr);
+        base_ptr = gtsam_wrapper(2381, my_ptr);
       elseif nargin == 5 && isa(varargin{1},'gtsam.StereoPoint2') && isa(varargin{2},'gtsam.noiseModel.Base') && isa(varargin{3},'numeric') && isa(varargin{4},'numeric') && isa(varargin{5},'gtsam.Cal3_S2Stereo')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(2253, varargin{1}, varargin{2}, varargin{3}, varargin{4}, varargin{5});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(2383, varargin{1}, varargin{2}, varargin{3}, varargin{4}, varargin{5});
       else
         error('Arguments do not match any overload of gtsam.GenericStereoFactor3D constructor');
       end
@@ -41,7 +41,7 @@ classdef GenericStereoFactor3D < gtsam.NoiseModelFactor
     end
 
     function delete(obj)
-      gtsam_wrapper(2254, obj.ptr_gtsamGenericStereoFactor3D);
+      gtsam_wrapper(2384, obj.ptr_gtsamGenericStereoFactor3D);
     end
 
     function display(obj), obj.print(''); end
@@ -52,7 +52,7 @@ classdef GenericStereoFactor3D < gtsam.NoiseModelFactor
       % ACTIVE usage: active(Values c) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(2255, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2385, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GenericStereoFactor3D.active');
       end
@@ -61,26 +61,26 @@ classdef GenericStereoFactor3D < gtsam.NoiseModelFactor
     function varargout = calibration(this, varargin)
       % CALIBRATION usage: calibration() : returns gtsam::Cal3_S2Stereo
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(2256, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2386, this, varargin{:});
     end
 
     function varargout = clone(this, varargin)
       % CLONE usage: clone() : returns gtsam::NonlinearFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(2257, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2387, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(2258, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2388, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(NonlinearFactor other, double tol) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.NonlinearFactor') && isa(varargin{2},'double')
-        gtsam_wrapper(2259, this, varargin{:});
+        gtsam_wrapper(2389, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GenericStereoFactor3D.equals');
       end
@@ -90,7 +90,7 @@ classdef GenericStereoFactor3D < gtsam.NoiseModelFactor
       % ERROR usage: error(Values c) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(2260, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2390, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GenericStereoFactor3D.error');
       end
@@ -99,14 +99,14 @@ classdef GenericStereoFactor3D < gtsam.NoiseModelFactor
     function varargout = keys(this, varargin)
       % KEYS usage: keys() : returns gtsam::KeyVector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(2261, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2391, this, varargin{:});
     end
 
     function varargout = linearize(this, varargin)
       % LINEARIZE usage: linearize(Values c) : returns gtsam::GaussianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(2262, this, varargin{:});
+        varargout{1} = gtsam_wrapper(2392, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GenericStereoFactor3D.linearize');
       end
@@ -115,14 +115,14 @@ classdef GenericStereoFactor3D < gtsam.NoiseModelFactor
     function varargout = measured(this, varargin)
       % MEASURED usage: measured() : returns gtsam::StereoPoint2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(2263, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2393, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(2264, this, varargin{:});
+        gtsam_wrapper(2394, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GenericStereoFactor3D.print');
       end
@@ -132,7 +132,7 @@ classdef GenericStereoFactor3D < gtsam.NoiseModelFactor
       % PRINTKEYS usage: printKeys(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(2265, this, varargin{:});
+        gtsam_wrapper(2395, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GenericStereoFactor3D.printKeys');
       end
@@ -141,7 +141,7 @@ classdef GenericStereoFactor3D < gtsam.NoiseModelFactor
     function varargout = size(this, varargin)
       % SIZE usage: size() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(2266, this, varargin{:});
+      varargout{1} = gtsam_wrapper(2396, this, varargin{:});
     end
 
   end

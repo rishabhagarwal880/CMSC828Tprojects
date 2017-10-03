@@ -38,13 +38,13 @@ classdef GaussianBayesNet < handle
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(811, varargin{2});
+          my_ptr = gtsam_wrapper(851, varargin{2});
         end
-        gtsam_wrapper(810, my_ptr);
+        gtsam_wrapper(850, my_ptr);
       elseif nargin == 0
-        my_ptr = gtsam_wrapper(812);
+        my_ptr = gtsam_wrapper(852);
       elseif nargin == 1 && isa(varargin{1},'gtsam.GaussianConditional')
-        my_ptr = gtsam_wrapper(813, varargin{1});
+        my_ptr = gtsam_wrapper(853, varargin{1});
       else
         error('Arguments do not match any overload of gtsam.GaussianBayesNet constructor');
       end
@@ -52,7 +52,7 @@ classdef GaussianBayesNet < handle
     end
 
     function delete(obj)
-      gtsam_wrapper(814, obj.ptr_gtsamGaussianBayesNet);
+      gtsam_wrapper(854, obj.ptr_gtsamGaussianBayesNet);
     end
 
     function display(obj), obj.print(''); end
@@ -62,20 +62,20 @@ classdef GaussianBayesNet < handle
     function varargout = at(this, varargin)
       % AT usage: at(size_t idx) : returns gtsam::GaussianConditional
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(815, this, varargin{:});
+      varargout{1} = gtsam_wrapper(855, this, varargin{:});
     end
 
     function varargout = back(this, varargin)
       % BACK usage: back() : returns gtsam::GaussianConditional
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(816, this, varargin{:});
+      varargout{1} = gtsam_wrapper(856, this, varargin{:});
     end
 
     function varargout = backSubstitute(this, varargin)
       % BACKSUBSTITUTE usage: backSubstitute(VectorValues gx) : returns gtsam::VectorValues
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        varargout{1} = gtsam_wrapper(817, this, varargin{:});
+        varargout{1} = gtsam_wrapper(857, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianBayesNet.backSubstitute');
       end
@@ -85,7 +85,7 @@ classdef GaussianBayesNet < handle
       % BACKSUBSTITUTETRANSPOSE usage: backSubstituteTranspose(VectorValues gx) : returns gtsam::VectorValues
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        varargout{1} = gtsam_wrapper(818, this, varargin{:});
+        varargout{1} = gtsam_wrapper(858, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianBayesNet.backSubstituteTranspose');
       end
@@ -94,14 +94,14 @@ classdef GaussianBayesNet < handle
     function varargout = determinant(this, varargin)
       % DETERMINANT usage: determinant() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(819, this, varargin{:});
+      varargout{1} = gtsam_wrapper(859, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(GaussianBayesNet other, double tol) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.GaussianBayesNet') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(820, this, varargin{:});
+        varargout{1} = gtsam_wrapper(860, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianBayesNet.equals');
       end
@@ -111,7 +111,7 @@ classdef GaussianBayesNet < handle
       % ERROR usage: error(VectorValues x) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        varargout{1} = gtsam_wrapper(821, this, varargin{:});
+        varargout{1} = gtsam_wrapper(861, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianBayesNet.error');
       end
@@ -120,20 +120,20 @@ classdef GaussianBayesNet < handle
     function varargout = exists(this, varargin)
       % EXISTS usage: exists(size_t idx) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(822, this, varargin{:});
+      varargout{1} = gtsam_wrapper(862, this, varargin{:});
     end
 
     function varargout = front(this, varargin)
       % FRONT usage: front() : returns gtsam::GaussianConditional
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(823, this, varargin{:});
+      varargout{1} = gtsam_wrapper(863, this, varargin{:});
     end
 
     function varargout = gradient(this, varargin)
       % GRADIENT usage: gradient(VectorValues x0) : returns gtsam::VectorValues
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        varargout{1} = gtsam_wrapper(824, this, varargin{:});
+        varargout{1} = gtsam_wrapper(864, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianBayesNet.gradient');
       end
@@ -142,19 +142,19 @@ classdef GaussianBayesNet < handle
     function varargout = gradientAtZero(this, varargin)
       % GRADIENTATZERO usage: gradientAtZero() : returns gtsam::VectorValues
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(825, this, varargin{:});
+      varargout{1} = gtsam_wrapper(865, this, varargin{:});
     end
 
     function varargout = keys(this, varargin)
       % KEYS usage: keys() : returns gtsam::KeySet
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(826, this, varargin{:});
+      varargout{1} = gtsam_wrapper(866, this, varargin{:});
     end
 
     function varargout = logDeterminant(this, varargin)
       % LOGDETERMINANT usage: logDeterminant() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(827, this, varargin{:});
+      varargout{1} = gtsam_wrapper(867, this, varargin{:});
     end
 
     function varargout = optimize(this, varargin)
@@ -165,9 +165,9 @@ classdef GaussianBayesNet < handle
       % optimize()
       % optimize(VectorValues solutionForMissing)
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(828, this, varargin{:});
+        varargout{1} = gtsam_wrapper(868, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.VectorValues')
-        varargout{1} = gtsam_wrapper(829, this, varargin{:});
+        varargout{1} = gtsam_wrapper(869, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianBayesNet.optimize');
       end
@@ -176,14 +176,14 @@ classdef GaussianBayesNet < handle
     function varargout = optimizeGradientSearch(this, varargin)
       % OPTIMIZEGRADIENTSEARCH usage: optimizeGradientSearch() : returns gtsam::VectorValues
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(830, this, varargin{:});
+      varargout{1} = gtsam_wrapper(870, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(831, this, varargin{:});
+        gtsam_wrapper(871, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianBayesNet.print');
       end
@@ -197,9 +197,9 @@ classdef GaussianBayesNet < handle
       % push_back(GaussianConditional conditional)
       % push_back(GaussianBayesNet bayesNet)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.GaussianConditional')
-        gtsam_wrapper(832, this, varargin{:});
+        gtsam_wrapper(872, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.GaussianBayesNet')
-        gtsam_wrapper(833, this, varargin{:});
+        gtsam_wrapper(873, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianBayesNet.push_back');
       end
@@ -213,9 +213,9 @@ classdef GaussianBayesNet < handle
       % size()
       % size()
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(834, this, varargin{:});
+        varargout{1} = gtsam_wrapper(874, this, varargin{:});
       elseif length(varargin) == 0
-        varargout{1} = gtsam_wrapper(835, this, varargin{:});
+        varargout{1} = gtsam_wrapper(875, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.GaussianBayesNet.size');
       end

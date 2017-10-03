@@ -17,6 +17,10 @@
 %prior() : returns gtsam::StereoPoint2
 %size() : returns size_t
 %
+%-------Serialization Interface-------
+%string_serialize() : returns string
+%string_deserialize(string serialized) : returns PriorFactorStereoPoint2
+%
 classdef PriorFactorStereoPoint2 < gtsam.NoiseModelFactor
   properties
     ptr_gtsamPriorFactorStereoPoint2 = 0
@@ -27,11 +31,11 @@ classdef PriorFactorStereoPoint2 < gtsam.NoiseModelFactor
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(1410, varargin{2});
+          my_ptr = gtsam_wrapper(1470, varargin{2});
         end
-        base_ptr = gtsam_wrapper(1409, my_ptr);
+        base_ptr = gtsam_wrapper(1469, my_ptr);
       elseif nargin == 3 && isa(varargin{1},'numeric') && isa(varargin{2},'gtsam.StereoPoint2') && isa(varargin{3},'gtsam.noiseModel.Base')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1411, varargin{1}, varargin{2}, varargin{3});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(1471, varargin{1}, varargin{2}, varargin{3});
       else
         error('Arguments do not match any overload of gtsam.PriorFactorStereoPoint2 constructor');
       end
@@ -40,7 +44,7 @@ classdef PriorFactorStereoPoint2 < gtsam.NoiseModelFactor
     end
 
     function delete(obj)
-      gtsam_wrapper(1412, obj.ptr_gtsamPriorFactorStereoPoint2);
+      gtsam_wrapper(1472, obj.ptr_gtsamPriorFactorStereoPoint2);
     end
 
     function display(obj), obj.print(''); end
@@ -51,7 +55,7 @@ classdef PriorFactorStereoPoint2 < gtsam.NoiseModelFactor
       % ACTIVE usage: active(Values c) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1413, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1473, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.PriorFactorStereoPoint2.active');
       end
@@ -60,20 +64,20 @@ classdef PriorFactorStereoPoint2 < gtsam.NoiseModelFactor
     function varargout = clone(this, varargin)
       % CLONE usage: clone() : returns gtsam::NonlinearFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1414, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1474, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1415, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1475, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(NonlinearFactor other, double tol) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.NonlinearFactor') && isa(varargin{2},'double')
-        gtsam_wrapper(1416, this, varargin{:});
+        gtsam_wrapper(1476, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.PriorFactorStereoPoint2.equals');
       end
@@ -83,7 +87,7 @@ classdef PriorFactorStereoPoint2 < gtsam.NoiseModelFactor
       % ERROR usage: error(Values c) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1417, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1477, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.PriorFactorStereoPoint2.error');
       end
@@ -92,14 +96,14 @@ classdef PriorFactorStereoPoint2 < gtsam.NoiseModelFactor
     function varargout = keys(this, varargin)
       % KEYS usage: keys() : returns gtsam::KeyVector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1418, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1478, this, varargin{:});
     end
 
     function varargout = linearize(this, varargin)
       % LINEARIZE usage: linearize(Values c) : returns gtsam::GaussianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1419, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1479, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.PriorFactorStereoPoint2.linearize');
       end
@@ -109,7 +113,7 @@ classdef PriorFactorStereoPoint2 < gtsam.NoiseModelFactor
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1420, this, varargin{:});
+        gtsam_wrapper(1480, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.PriorFactorStereoPoint2.print');
       end
@@ -119,7 +123,7 @@ classdef PriorFactorStereoPoint2 < gtsam.NoiseModelFactor
       % PRINTKEYS usage: printKeys(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1421, this, varargin{:});
+        gtsam_wrapper(1481, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.PriorFactorStereoPoint2.printKeys');
       end
@@ -128,17 +132,45 @@ classdef PriorFactorStereoPoint2 < gtsam.NoiseModelFactor
     function varargout = prior(this, varargin)
       % PRIOR usage: prior() : returns gtsam::StereoPoint2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1422, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1482, this, varargin{:});
     end
 
     function varargout = size(this, varargin)
       % SIZE usage: size() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1423, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1483, this, varargin{:});
     end
 
+    function varargout = string_serialize(this, varargin)
+      % STRING_SERIALIZE usage: string_serialize() : returns string
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 0
+        varargout{1} = gtsam_wrapper(1484, this, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.PriorFactorStereoPoint2.string_serialize');
+      end
+    end
+
+    function sobj = saveobj(obj)
+      % SAVEOBJ Saves the object to a matlab-readable format
+      sobj = obj.string_serialize();
+    end
   end
 
   methods(Static = true)
+    function varargout = string_deserialize(varargin)
+      % STRING_DESERIALIZE usage: string_deserialize() : returns gtsam.PriorFactorStereoPoint2
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 1
+        varargout{1} = gtsam_wrapper(1485, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.PriorFactorStereoPoint2.string_deserialize');
+      end
+    end
+
+    function obj = loadobj(sobj)
+      % LOADOBJ Saves the object to a matlab-readable format
+      obj = gtsam.PriorFactorStereoPoint2.string_deserialize(sobj);
+    end
   end
 end

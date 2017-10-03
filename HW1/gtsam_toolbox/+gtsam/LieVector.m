@@ -21,6 +21,10 @@
 %Logmap(LieVector p) : returns Vector
 %identity() : returns gtsam::LieVector
 %
+%-------Serialization Interface-------
+%string_serialize() : returns string
+%string_deserialize(string serialized) : returns LieVector
+%
 classdef LieVector < gtsam.Value
   properties
     ptr_gtsamLieVector = 0
@@ -131,6 +135,20 @@ classdef LieVector < gtsam.Value
       varargout{1} = gtsam_wrapper(35, this, varargin{:});
     end
 
+    function varargout = string_serialize(this, varargin)
+      % STRING_SERIALIZE usage: string_serialize() : returns string
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 0
+        varargout{1} = gtsam_wrapper(36, this, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.LieVector.string_serialize');
+      end
+    end
+
+    function sobj = saveobj(obj)
+      % SAVEOBJ Saves the object to a matlab-readable format
+      sobj = obj.string_serialize();
+    end
   end
 
   methods(Static = true)
@@ -141,7 +159,7 @@ classdef LieVector < gtsam.Value
       % Usage
       % EXPMAP(Vector v)
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(36, varargin{:});
+        varargout{1} = gtsam_wrapper(37, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.LieVector.Expmap');
       end
@@ -154,7 +172,7 @@ classdef LieVector < gtsam.Value
       % Usage
       % LOGMAP(LieVector p)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.LieVector')
-        varargout{1} = gtsam_wrapper(37, varargin{:});
+        varargout{1} = gtsam_wrapper(38, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.LieVector.Logmap');
       end
@@ -167,11 +185,25 @@ classdef LieVector < gtsam.Value
       % Usage
       % IDENTITY()
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(38, varargin{:});
+        varargout{1} = gtsam_wrapper(39, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.LieVector.Identity');
       end
     end
 
+    function varargout = string_deserialize(varargin)
+      % STRING_DESERIALIZE usage: string_deserialize() : returns gtsam.LieVector
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 1
+        varargout{1} = gtsam_wrapper(40, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.LieVector.string_deserialize');
+      end
+    end
+
+    function obj = loadobj(sobj)
+      % LOADOBJ Saves the object to a matlab-readable format
+      obj = gtsam.LieVector.string_deserialize(sobj);
+    end
   end
 end

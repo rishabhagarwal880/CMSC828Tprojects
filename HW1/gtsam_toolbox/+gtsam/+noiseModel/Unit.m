@@ -17,9 +17,9 @@ classdef Unit < gtsam.noiseModel.Isotropic
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(570, varargin{2});
+          my_ptr = gtsam_wrapper(600, varargin{2});
         end
-        base_ptr = gtsam_wrapper(569, my_ptr);
+        base_ptr = gtsam_wrapper(599, my_ptr);
       else
         error('Arguments do not match any overload of gtsam.noiseModel.Unit constructor');
       end
@@ -28,7 +28,7 @@ classdef Unit < gtsam.noiseModel.Isotropic
     end
 
     function delete(obj)
-      gtsam_wrapper(571, obj.ptr_gtsamnoiseModelUnit);
+      gtsam_wrapper(601, obj.ptr_gtsamnoiseModelUnit);
     end
 
     function display(obj), obj.print(''); end
@@ -39,7 +39,7 @@ classdef Unit < gtsam.noiseModel.Isotropic
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(572, this, varargin{:});
+        gtsam_wrapper(602, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Unit.print');
       end
@@ -55,7 +55,7 @@ classdef Unit < gtsam.noiseModel.Isotropic
       % Usage
       % CREATE(size_t dim)
       if length(varargin) == 1 && isa(varargin{1},'numeric')
-        varargout{1} = gtsam_wrapper(573, varargin{:});
+        varargout{1} = gtsam_wrapper(603, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Unit.Create');
       end

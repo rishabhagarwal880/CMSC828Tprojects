@@ -20,11 +20,11 @@ classdef Fair < gtsam.noiseModel.mEstimator.Base
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(584, varargin{2});
+          my_ptr = gtsam_wrapper(614, varargin{2});
         end
-        base_ptr = gtsam_wrapper(583, my_ptr);
+        base_ptr = gtsam_wrapper(613, my_ptr);
       elseif nargin == 1 && isa(varargin{1},'double')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(585, varargin{1});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(615, varargin{1});
       else
         error('Arguments do not match any overload of gtsam.noiseModel.mEstimator.Fair constructor');
       end
@@ -33,7 +33,7 @@ classdef Fair < gtsam.noiseModel.mEstimator.Base
     end
 
     function delete(obj)
-      gtsam_wrapper(586, obj.ptr_gtsamnoiseModelmEstimatorFair);
+      gtsam_wrapper(616, obj.ptr_gtsamnoiseModelmEstimatorFair);
     end
 
     function display(obj), obj.print(''); end
@@ -44,7 +44,7 @@ classdef Fair < gtsam.noiseModel.mEstimator.Base
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(587, this, varargin{:});
+        gtsam_wrapper(617, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.mEstimator.Fair.print');
       end
@@ -60,7 +60,7 @@ classdef Fair < gtsam.noiseModel.mEstimator.Base
       % Usage
       % CREATE(double c)
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(588, varargin{:});
+        varargout{1} = gtsam_wrapper(618, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.mEstimator.Fair.Create');
       end

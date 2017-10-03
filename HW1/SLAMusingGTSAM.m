@@ -1,5 +1,5 @@
 %% You can uncomment this for your development. But you must comment this out before you submit.
- addpath(ToolboxPath);
+% addpath(home/rishabh/repositories/CMSC828Tprojects/HW1/gtsam_toolbox);
  import gtsam.*
 
 %% Function Descriptions
@@ -28,11 +28,11 @@ OUTPUT
 %}
 
 %% Function Implementation
-function [LandmarksComputed, AllPosesComputed] = SLAMusingGTSAM(Odom, ObservedLandMarks, StartingLocation)
+function [LandmarksComputed, AllPosesComputed] = SLAMusingGTSAM2(Odom, ObservedLandMarks, StartingLocation)
 
-    graph_cont= NonlinearFactorGraph;
+    graph= NonlinearFactorGraph;
     [p,q]=size(Odom);
-    [m,n]=size(ObservedLandMarks)
+    [m,n]=size(ObservedLandMarks);
    
     for i=1:q+1
         x(i)=symbol('x',i);    
@@ -52,35 +52,36 @@ function [LandmarksComputed, AllPosesComputed] = SLAMusingGTSAM(Odom, ObservedLa
     
     priorMean = Pose2(0.0, 0.0, 0.0); % prior at origin
     priorNoise = noiseModel.Diagonal.Sigmas([0.3; 0.3; 0.1]);
-    graph_cont.add(PriorFactorPose2(x(1), priorMean, priorNoise));
+    graph.add(PriorFactorPose2(x(1), priorMean, priorNoise));
     
    %odometry 
     odometry = Pose2(2.0, 0.0, 0.0);
     odometryNoise = noiseModel.Diagonal.Sigmas([0.2; 0.2; 0.1]);
     for j=1:q
         k=j+1;
-        graph_cont.add(BetweenFactorPose2(x(j), x(k), odometry, odometryNoise));
+        graph.add(BetweenFactorPose2(x(j), x(k), odometry, odometryNoise));
     end
     
     % Add bearing/range measurement factors
     degrees = pi/180;
     brNoise = noiseModel.Diagonal.Sigmas([0.1; 0.2]);
     for i=1:q+1
-        for b=1:size(ObservedLandMarks{i}.Idx)
-            graph_cont.add(BearingRangeFactor2D(x(i), l(ObservedLandMarks{i}.Idx(b)), Rot2(90*degrees), sqrt(8), brNoise));
+        [aa,bb]=size(ObservedLandMarks{i}.Idx);
+        for b=1:bb
+            graph.add(BearingRangeFactor2D(x(i), l(ObservedLandMarks{i}.Idx(b)), Rot2(90*degrees), sqrt(8), brNoise));
         end   
     end
 %     graph_cont.add(BearingRangeFactor2D(i1, j1, Rot2(45*degrees), sqrt(8), brNoise));
 %     graph_cont.add(BearingRangeFactor2D(i2, j1, Rot2(90*degrees), 2, brNoise));
 %     graph_cont.add(BearingRangeFactor2D(i3, j2, Rot2(90*degrees), 2, brNoise));
 
-    graph_cont.print(sprintf('\nFull graph:\n'));
+    graph.print(sprintf('\nFull graph:\n'));
     
     
     % Initialize to noisy points
      initialEstimate = Values;
      initialEstimate.insert(x(1),Pose2(StartingLocation(1), StartingLocation(2), StartingLocation(3)));
-     for k=1:p
+     for k=1:q
          initialEstimate.insert(x(k+1),Pose2(StartingLocation(1)+Odom(1,k), StartingLocation(2)+Odom(2,k), StartingLocation(3)+Odom(3,k)));
      end
      
@@ -99,14 +100,14 @@ function [LandmarksComputed, AllPosesComputed] = SLAMusingGTSAM(Odom, ObservedLa
 
      
     % Optimize using Levenberg-Marquardt optimization with an ordering from colamd
-    optimizer = LevenbergMarquardtOptimizer(graph_cont, initialEstimate);
+    optimizer = LevenbergMarquardtOptimizer(graph, initialEstimate);
     result = optimizer.optimizeSafely();
     result.print(sprintf('\nFinal result:\n'));
 
     % Plot Covariance Ellipses
     cla;hold on
 
-    marginals = Marginals(graph_cont, result);
+    marginals = Marginals(graph, result);
     plot2DTrajectory(result, [], marginals);
     plot2DPoints(result, 'b', marginals);
 

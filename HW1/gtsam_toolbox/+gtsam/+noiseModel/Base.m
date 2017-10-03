@@ -11,9 +11,9 @@ classdef Base < handle
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(532, varargin{2});
+          my_ptr = gtsam_wrapper(562, varargin{2});
         end
-        gtsam_wrapper(531, my_ptr);
+        gtsam_wrapper(561, my_ptr);
       else
         error('Arguments do not match any overload of gtsam.noiseModel.Base constructor');
       end
@@ -21,7 +21,7 @@ classdef Base < handle
     end
 
     function delete(obj)
-      gtsam_wrapper(533, obj.ptr_gtsamnoiseModelBase);
+      gtsam_wrapper(563, obj.ptr_gtsamnoiseModelBase);
     end
 
     function display(obj), obj.print(''); end

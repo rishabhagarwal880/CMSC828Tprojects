@@ -20,9 +20,9 @@ classdef Diagonal < gtsam.noiseModel.Gaussian
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(543, varargin{2});
+          my_ptr = gtsam_wrapper(573, varargin{2});
         end
-        base_ptr = gtsam_wrapper(542, my_ptr);
+        base_ptr = gtsam_wrapper(572, my_ptr);
       else
         error('Arguments do not match any overload of gtsam.noiseModel.Diagonal constructor');
       end
@@ -31,7 +31,7 @@ classdef Diagonal < gtsam.noiseModel.Gaussian
     end
 
     function delete(obj)
-      gtsam_wrapper(544, obj.ptr_gtsamnoiseModelDiagonal);
+      gtsam_wrapper(574, obj.ptr_gtsamnoiseModelDiagonal);
     end
 
     function display(obj), obj.print(''); end
@@ -41,14 +41,14 @@ classdef Diagonal < gtsam.noiseModel.Gaussian
     function varargout = R(this, varargin)
       % R usage: R() : returns Matrix
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(545, this, varargin{:});
+      varargout{1} = gtsam_wrapper(575, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(546, this, varargin{:});
+        gtsam_wrapper(576, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Diagonal.print');
       end
@@ -64,7 +64,7 @@ classdef Diagonal < gtsam.noiseModel.Gaussian
       % Usage
       % PRECISIONS(Vector precisions)
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(547, varargin{:});
+        varargout{1} = gtsam_wrapper(577, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Diagonal.Precisions');
       end
@@ -77,7 +77,7 @@ classdef Diagonal < gtsam.noiseModel.Gaussian
       % Usage
       % SIGMAS(Vector sigmas)
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(548, varargin{:});
+        varargout{1} = gtsam_wrapper(578, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Diagonal.Sigmas');
       end
@@ -90,7 +90,7 @@ classdef Diagonal < gtsam.noiseModel.Gaussian
       % Usage
       % VARIANCES(Vector variances)
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(549, varargin{:});
+        varargout{1} = gtsam_wrapper(579, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Diagonal.Variances');
       end

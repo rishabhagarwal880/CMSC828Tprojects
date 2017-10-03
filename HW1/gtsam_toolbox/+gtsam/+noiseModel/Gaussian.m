@@ -20,9 +20,9 @@ classdef Gaussian < gtsam.noiseModel.Base
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(535, varargin{2});
+          my_ptr = gtsam_wrapper(565, varargin{2});
         end
-        base_ptr = gtsam_wrapper(534, my_ptr);
+        base_ptr = gtsam_wrapper(564, my_ptr);
       else
         error('Arguments do not match any overload of gtsam.noiseModel.Gaussian constructor');
       end
@@ -31,7 +31,7 @@ classdef Gaussian < gtsam.noiseModel.Base
     end
 
     function delete(obj)
-      gtsam_wrapper(536, obj.ptr_gtsamnoiseModelGaussian);
+      gtsam_wrapper(566, obj.ptr_gtsamnoiseModelGaussian);
     end
 
     function display(obj), obj.print(''); end
@@ -41,14 +41,14 @@ classdef Gaussian < gtsam.noiseModel.Base
     function varargout = R(this, varargin)
       % R usage: R() : returns Matrix
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(537, this, varargin{:});
+      varargout{1} = gtsam_wrapper(567, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(Base expected, double tol) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.noiseModel.Base') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(538, this, varargin{:});
+        varargout{1} = gtsam_wrapper(568, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Gaussian.equals');
       end
@@ -58,7 +58,7 @@ classdef Gaussian < gtsam.noiseModel.Base
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(539, this, varargin{:});
+        gtsam_wrapper(569, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Gaussian.print');
       end
@@ -74,7 +74,7 @@ classdef Gaussian < gtsam.noiseModel.Base
       % Usage
       % COVARIANCE(Matrix R)
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(540, varargin{:});
+        varargout{1} = gtsam_wrapper(570, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Gaussian.Covariance');
       end
@@ -87,7 +87,7 @@ classdef Gaussian < gtsam.noiseModel.Base
       % Usage
       % SQRTINFORMATION(Matrix R)
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(541, varargin{:});
+        varargout{1} = gtsam_wrapper(571, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Gaussian.SqrtInformation');
       end

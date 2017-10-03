@@ -19,9 +19,9 @@ classdef Isotropic < gtsam.noiseModel.Diagonal
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(563, varargin{2});
+          my_ptr = gtsam_wrapper(593, varargin{2});
         end
-        base_ptr = gtsam_wrapper(562, my_ptr);
+        base_ptr = gtsam_wrapper(592, my_ptr);
       else
         error('Arguments do not match any overload of gtsam.noiseModel.Isotropic constructor');
       end
@@ -30,7 +30,7 @@ classdef Isotropic < gtsam.noiseModel.Diagonal
     end
 
     function delete(obj)
-      gtsam_wrapper(564, obj.ptr_gtsamnoiseModelIsotropic);
+      gtsam_wrapper(594, obj.ptr_gtsamnoiseModelIsotropic);
     end
 
     function display(obj), obj.print(''); end
@@ -41,7 +41,7 @@ classdef Isotropic < gtsam.noiseModel.Diagonal
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(565, this, varargin{:});
+        gtsam_wrapper(595, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Isotropic.print');
       end
@@ -57,7 +57,7 @@ classdef Isotropic < gtsam.noiseModel.Diagonal
       % Usage
       % PRECISION(size_t dim, double precision)
       if length(varargin) == 2 && isa(varargin{1},'numeric') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(566, varargin{:});
+        varargout{1} = gtsam_wrapper(596, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Isotropic.Precision');
       end
@@ -70,7 +70,7 @@ classdef Isotropic < gtsam.noiseModel.Diagonal
       % Usage
       % SIGMA(size_t dim, double sigma)
       if length(varargin) == 2 && isa(varargin{1},'numeric') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(567, varargin{:});
+        varargout{1} = gtsam_wrapper(597, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Isotropic.Sigma');
       end
@@ -83,7 +83,7 @@ classdef Isotropic < gtsam.noiseModel.Diagonal
       % Usage
       % VARIANCE(size_t dim, double varianace)
       if length(varargin) == 2 && isa(varargin{1},'numeric') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(568, varargin{:});
+        varargout{1} = gtsam_wrapper(598, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.noiseModel.Isotropic.Variance');
       end

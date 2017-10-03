@@ -27,6 +27,10 @@
 %Lookat(Point3 eye, Point3 target, Point3 upVector, Cal3_S2 K) : returns gtsam::SimpleCamera
 %project_to_camera(Point3 cameraPoint) : returns gtsam::Point2
 %
+%-------Serialization Interface-------
+%string_serialize() : returns string
+%string_deserialize(string serialized) : returns SimpleCamera
+%
 classdef SimpleCamera < gtsam.Value
   properties
     ptr_gtsamSimpleCamera = 0
@@ -37,15 +41,15 @@ classdef SimpleCamera < gtsam.Value
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(367, varargin{2});
+          my_ptr = gtsam_wrapper(391, varargin{2});
         end
-        base_ptr = gtsam_wrapper(366, my_ptr);
+        base_ptr = gtsam_wrapper(390, my_ptr);
       elseif nargin == 0
-        [ my_ptr, base_ptr ] = gtsam_wrapper(368);
+        [ my_ptr, base_ptr ] = gtsam_wrapper(392);
       elseif nargin == 1 && isa(varargin{1},'gtsam.Pose3')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(369, varargin{1});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(393, varargin{1});
       elseif nargin == 2 && isa(varargin{1},'gtsam.Pose3') && isa(varargin{2},'gtsam.Cal3_S2')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(370, varargin{1}, varargin{2});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(394, varargin{1}, varargin{2});
       else
         error('Arguments do not match any overload of gtsam.SimpleCamera constructor');
       end
@@ -54,7 +58,7 @@ classdef SimpleCamera < gtsam.Value
     end
 
     function delete(obj)
-      gtsam_wrapper(371, obj.ptr_gtsamSimpleCamera);
+      gtsam_wrapper(395, obj.ptr_gtsamSimpleCamera);
     end
 
     function display(obj), obj.print(''); end
@@ -65,7 +69,7 @@ classdef SimpleCamera < gtsam.Value
       % BACKPROJECT usage: backproject(Point2 p, double depth) : returns gtsam::Point3
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.Point2') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(372, this, varargin{:});
+        varargout{1} = gtsam_wrapper(396, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.SimpleCamera.backproject');
       end
@@ -74,20 +78,20 @@ classdef SimpleCamera < gtsam.Value
     function varargout = calibration(this, varargin)
       % CALIBRATION usage: calibration() : returns gtsam::Cal3_S2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(373, this, varargin{:});
+      varargout{1} = gtsam_wrapper(397, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(374, this, varargin{:});
+      varargout{1} = gtsam_wrapper(398, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(SimpleCamera camera, double tol) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.SimpleCamera') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(375, this, varargin{:});
+        varargout{1} = gtsam_wrapper(399, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.SimpleCamera.equals');
       end
@@ -97,7 +101,7 @@ classdef SimpleCamera < gtsam.Value
       % LOCALCOORDINATES usage: localCoordinates(SimpleCamera T2) : returns Vector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.SimpleCamera')
-        varargout{1} = gtsam_wrapper(376, this, varargin{:});
+        varargout{1} = gtsam_wrapper(400, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.SimpleCamera.localCoordinates');
       end
@@ -106,14 +110,14 @@ classdef SimpleCamera < gtsam.Value
     function varargout = pose(this, varargin)
       % POSE usage: pose() : returns gtsam::Pose3
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(377, this, varargin{:});
+      varargout{1} = gtsam_wrapper(401, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(378, this, varargin{:});
+        gtsam_wrapper(402, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.SimpleCamera.print');
       end
@@ -123,7 +127,7 @@ classdef SimpleCamera < gtsam.Value
       % PROJECT usage: project(Point3 point) : returns gtsam::Point2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Point3')
-        varargout{1} = gtsam_wrapper(379, this, varargin{:});
+        varargout{1} = gtsam_wrapper(403, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.SimpleCamera.project');
       end
@@ -133,7 +137,7 @@ classdef SimpleCamera < gtsam.Value
       % PROJECTSAFE usage: projectSafe(Point3 pw) : returns pair< gtsam::Point2, bool >
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Point3')
-        [ varargout{1} varargout{2} ] = gtsam_wrapper(380, this, varargin{:});
+        [ varargout{1} varargout{2} ] = gtsam_wrapper(404, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.SimpleCamera.projectSafe');
       end
@@ -147,9 +151,9 @@ classdef SimpleCamera < gtsam.Value
       % range(Point3 point)
       % range(Pose3 point)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Point3')
-        varargout{1} = gtsam_wrapper(381, this, varargin{:});
+        varargout{1} = gtsam_wrapper(405, this, varargin{:});
       elseif length(varargin) == 1 && isa(varargin{1},'gtsam.Pose3')
-        varargout{1} = gtsam_wrapper(382, this, varargin{:});
+        varargout{1} = gtsam_wrapper(406, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.SimpleCamera.range');
       end
@@ -159,12 +163,26 @@ classdef SimpleCamera < gtsam.Value
       % RETRACT usage: retract(Vector d) : returns gtsam::SimpleCamera
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(383, this, varargin{:});
+        varargout{1} = gtsam_wrapper(407, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.SimpleCamera.retract');
       end
     end
 
+    function varargout = string_serialize(this, varargin)
+      % STRING_SERIALIZE usage: string_serialize() : returns string
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 0
+        varargout{1} = gtsam_wrapper(408, this, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.SimpleCamera.string_serialize');
+      end
+    end
+
+    function sobj = saveobj(obj)
+      % SAVEOBJ Saves the object to a matlab-readable format
+      sobj = obj.string_serialize();
+    end
   end
 
   methods(Static = true)
@@ -175,7 +193,7 @@ classdef SimpleCamera < gtsam.Value
       % Usage
       % DIM()
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(384, varargin{:});
+        varargout{1} = gtsam_wrapper(409, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.SimpleCamera.Dim');
       end
@@ -189,9 +207,9 @@ classdef SimpleCamera < gtsam.Value
       % LEVEL(Cal3_S2 K, Pose2 pose, double height)
       % LEVEL(Pose2 pose, double height)
       if length(varargin) == 3 && isa(varargin{1},'gtsam.Cal3_S2') && isa(varargin{2},'gtsam.Pose2') && isa(varargin{3},'double')
-        varargout{1} = gtsam_wrapper(385, varargin{:});
+        varargout{1} = gtsam_wrapper(410, varargin{:});
       elseif length(varargin) == 2 && isa(varargin{1},'gtsam.Pose2') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(386, varargin{:});
+        varargout{1} = gtsam_wrapper(411, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.SimpleCamera.Level');
       end
@@ -204,7 +222,7 @@ classdef SimpleCamera < gtsam.Value
       % Usage
       % LOOKAT(Point3 eye, Point3 target, Point3 upVector, Cal3_S2 K)
       if length(varargin) == 4 && isa(varargin{1},'gtsam.Point3') && isa(varargin{2},'gtsam.Point3') && isa(varargin{3},'gtsam.Point3') && isa(varargin{4},'gtsam.Cal3_S2')
-        varargout{1} = gtsam_wrapper(387, varargin{:});
+        varargout{1} = gtsam_wrapper(412, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.SimpleCamera.Lookat');
       end
@@ -217,11 +235,25 @@ classdef SimpleCamera < gtsam.Value
       % Usage
       % PROJECT_TO_CAMERA(Point3 cameraPoint)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Point3')
-        varargout{1} = gtsam_wrapper(388, varargin{:});
+        varargout{1} = gtsam_wrapper(413, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.SimpleCamera.Project_to_camera');
       end
     end
 
+    function varargout = string_deserialize(varargin)
+      % STRING_DESERIALIZE usage: string_deserialize() : returns gtsam.SimpleCamera
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 1
+        varargout{1} = gtsam_wrapper(414, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.SimpleCamera.string_deserialize');
+      end
+    end
+
+    function obj = loadobj(sobj)
+      % LOADOBJ Saves the object to a matlab-readable format
+      obj = gtsam.SimpleCamera.string_deserialize(sobj);
+    end
   end
 end

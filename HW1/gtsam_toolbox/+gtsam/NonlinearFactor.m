@@ -23,9 +23,9 @@ classdef NonlinearFactor < handle
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(961, varargin{2});
+          my_ptr = gtsam_wrapper(1005, varargin{2});
         end
-        gtsam_wrapper(960, my_ptr);
+        gtsam_wrapper(1004, my_ptr);
       else
         error('Arguments do not match any overload of gtsam.NonlinearFactor constructor');
       end
@@ -33,7 +33,7 @@ classdef NonlinearFactor < handle
     end
 
     function delete(obj)
-      gtsam_wrapper(962, obj.ptr_gtsamNonlinearFactor);
+      gtsam_wrapper(1006, obj.ptr_gtsamNonlinearFactor);
     end
 
     function display(obj), obj.print(''); end
@@ -44,7 +44,7 @@ classdef NonlinearFactor < handle
       % ACTIVE usage: active(Values c) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(963, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1007, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearFactor.active');
       end
@@ -53,20 +53,20 @@ classdef NonlinearFactor < handle
     function varargout = clone(this, varargin)
       % CLONE usage: clone() : returns gtsam::NonlinearFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(964, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1008, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(965, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1009, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(NonlinearFactor other, double tol) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.NonlinearFactor') && isa(varargin{2},'double')
-        gtsam_wrapper(966, this, varargin{:});
+        gtsam_wrapper(1010, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearFactor.equals');
       end
@@ -76,7 +76,7 @@ classdef NonlinearFactor < handle
       % ERROR usage: error(Values c) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(967, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1011, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearFactor.error');
       end
@@ -85,14 +85,14 @@ classdef NonlinearFactor < handle
     function varargout = keys(this, varargin)
       % KEYS usage: keys() : returns gtsam::KeyVector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(968, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1012, this, varargin{:});
     end
 
     function varargout = linearize(this, varargin)
       % LINEARIZE usage: linearize(Values c) : returns gtsam::GaussianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(969, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1013, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearFactor.linearize');
       end
@@ -102,7 +102,7 @@ classdef NonlinearFactor < handle
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(970, this, varargin{:});
+        gtsam_wrapper(1014, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearFactor.print');
       end
@@ -112,7 +112,7 @@ classdef NonlinearFactor < handle
       % PRINTKEYS usage: printKeys(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(971, this, varargin{:});
+        gtsam_wrapper(1015, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.NonlinearFactor.printKeys');
       end
@@ -121,7 +121,7 @@ classdef NonlinearFactor < handle
     function varargout = size(this, varargin)
       % SIZE usage: size() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(972, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1016, this, varargin{:});
     end
 
   end

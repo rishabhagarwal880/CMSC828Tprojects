@@ -18,6 +18,10 @@
 %print(string s) : returns void
 %size() : returns size_t
 %
+%-------Serialization Interface-------
+%string_serialize() : returns string
+%string_deserialize(string serialized) : returns KeySet
+%
 classdef KeySet < handle
   properties
     ptr_gtsamKeySet = 0
@@ -26,15 +30,15 @@ classdef KeySet < handle
     function obj = KeySet(varargin)
       if nargin == 2 && isa(varargin{1}, 'uint64') && varargin{1} == uint64(5139824614673773682)
         my_ptr = varargin{2};
-        gtsam_wrapper(1026, my_ptr);
+        gtsam_wrapper(1074, my_ptr);
       elseif nargin == 0
-        my_ptr = gtsam_wrapper(1027);
+        my_ptr = gtsam_wrapper(1075);
       elseif nargin == 1 && isa(varargin{1},'gtsam.KeySet')
-        my_ptr = gtsam_wrapper(1028, varargin{1});
+        my_ptr = gtsam_wrapper(1076, varargin{1});
       elseif nargin == 1 && isa(varargin{1},'gtsam.KeyVector')
-        my_ptr = gtsam_wrapper(1029, varargin{1});
+        my_ptr = gtsam_wrapper(1077, varargin{1});
       elseif nargin == 1 && isa(varargin{1},'gtsam.KeyList')
-        my_ptr = gtsam_wrapper(1030, varargin{1});
+        my_ptr = gtsam_wrapper(1078, varargin{1});
       else
         error('Arguments do not match any overload of gtsam.KeySet constructor');
       end
@@ -42,7 +46,7 @@ classdef KeySet < handle
     end
 
     function delete(obj)
-      gtsam_wrapper(1031, obj.ptr_gtsamKeySet);
+      gtsam_wrapper(1079, obj.ptr_gtsamKeySet);
     end
 
     function display(obj), obj.print(''); end
@@ -52,26 +56,26 @@ classdef KeySet < handle
     function varargout = clear(this, varargin)
       % CLEAR usage: clear() : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1032, this, varargin{:});
+      gtsam_wrapper(1080, this, varargin{:});
     end
 
     function varargout = count(this, varargin)
       % COUNT usage: count(size_t key) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1033, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1081, this, varargin{:});
     end
 
     function varargout = empty(this, varargin)
       % EMPTY usage: empty() : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1034, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1082, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(KeySet other) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.KeySet')
-        varargout{1} = gtsam_wrapper(1035, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1083, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.KeySet.equals');
       end
@@ -80,20 +84,20 @@ classdef KeySet < handle
     function varargout = erase(this, varargin)
       % ERASE usage: erase(size_t key) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1036, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1084, this, varargin{:});
     end
 
     function varargout = insert(this, varargin)
       % INSERT usage: insert(size_t key) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1037, this, varargin{:});
+      gtsam_wrapper(1085, this, varargin{:});
     end
 
     function varargout = merge(this, varargin)
       % MERGE usage: merge(KeySet other) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.KeySet')
-        gtsam_wrapper(1038, this, varargin{:});
+        gtsam_wrapper(1086, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.KeySet.merge');
       end
@@ -103,7 +107,7 @@ classdef KeySet < handle
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1039, this, varargin{:});
+        gtsam_wrapper(1087, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.KeySet.print');
       end
@@ -112,11 +116,39 @@ classdef KeySet < handle
     function varargout = size(this, varargin)
       % SIZE usage: size() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1040, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1088, this, varargin{:});
     end
 
+    function varargout = string_serialize(this, varargin)
+      % STRING_SERIALIZE usage: string_serialize() : returns string
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 0
+        varargout{1} = gtsam_wrapper(1089, this, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.KeySet.string_serialize');
+      end
+    end
+
+    function sobj = saveobj(obj)
+      % SAVEOBJ Saves the object to a matlab-readable format
+      sobj = obj.string_serialize();
+    end
   end
 
   methods(Static = true)
+    function varargout = string_deserialize(varargin)
+      % STRING_DESERIALIZE usage: string_deserialize() : returns gtsam.KeySet
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 1
+        varargout{1} = gtsam_wrapper(1090, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.KeySet.string_deserialize');
+      end
+    end
+
+    function obj = loadobj(sobj)
+      % LOADOBJ Saves the object to a matlab-readable format
+      obj = gtsam.KeySet.string_deserialize(sobj);
+    end
   end
 end

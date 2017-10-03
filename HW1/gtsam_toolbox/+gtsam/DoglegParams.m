@@ -39,11 +39,11 @@ classdef DoglegParams < gtsam.NonlinearOptimizerParams
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(1176, varargin{2});
+          my_ptr = gtsam_wrapper(1228, varargin{2});
         end
-        base_ptr = gtsam_wrapper(1175, my_ptr);
+        base_ptr = gtsam_wrapper(1227, my_ptr);
       elseif nargin == 0
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1177);
+        [ my_ptr, base_ptr ] = gtsam_wrapper(1229);
       else
         error('Arguments do not match any overload of gtsam.DoglegParams constructor');
       end
@@ -52,7 +52,7 @@ classdef DoglegParams < gtsam.NonlinearOptimizerParams
     end
 
     function delete(obj)
-      gtsam_wrapper(1178, obj.ptr_gtsamDoglegParams);
+      gtsam_wrapper(1230, obj.ptr_gtsamDoglegParams);
     end
 
     function display(obj), obj.print(''); end
@@ -62,80 +62,80 @@ classdef DoglegParams < gtsam.NonlinearOptimizerParams
     function varargout = getAbsoluteErrorTol(this, varargin)
       % GETABSOLUTEERRORTOL usage: getAbsoluteErrorTol() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1179, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1231, this, varargin{:});
     end
 
     function varargout = getDeltaInitial(this, varargin)
       % GETDELTAINITIAL usage: getDeltaInitial() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1180, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1232, this, varargin{:});
     end
 
     function varargout = getErrorTol(this, varargin)
       % GETERRORTOL usage: getErrorTol() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1181, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1233, this, varargin{:});
     end
 
     function varargout = getLinearSolverType(this, varargin)
       % GETLINEARSOLVERTYPE usage: getLinearSolverType() : returns string
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1182, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1234, this, varargin{:});
     end
 
     function varargout = getMaxIterations(this, varargin)
       % GETMAXITERATIONS usage: getMaxIterations() : returns int
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1183, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1235, this, varargin{:});
     end
 
     function varargout = getRelativeErrorTol(this, varargin)
       % GETRELATIVEERRORTOL usage: getRelativeErrorTol() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1184, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1236, this, varargin{:});
     end
 
     function varargout = getVerbosity(this, varargin)
       % GETVERBOSITY usage: getVerbosity() : returns string
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1185, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1237, this, varargin{:});
     end
 
     function varargout = getVerbosityDL(this, varargin)
       % GETVERBOSITYDL usage: getVerbosityDL() : returns string
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1186, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1238, this, varargin{:});
     end
 
     function varargout = isCholmod(this, varargin)
       % ISCHOLMOD usage: isCholmod() : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1187, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1239, this, varargin{:});
     end
 
     function varargout = isIterative(this, varargin)
       % ISITERATIVE usage: isIterative() : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1188, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1240, this, varargin{:});
     end
 
     function varargout = isMultifrontal(this, varargin)
       % ISMULTIFRONTAL usage: isMultifrontal() : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1189, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1241, this, varargin{:});
     end
 
     function varargout = isSequential(this, varargin)
       % ISSEQUENTIAL usage: isSequential() : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1190, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1242, this, varargin{:});
     end
 
     function varargout = print(this, varargin)
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1191, this, varargin{:});
+        gtsam_wrapper(1243, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.DoglegParams.print');
       end
@@ -144,26 +144,26 @@ classdef DoglegParams < gtsam.NonlinearOptimizerParams
     function varargout = setAbsoluteErrorTol(this, varargin)
       % SETABSOLUTEERRORTOL usage: setAbsoluteErrorTol(double value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1192, this, varargin{:});
+      gtsam_wrapper(1244, this, varargin{:});
     end
 
     function varargout = setDeltaInitial(this, varargin)
       % SETDELTAINITIAL usage: setDeltaInitial(double deltaInitial) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1193, this, varargin{:});
+      gtsam_wrapper(1245, this, varargin{:});
     end
 
     function varargout = setErrorTol(this, varargin)
       % SETERRORTOL usage: setErrorTol(double value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1194, this, varargin{:});
+      gtsam_wrapper(1246, this, varargin{:});
     end
 
     function varargout = setIterativeParams(this, varargin)
       % SETITERATIVEPARAMS usage: setIterativeParams(IterativeOptimizationParameters params) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.IterativeOptimizationParameters')
-        gtsam_wrapper(1195, this, varargin{:});
+        gtsam_wrapper(1247, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.DoglegParams.setIterativeParams');
       end
@@ -173,7 +173,7 @@ classdef DoglegParams < gtsam.NonlinearOptimizerParams
       % SETLINEARSOLVERTYPE usage: setLinearSolverType(string solver) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1196, this, varargin{:});
+        gtsam_wrapper(1248, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.DoglegParams.setLinearSolverType');
       end
@@ -182,14 +182,14 @@ classdef DoglegParams < gtsam.NonlinearOptimizerParams
     function varargout = setMaxIterations(this, varargin)
       % SETMAXITERATIONS usage: setMaxIterations(int value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1197, this, varargin{:});
+      gtsam_wrapper(1249, this, varargin{:});
     end
 
     function varargout = setOrdering(this, varargin)
       % SETORDERING usage: setOrdering(Ordering ordering) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Ordering')
-        gtsam_wrapper(1198, this, varargin{:});
+        gtsam_wrapper(1250, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.DoglegParams.setOrdering');
       end
@@ -198,14 +198,14 @@ classdef DoglegParams < gtsam.NonlinearOptimizerParams
     function varargout = setRelativeErrorTol(this, varargin)
       % SETRELATIVEERRORTOL usage: setRelativeErrorTol(double value) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      gtsam_wrapper(1199, this, varargin{:});
+      gtsam_wrapper(1251, this, varargin{:});
     end
 
     function varargout = setVerbosity(this, varargin)
       % SETVERBOSITY usage: setVerbosity(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1200, this, varargin{:});
+        gtsam_wrapper(1252, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.DoglegParams.setVerbosity');
       end
@@ -215,7 +215,7 @@ classdef DoglegParams < gtsam.NonlinearOptimizerParams
       % SETVERBOSITYDL usage: setVerbosityDL(string verbosityDL) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1201, this, varargin{:});
+        gtsam_wrapper(1253, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.DoglegParams.setVerbosityDL');
       end

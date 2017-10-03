@@ -17,6 +17,10 @@
 %prior() : returns gtsam::LieMatrix
 %size() : returns size_t
 %
+%-------Serialization Interface-------
+%string_serialize() : returns string
+%string_deserialize(string serialized) : returns PriorFactorLieMatrix
+%
 classdef PriorFactorLieMatrix < gtsam.NoiseModelFactor
   properties
     ptr_gtsamPriorFactorLieMatrix = 0
@@ -27,11 +31,11 @@ classdef PriorFactorLieMatrix < gtsam.NoiseModelFactor
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(1380, varargin{2});
+          my_ptr = gtsam_wrapper(1436, varargin{2});
         end
-        base_ptr = gtsam_wrapper(1379, my_ptr);
+        base_ptr = gtsam_wrapper(1435, my_ptr);
       elseif nargin == 3 && isa(varargin{1},'numeric') && isa(varargin{2},'gtsam.LieMatrix') && isa(varargin{3},'gtsam.noiseModel.Base')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(1381, varargin{1}, varargin{2}, varargin{3});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(1437, varargin{1}, varargin{2}, varargin{3});
       else
         error('Arguments do not match any overload of gtsam.PriorFactorLieMatrix constructor');
       end
@@ -40,7 +44,7 @@ classdef PriorFactorLieMatrix < gtsam.NoiseModelFactor
     end
 
     function delete(obj)
-      gtsam_wrapper(1382, obj.ptr_gtsamPriorFactorLieMatrix);
+      gtsam_wrapper(1438, obj.ptr_gtsamPriorFactorLieMatrix);
     end
 
     function display(obj), obj.print(''); end
@@ -51,7 +55,7 @@ classdef PriorFactorLieMatrix < gtsam.NoiseModelFactor
       % ACTIVE usage: active(Values c) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1383, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1439, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.PriorFactorLieMatrix.active');
       end
@@ -60,20 +64,20 @@ classdef PriorFactorLieMatrix < gtsam.NoiseModelFactor
     function varargout = clone(this, varargin)
       % CLONE usage: clone() : returns gtsam::NonlinearFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1384, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1440, this, varargin{:});
     end
 
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1385, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1441, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(NonlinearFactor other, double tol) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.NonlinearFactor') && isa(varargin{2},'double')
-        gtsam_wrapper(1386, this, varargin{:});
+        gtsam_wrapper(1442, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.PriorFactorLieMatrix.equals');
       end
@@ -83,7 +87,7 @@ classdef PriorFactorLieMatrix < gtsam.NoiseModelFactor
       % ERROR usage: error(Values c) : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1387, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1443, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.PriorFactorLieMatrix.error');
       end
@@ -92,14 +96,14 @@ classdef PriorFactorLieMatrix < gtsam.NoiseModelFactor
     function varargout = keys(this, varargin)
       % KEYS usage: keys() : returns gtsam::KeyVector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1388, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1444, this, varargin{:});
     end
 
     function varargout = linearize(this, varargin)
       % LINEARIZE usage: linearize(Values c) : returns gtsam::GaussianFactor
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.Values')
-        varargout{1} = gtsam_wrapper(1389, this, varargin{:});
+        varargout{1} = gtsam_wrapper(1445, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.PriorFactorLieMatrix.linearize');
       end
@@ -109,7 +113,7 @@ classdef PriorFactorLieMatrix < gtsam.NoiseModelFactor
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1390, this, varargin{:});
+        gtsam_wrapper(1446, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.PriorFactorLieMatrix.print');
       end
@@ -119,7 +123,7 @@ classdef PriorFactorLieMatrix < gtsam.NoiseModelFactor
       % PRINTKEYS usage: printKeys(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(1391, this, varargin{:});
+        gtsam_wrapper(1447, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.PriorFactorLieMatrix.printKeys');
       end
@@ -128,17 +132,45 @@ classdef PriorFactorLieMatrix < gtsam.NoiseModelFactor
     function varargout = prior(this, varargin)
       % PRIOR usage: prior() : returns gtsam::LieMatrix
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1392, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1448, this, varargin{:});
     end
 
     function varargout = size(this, varargin)
       % SIZE usage: size() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(1393, this, varargin{:});
+      varargout{1} = gtsam_wrapper(1449, this, varargin{:});
     end
 
+    function varargout = string_serialize(this, varargin)
+      % STRING_SERIALIZE usage: string_serialize() : returns string
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 0
+        varargout{1} = gtsam_wrapper(1450, this, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.PriorFactorLieMatrix.string_serialize');
+      end
+    end
+
+    function sobj = saveobj(obj)
+      % SAVEOBJ Saves the object to a matlab-readable format
+      sobj = obj.string_serialize();
+    end
   end
 
   methods(Static = true)
+    function varargout = string_deserialize(varargin)
+      % STRING_DESERIALIZE usage: string_deserialize() : returns gtsam.PriorFactorLieMatrix
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 1
+        varargout{1} = gtsam_wrapper(1451, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.PriorFactorLieMatrix.string_deserialize');
+      end
+    end
+
+    function obj = loadobj(sobj)
+      % LOADOBJ Saves the object to a matlab-readable format
+      obj = gtsam.PriorFactorLieMatrix.string_deserialize(sobj);
+    end
   end
 end

@@ -25,6 +25,10 @@
 %Logmap(StereoPoint2 p) : returns Vector
 %identity() : returns gtsam::StereoPoint2
 %
+%-------Serialization Interface-------
+%string_serialize() : returns string
+%string_deserialize(string serialized) : returns StereoPoint2
+%
 classdef StereoPoint2 < gtsam.Value
   properties
     ptr_gtsamStereoPoint2 = 0
@@ -35,13 +39,13 @@ classdef StereoPoint2 < gtsam.Value
         if nargin == 2
           my_ptr = varargin{2};
         else
-          my_ptr = gtsam_wrapper(80, varargin{2});
+          my_ptr = gtsam_wrapper(86, varargin{2});
         end
-        base_ptr = gtsam_wrapper(79, my_ptr);
+        base_ptr = gtsam_wrapper(85, my_ptr);
       elseif nargin == 0
-        [ my_ptr, base_ptr ] = gtsam_wrapper(81);
+        [ my_ptr, base_ptr ] = gtsam_wrapper(87);
       elseif nargin == 3 && isa(varargin{1},'double') && isa(varargin{2},'double') && isa(varargin{3},'double')
-        [ my_ptr, base_ptr ] = gtsam_wrapper(82, varargin{1}, varargin{2}, varargin{3});
+        [ my_ptr, base_ptr ] = gtsam_wrapper(88, varargin{1}, varargin{2}, varargin{3});
       else
         error('Arguments do not match any overload of gtsam.StereoPoint2 constructor');
       end
@@ -50,7 +54,7 @@ classdef StereoPoint2 < gtsam.Value
     end
 
     function delete(obj)
-      gtsam_wrapper(83, obj.ptr_gtsamStereoPoint2);
+      gtsam_wrapper(89, obj.ptr_gtsamStereoPoint2);
     end
 
     function display(obj), obj.print(''); end
@@ -61,7 +65,7 @@ classdef StereoPoint2 < gtsam.Value
       % BETWEEN usage: between(StereoPoint2 p2) : returns gtsam::StereoPoint2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.StereoPoint2')
-        varargout{1} = gtsam_wrapper(84, this, varargin{:});
+        varargout{1} = gtsam_wrapper(90, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.StereoPoint2.between');
       end
@@ -71,7 +75,7 @@ classdef StereoPoint2 < gtsam.Value
       % COMPOSE usage: compose(StereoPoint2 p2) : returns gtsam::StereoPoint2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.StereoPoint2')
-        varargout{1} = gtsam_wrapper(85, this, varargin{:});
+        varargout{1} = gtsam_wrapper(91, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.StereoPoint2.compose');
       end
@@ -80,14 +84,14 @@ classdef StereoPoint2 < gtsam.Value
     function varargout = dim(this, varargin)
       % DIM usage: dim() : returns size_t
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(86, this, varargin{:});
+      varargout{1} = gtsam_wrapper(92, this, varargin{:});
     end
 
     function varargout = equals(this, varargin)
       % EQUALS usage: equals(StereoPoint2 point, double tol) : returns bool
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 2 && isa(varargin{1},'gtsam.StereoPoint2') && isa(varargin{2},'double')
-        varargout{1} = gtsam_wrapper(87, this, varargin{:});
+        varargout{1} = gtsam_wrapper(93, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.StereoPoint2.equals');
       end
@@ -96,14 +100,14 @@ classdef StereoPoint2 < gtsam.Value
     function varargout = inverse(this, varargin)
       % INVERSE usage: inverse() : returns gtsam::StereoPoint2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(88, this, varargin{:});
+      varargout{1} = gtsam_wrapper(94, this, varargin{:});
     end
 
     function varargout = localCoordinates(this, varargin)
       % LOCALCOORDINATES usage: localCoordinates(StereoPoint2 p) : returns Vector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'gtsam.StereoPoint2')
-        varargout{1} = gtsam_wrapper(89, this, varargin{:});
+        varargout{1} = gtsam_wrapper(95, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.StereoPoint2.localCoordinates');
       end
@@ -113,7 +117,7 @@ classdef StereoPoint2 < gtsam.Value
       % PRINT usage: print(string s) : returns void
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'char')
-        gtsam_wrapper(90, this, varargin{:});
+        gtsam_wrapper(96, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.StereoPoint2.print');
       end
@@ -123,7 +127,7 @@ classdef StereoPoint2 < gtsam.Value
       % RETRACT usage: retract(Vector v) : returns gtsam::StereoPoint2
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(91, this, varargin{:});
+        varargout{1} = gtsam_wrapper(97, this, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.StereoPoint2.retract');
       end
@@ -132,27 +136,41 @@ classdef StereoPoint2 < gtsam.Value
     function varargout = uL(this, varargin)
       % UL usage: uL() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(92, this, varargin{:});
+      varargout{1} = gtsam_wrapper(98, this, varargin{:});
     end
 
     function varargout = uR(this, varargin)
       % UR usage: uR() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(93, this, varargin{:});
+      varargout{1} = gtsam_wrapper(99, this, varargin{:});
     end
 
     function varargout = v(this, varargin)
       % V usage: v() : returns double
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(94, this, varargin{:});
+      varargout{1} = gtsam_wrapper(100, this, varargin{:});
     end
 
     function varargout = vector(this, varargin)
       % VECTOR usage: vector() : returns Vector
       % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
-      varargout{1} = gtsam_wrapper(95, this, varargin{:});
+      varargout{1} = gtsam_wrapper(101, this, varargin{:});
     end
 
+    function varargout = string_serialize(this, varargin)
+      % STRING_SERIALIZE usage: string_serialize() : returns string
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 0
+        varargout{1} = gtsam_wrapper(102, this, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.StereoPoint2.string_serialize');
+      end
+    end
+
+    function sobj = saveobj(obj)
+      % SAVEOBJ Saves the object to a matlab-readable format
+      sobj = obj.string_serialize();
+    end
   end
 
   methods(Static = true)
@@ -163,7 +181,7 @@ classdef StereoPoint2 < gtsam.Value
       % Usage
       % DIM()
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(96, varargin{:});
+        varargout{1} = gtsam_wrapper(103, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.StereoPoint2.Dim');
       end
@@ -176,7 +194,7 @@ classdef StereoPoint2 < gtsam.Value
       % Usage
       % EXPMAP(Vector v)
       if length(varargin) == 1 && isa(varargin{1},'double')
-        varargout{1} = gtsam_wrapper(97, varargin{:});
+        varargout{1} = gtsam_wrapper(104, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.StereoPoint2.Expmap');
       end
@@ -189,7 +207,7 @@ classdef StereoPoint2 < gtsam.Value
       % Usage
       % LOGMAP(StereoPoint2 p)
       if length(varargin) == 1 && isa(varargin{1},'gtsam.StereoPoint2')
-        varargout{1} = gtsam_wrapper(98, varargin{:});
+        varargout{1} = gtsam_wrapper(105, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.StereoPoint2.Logmap');
       end
@@ -202,11 +220,25 @@ classdef StereoPoint2 < gtsam.Value
       % Usage
       % IDENTITY()
       if length(varargin) == 0
-        varargout{1} = gtsam_wrapper(99, varargin{:});
+        varargout{1} = gtsam_wrapper(106, varargin{:});
       else
         error('Arguments do not match any overload of function gtsam.StereoPoint2.Identity');
       end
     end
 
+    function varargout = string_deserialize(varargin)
+      % STRING_DESERIALIZE usage: string_deserialize() : returns gtsam.StereoPoint2
+      % Doxygen can be found at http://research.cc.gatech.edu/borg/sites/edu.borg/html/index.html
+      if length(varargin) == 1
+        varargout{1} = gtsam_wrapper(107, varargin{:});
+      else
+        error('Arguments do not match any overload of function gtsam.StereoPoint2.string_deserialize');
+      end
+    end
+
+    function obj = loadobj(sobj)
+      % LOADOBJ Saves the object to a matlab-readable format
+      obj = gtsam.StereoPoint2.string_deserialize(sobj);
+    end
   end
 end
