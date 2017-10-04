@@ -68,7 +68,7 @@ function [LandmarksComputed, AllPosesComputed] = SLAMusingGTSAM2(Odom, ObservedL
     for i=1:q+1
         [aa,bb]=size(ObservedLandMarks{i}.Idx);
         for b=1:bb
-            graph.add(BearingRangeFactor2D(x(i), l(ObservedLandMarks{i}.Idx(b)), Rot2(90*degrees), sqrt(8), brNoise));
+            graph.add(BearingRangeFactor2D(x(i), l(ObservedLandMarks{i}.Idx(b)), Rot2(atan2(ObservedLandMarks{i}.Locations(b,2),ObservedLandMarks{i}.Locations(b,1))-Pose(3)), sqrt(8), brNoise));
         end   
     end
 %     graph_cont.add(BearingRangeFactor2D(i1, j1, Rot2(45*degrees), sqrt(8), brNoise));
