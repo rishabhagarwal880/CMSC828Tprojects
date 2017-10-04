@@ -1,7 +1,5 @@
 %% You can uncomment this for your development. But you must comment this out before you submit.
 % addpath(home/rishabh/repositories/CMSC828Tprojects/HW1/gtsam_toolbox);
- import gtsam.*
-
 %% Function Descriptions
 %{
 INPUT
@@ -28,14 +26,18 @@ OUTPUT
 %}
 
 %% Function Implementation
-function [LandmarksComputed, AllPosesComputed] = SLAMusingGTSAM2(Odom, ObservedLandMarks, StartingLocation)
+function [LandmarksComputed, AllPosesComputed] = SLAMusingGTSAM(Odom, ObservedLandMarks, StartingLocation)
+import gtsam.*
 
+%     LandmarksComputed=0;
+%     AllPosesComputed=0;
+    
     graph= NonlinearFactorGraph;
     [p,q]=size(Odom);
     [m,n]=size(ObservedLandMarks);
    
     for i=1:q+1
-        x(i)=symbol('x',i);    
+        x(i)=symbol('x',i);  
     end
     
 %     for b=1:m
@@ -45,30 +47,33 @@ function [LandmarksComputed, AllPosesComputed] = SLAMusingGTSAM2(Odom, ObservedL
     for b=2:m
             ID=union(ID,ObservedLandMarks{b}.Idx);
     end
-    
-    for a=1:size(ID)
-         l(ID(a))=symbol('l',ID(a)); 
+    [xp,yp]=size(ID);
+    for a=1:yp
+         l(ID(a))=symbol('l',ID(a));
     end
     
-    priorMean = Pose2(0.0, 0.0, 0.0); % prior at origin
+    priorMean = Pose2(StartingLocation(1), StartingLocation(2), StartingLocation(3)); % prior at origin
     priorNoise = noiseModel.Diagonal.Sigmas([0.3; 0.3; 0.1]);
     graph.add(PriorFactorPose2(x(1), priorMean, priorNoise));
     
    %odometry 
-    odometry = Pose2(2.0, 0.0, 0.0);
-    odometryNoise = noiseModel.Diagonal.Sigmas([0.2; 0.2; 0.1]);
+    odometry = Pose2(2.0, 2.0, 0.0);
+    odometryNoise = noiseModel.Diagonal.Sigmas([0.3; 0.3; 0.1]);
     for j=1:q
-        k=j+1;
-        graph.add(BetweenFactorPose2(x(j), x(k), odometry, odometryNoise));
+        graph.add(BetweenFactorPose2(x(j), x(j+1), odometry, odometryNoise));
     end
     
     % Add bearing/range measurement factors
     degrees = pi/180;
-    brNoise = noiseModel.Diagonal.Sigmas([0.1; 0.2]);
+    brNoise = noiseModel.Diagonal.Sigmas([0.1; 0.1]);
     for i=1:q+1
         [aa,bb]=size(ObservedLandMarks{i}.Idx);
         for b=1:bb
-            graph.add(BearingRangeFactor2D(x(i), l(ObservedLandMarks{i}.Idx(b)), Rot2(atan2(ObservedLandMarks{i}.Locations(b,2),ObservedLandMarks{i}.Locations(b,1))-Pose(3)), sqrt(8), brNoise));
+            if i==1
+                    graph.add(BearingRangeFactor2D(x(i), l(ObservedLandMarks{i}.Idx(b)), Rot2(atan2(ObservedLandMarks{i}.Locations(b,2),ObservedLandMarks{i}.Locations(b,1))-StartingLocation(3)), 2, brNoise));
+                else
+                    graph.add(BearingRangeFactor2D(x(i), l(ObservedLandMarks{i}.Idx(b)), Rot2(atan2(ObservedLandMarks{i}.Locations(b,2),ObservedLandMarks{i}.Locations(b,1))-(StartingLocation(3)+Odom(3,i-1))), 2, brNoise));
+            end
         end   
     end
 %     graph_cont.add(BearingRangeFactor2D(i1, j1, Rot2(45*degrees), sqrt(8), brNoise));
@@ -83,25 +88,31 @@ function [LandmarksComputed, AllPosesComputed] = SLAMusingGTSAM2(Odom, ObservedL
      initialEstimate.insert(x(1),Pose2(StartingLocation(1), StartingLocation(2), StartingLocation(3)));
      for k=1:q
          initialEstimate.insert(x(k+1),Pose2(StartingLocation(1)+Odom(1,k), StartingLocation(2)+Odom(2,k), StartingLocation(3)+Odom(3,k)));
+%             initialEstimate.insert(x(k+1),Pose2(StartingLocation(1), StartingLocation(2), StartingLocation(3)));
      end
      
      
-     for u=1:m
-         for v=1:size(ObservedLandMarks{u}.Idx)
-                if u==1
-                    initialEstimate.insert(l(ObservedLandMarks{u}.Idx(v)), Point2(ObservedLandMarks{u}.Locations(v,1)-(StartingLocation(1)), ObservedLandMarks{u}.Locations(v,2)-(StartingLocation(1))));
-                else
-                    initialEstimate.insert(l(ObservedLandMarks{u}.Idx(v)), Point2(ObservedLandMarks{u}.Locations(v,1)-(StartingLocation(1)+Odom(1,u-1)), ObservedLandMarks{u}.Locations(v,2)-(StartingLocation(1)+Odom(2,u-1))));
-                end
-         end
-     end
+%      for u=1:m
+%          for v=1:size(ObservedLandMarks{u}.Idx)
+%                 if u==1
+%                     initialEstimate.insert(l(ObservedLandMarks{u}.Idx(v)), Point2(ObservedLandMarks{u}.Locations(v,1)-(StartingLocation(1)), ObservedLandMarks{u}.Locations(v,2)-(StartingLocation(1))));
+%                 else
+%                     initialEstimate.insert(l(ObservedLandMarks{u}.Idx(v)), Point2(ObservedLandMarks{u}.Locations(v,1)-(StartingLocation(1)+Odom(1,u-1)), ObservedLandMarks{u}.Locations(v,2)-(StartingLocation(1)+Odom(2,u-1))));
+%                 end
+%          end
+%      end
         
+     
+         for v=1:yp
+               initialEstimate.insert(l(ID(v)), Point2(3.5 , -7.7));            
+         end
+
      initialEstimate.print(sprintf('\nInitial estimate:\n'));
 
      
     % Optimize using Levenberg-Marquardt optimization with an ordering from colamd
     optimizer = LevenbergMarquardtOptimizer(graph, initialEstimate);
-    result = optimizer.optimizeSafely();
+    result = optimizer.optimizeSafely()
     result.print(sprintf('\nFinal result:\n'));
 
     % Plot Covariance Ellipses

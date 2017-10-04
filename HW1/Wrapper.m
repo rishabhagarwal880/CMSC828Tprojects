@@ -6,7 +6,7 @@ clear all
 close all
 
 %% Add ToolBox to Path eg. ToolboxPath = 'gtsam_toolbox';
-addpath(ToolboxPath);
+addpath('gtsam_toolbox');
 
 %% Load Data
 load('HW1.mat');
