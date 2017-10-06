@@ -53,12 +53,12 @@ import gtsam.*
     end
     
     priorMean = Pose2(StartingLocation(1), StartingLocation(2), StartingLocation(3)); % prior at origin
-    priorNoise = noiseModel.Diagonal.Sigmas([0.3; 0.3; 0.1]);
+    priorNoise = noiseModel.Diagonal.Sigmas([0.01; 0.01; 0.01]);
     graph.add(PriorFactorPose2(x(1), priorMean, priorNoise));
     
    %odometry 
     odometry = Pose2(2.0, 2.0, 0.0);
-    odometryNoise = noiseModel.Diagonal.Sigmas([0.3; 0.3; 0.1]);
+    odometryNoise = noiseModel.Diagonal.Sigmas([2*0.3; 2*0.3; 0.017]);
     for j=1:q
         graph.add(BetweenFactorPose2(x(j), x(j+1), odometry, odometryNoise));
     end
@@ -70,9 +70,13 @@ import gtsam.*
         [aa,bb]=size(ObservedLandMarks{i}.Idx);
         for b=1:bb
             if i==1
-                    graph.add(BearingRangeFactor2D(x(i), l(ObservedLandMarks{i}.Idx(b)), Rot2(atan2(ObservedLandMarks{i}.Locations(b,2),ObservedLandMarks{i}.Locations(b,1))-StartingLocation(3)), 2, brNoise));
+                    graph.add(BearingRangeFactor2D(x(i), l(ObservedLandMarks{i}.Idx(b)),...
+                        Rot2(atan2(ObservedLandMarks{i}.Locations(b,2),ObservedLandMarks{i}.Locations(b,1))-StartingLocation(3)), ...
+                        sqrt((ObservedLandMarks{i,1}.Locations(b,1))^2 + (ObservedLandMarks{i,1}.Locations(b,2))^2), brNoise));
                 else
-                    graph.add(BearingRangeFactor2D(x(i), l(ObservedLandMarks{i}.Idx(b)), Rot2(atan2(ObservedLandMarks{i}.Locations(b,2),ObservedLandMarks{i}.Locations(b,1))-(StartingLocation(3)+Odom(3,i-1))), 2, brNoise));
+                    graph.add(BearingRangeFactor2D(x(i), l(ObservedLandMarks{i}.Idx(b)),...
+                        Rot2(atan2(ObservedLandMarks{i}.Locations(b,2),ObservedLandMarks{i}.Locations(b,1))-(StartingLocation(3)+Odom(3,i-1))), ...
+                        sqrt((ObservedLandMarks{i,1}.Locations(b,1))^2 + (ObservedLandMarks{i,1}.Locations(b,2))^2), brNoise));
             end
         end   
     end
@@ -121,6 +125,14 @@ import gtsam.*
     marginals = Marginals(graph, result);
     plot2DTrajectory(result, [], marginals);
     plot2DPoints(result, 'b', marginals);
+    
+    
+    for i = 1:(size(Odom, 2) + 1)
+       AllPosesComputed(:,i) = [result.at(points(i)).x, result.at(points(i)).y, result.at(points(i)).theta];
+    end
+    for i = 1:size(landmarks_idx, 2)
+       LandMarksComputed(i,:) = [ID(i), result.at(landmarks(landmarks_idx(i))).x, result.at(landmarks(landmarks_idx(i))).y];
+    end
 
 %     plot([result.at(i1).x; result.at(j1).x],[result.at(i1).y; result.at(j1).y], 'c-');
 %     plot([result.at(i2).x; result.at(j1).x],[result.at(i2).y; result.at(j1).y], 'c-');
