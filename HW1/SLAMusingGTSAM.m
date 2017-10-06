@@ -57,9 +57,10 @@ import gtsam.*
     graph.add(PriorFactorPose2(x(1), priorMean, priorNoise));
     
    %odometry 
-    odometry = Pose2(2.0, 2.0, 0.0);
+    %odometry = Pose2(2.0, 2.0, 0.0);
     odometryNoise = noiseModel.Diagonal.Sigmas([2*0.3; 2*0.3; 0.017]);
     for j=1:q
+	odometry = Pose2(Odom(1, j), Odom(2, j), Odom(3, j));
         graph.add(BetweenFactorPose2(x(j), x(j+1), odometry, odometryNoise));
     end
     
@@ -116,7 +117,7 @@ import gtsam.*
      
     % Optimize using Levenberg-Marquardt optimization with an ordering from colamd
     optimizer = LevenbergMarquardtOptimizer(graph, initialEstimate);
-    result = optimizer.optimizeSafely()
+    result = optimizer.optimizeSafely();
     result.print(sprintf('\nFinal result:\n'));
 
     % Plot Covariance Ellipses
@@ -128,12 +129,13 @@ import gtsam.*
     
     
     for i = 1:(size(Odom, 2) + 1)
-       AllPosesComputed(:,i) = [result.at(points(i)).x, result.at(points(i)).y, result.at(points(i)).theta];
+       AllPosesComputed(:,i) = [result.at(x(i)).x, result.at(x(i)).y, result.at(x(i)).theta];
     end
-    for i = 1:size(landmarks_idx, 2)
-       LandMarksComputed(i,:) = [ID(i), result.at(landmarks(landmarks_idx(i))).x, result.at(landmarks(landmarks_idx(i))).y];
+    for i = 1:size(ID, 2)
+       LandMarksComputed(i,:) = [ID(i), result.at(l(ID(i))).x, result.at(l(ID(i))).y];
     end
-
+ AllPosesComputed
+LandmarksComputed=LandMarksComputed
 %     plot([result.at(i1).x; result.at(j1).x],[result.at(i1).y; result.at(j1).y], 'c-');
 %     plot([result.at(i2).x; result.at(j1).x],[result.at(i2).y; result.at(j1).y], 'c-');
 %     plot([result.at(i3).x; result.at(j2).x],[result.at(i3).y; result.at(j2).y], 'c-');
