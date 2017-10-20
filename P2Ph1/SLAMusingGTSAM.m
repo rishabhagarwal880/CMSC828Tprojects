@@ -67,7 +67,6 @@ for i = 1:length(dat.Z)
 
    end
 end
-
 %% Add Gaussian priors for a pose and a landmark to constrain the system
 posePriorNoise  = noiseModel.Diagonal.Sigmas(poseNoiseSigmas);
 graph_container.add(PriorFactorPose3(symbol('x',1), truth.cameras{1}.pose, posePriorNoise));
@@ -77,14 +76,13 @@ graph_container.add(PriorFactorPoint3(symbol('q',10), Point3([TagSize 0 0]'), po
 graph_container.add(PriorFactorPoint3(symbol('r',10), Point3([TagSize TagSize 0]'), pointPriorNoise));
 graph_container.add(PriorFactorPoint3(symbol('s',10), Point3([TagSize 0 0]'), pointPriorNoise));
 
-%  Add Gaussian priors for a pose and a landmark to constrain the system
+% Add Gaussian priors for a pose and a landmark to constrain the system
 % cameraPriorNoise  = noiseModel.Diagonal.Sigmas(cameraNoiseSigmas);
 % firstCamera = SimpleCamera(truth.cameras{1}.pose, truth.K);
 % graph.add(PriorFactorSimpleCamera(symbol('c',1), firstCamera, cameraPriorNoise));
 % 
 % pointPriorNoise  = noiseModel.Isotropic.Sigma(3,pointNoiseSigma);
 % graph.add(PriorFactorPoint3(symbol('p',1), truth.points{1}, pointPriorNoise));
-
 %% Constraints
 % PoseNoise = noiseModel.Diagonal.Sigmas([2*0.1; 2*0.1]);
 tag(1) = Point3([TagSize 0 0]');
@@ -121,8 +119,8 @@ for i = 1:length(totalLandmarks)
     initialEstimate.insert(q(totalLandmarks(i)), estimateLandmark(2));
     initialEstimate.insert(r(totalLandmarks(i)), estimateLandmark(3));
     initialEstimate.insert(s(totalLandmarks(i)), estimateLandmark(4));
-
 end
+
 initialEstimate.print(sprintf('\nInitial estimate:\n  '));
 
 %% Fine grain optimization, allowing user to iterate step by step
@@ -144,7 +142,7 @@ for i = 1:size(totalLandmarks, 1)
 end
 graph_container.print(sprintf('\nFactor graph:\n'));
 
-% %% Plot results with covariance ellipses
+% Plot results with covariance ellipses
 % marginals = Marginals(graph_container, result);
 % cla
 % hold on;
