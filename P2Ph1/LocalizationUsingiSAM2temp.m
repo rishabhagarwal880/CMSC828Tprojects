@@ -1,5 +1,5 @@
-function AllPosesComputed = LocalizationUsingiSAM2(DetAll, K, TagSize, qIMUToC, TIMUToC,...
-                                                IMU, LeftImgs, TLeftImgs, LandMarksComputed);
+function AllPosesComputed = LocalizationUsingiSAM2temp(DetAll, K, TagSize, qIMUToC, TIMUToC,...
+                                                IMU, TLeftImgs, LandMarksComputed);
 % For Input and Output specifications refer to the project pdf
 
 import gtsam.*
@@ -14,6 +14,14 @@ params = gtsam.ISAM2Params;
 %     params.setRelinearizeSkip(1);
 % end
 isam = ISAM2(params);
+
+for j = 1:size(LandMarksComputed, 1)
+   truth.points1{j} = Point3([LandMarksComputed(j,2), LandMarksComputed(j,3), 0]');
+   truth.points2{j} = Point3([LandMarksComputed(j,4), LandMarksComputed(j,5), 0]');
+   truth.points3{j} = Point3([LandMarksComputed(j,6), LandMarksComputed(j,7), 0]');
+   truth.points4{j} = Point3([LandMarksComputed(j,8), LandMarksComputed(j,9), 0]');
+   truth.pointID{j} = LandMarksComputed(j,1);
+end
 
 dat.K = Cal3_S2(K(1,1), K(2,2), 0, K(1,3), K(2,3));
 truth.K = dat.K;
@@ -40,7 +48,6 @@ noiseModels.pose = noiseModel.Diagonal.Sigmas([0.001 0.001 0.001 0.1 0.1 0.1]');
 noiseModels.odometry = noiseModel.Diagonal.Sigmas([0.05 0.05 0.05 0.2 0.2 0.2]');
 noiseModels.point = noiseModel.Isotropic.Sigma(3, 0.1);
 noiseModels.measurement = noiseModel.Isotropic.Sigma(2, 1.0);
-
 %% Add constraints/priors
 % TODO: should not be from ground truth!
 newFactors = NonlinearFactorGraph;
@@ -58,7 +65,7 @@ for j=1:length(totalLandmarks)
 end
 
 
-newFactors.add(PriorFactorPose3(symbol('x',1), truth.cameras{1}.pose, noiseModels.point));
+newFactors.add(PriorFactorPose3(symbol('x',1), truth.cameras{1}.pose, noiseModels.pose));
 newFactors.add(PriorFactorPoint3(symbol('p',10), Point3([0 0 0]'), noiseModels.point));
 newFactors.add(PriorFactorPoint3(symbol('q',10), Point3([TagSize 0 0]'), noiseModels.point));
 newFactors.add(PriorFactorPoint3(symbol('r',10), Point3([TagSize TagSize 0]'), noiseModels.point));
@@ -88,6 +95,11 @@ for i = 1:length(dat.Z)
        newFactors.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,3}, noiseModels.measurement, symbol('x',i), symbol('r',j), dat.K));
        newFactors.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,4}, noiseModels.measurement, symbol('x',i), symbol('s',j), dat.K));
    end
+end
+initialEstimates = Values;
+for a = 1:length(dat.Z)
+     estimatePose = truth.cameras{a}.pose.retract(0.1*randn(6,1));
+    initialEstimates.insert(x(a),estimatePose);
 end
 
 for i=1:length(totalLandmarks)
@@ -123,21 +135,21 @@ tag(5) = Point3([TagSize TagSize 0]');
 tag(6) = Point3([-TagSize TagSize 0]');
 
 for i = 1:length(totalLandmarks)
-        newFactors.add(BetweenFactorPoint3(p(totalLandmarks(i)), q(totalLandmarks(i)), tag(1), pointPriorNoise));
-        newFactors.add(BetweenFactorPoint3(q(totalLandmarks(i)), r(totalLandmarks(i)), tag(2), pointPriorNoise));
-        newFactors.add(BetweenFactorPoint3(r(totalLandmarks(i)), s(totalLandmarks(i)), tag(3), pointPriorNoise));
-        newFactors.add(BetweenFactorPoint3(s(totalLandmarks(i)), p(totalLandmarks(i)), tag(4), pointPriorNoise));
-        newFactors.add(BetweenFactorPoint3(p(totalLandmarks(i)), r(totalLandmarks(i)), tag(5), pointPriorNoise));
-        newFactors.add(BetweenFactorPoint3(q(totalLandmarks(i)), s(totalLandmarks(i)), tag(6), pointPriorNoise));
+        newFactors.add(BetweenFactorPoint3(p(totalLandmarks(i)), q(totalLandmarks(i)), tag(1), noiseModels.point));
+        newFactors.add(BetweenFactorPoint3(q(totalLandmarks(i)), r(totalLandmarks(i)), tag(2), noiseModels.point));
+        newFactors.add(BetweenFactorPoint3(r(totalLandmarks(i)), s(totalLandmarks(i)), tag(3), noiseModels.point));
+        newFactors.add(BetweenFactorPoint3(s(totalLandmarks(i)), p(totalLandmarks(i)), tag(4), noiseModels.point));
+        newFactors.add(BetweenFactorPoint3(p(totalLandmarks(i)), r(totalLandmarks(i)), tag(5), noiseModels.point));
+        newFactors.add(BetweenFactorPoint3(q(totalLandmarks(i)), s(totalLandmarks(i)), tag(6), noiseModels.point));
 end
 %% Update ISAM
-if options.batchInitialization % Do a full optimize for first two poses
+% if options.batchInitialization % Do a full optimize for first two poses
     batchOptimizer = LevenbergMarquardtOptimizer(newFactors, initialEstimates);
     fullyOptimized = batchOptimizer.optimize();
     isam.update(newFactors, fullyOptimized);
-else
-    isam.update(newFactors, initialEstimates);
-end
+% else
+%     isam.update(newFactors, initialEstimates);
+% end
 % figure(1);tic;
 % t=toc; plot(frame_i,t,'r.'); tic
 result = isam.calculateEstimate();

@@ -401,7 +401,7 @@ end
 toc
 %% Optimize
 % Fine grain optimization, allowing user to iterate step by step
-close all
+close allG
 tic
 addpath('../../../gtsam_toolbox')
 import gtsam.*

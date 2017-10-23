@@ -15,9 +15,8 @@ load('DataMapping.mat','DetAll','Pose');
 load('CalibParams.mat');
 
 %% SLAM Using GTSAM
-[LandMarksComputed, AllPosesComputed] = SLAMusingGTSAM_temp(DetAll, K, TagSize, qIMUToC, TIMUToC);
+[LandMarksComputed,AllPosesComputed] = SLAMusingGTSAM_temp(DetAll, K, TagSize, qIMUToC, TIMUToC);
                                             
                                             
 %% Localization usin iSAM2
-AllPosesComputed = LocalizationUsingiSAM2(DetAll, K, TagSize, qIMUToC, TIMUToC,...
-                                                IMU, LeftImgs, TLeftImgs, LandMarksComputed);
+AllPosesComputed = LocalizationUsingiSAM2_ri(DetAll, K, TagSize, LandMarksComputed);
