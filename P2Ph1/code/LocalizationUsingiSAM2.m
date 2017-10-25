@@ -169,7 +169,7 @@ tag(5) = Point3([TagSize, TagSize, 0]');
 tag(6) = Point3([-TagSize, TagSize,0]');
 
 for c = 3:2:length(dat.Z)
-        for i = 1:1:c
+        for i = c-2:1:c
                    for k = 1:length(dat.Z{i})
                        j = dat.J{i}{k};
                        graph_container.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,1}, measurementNoise, X(i), uint64(ar_tag(j,1)), dat.K));
@@ -187,11 +187,13 @@ for c = 3:2:length(dat.Z)
                         initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),2)), Point3([LandMarksComputed(tagID,4),LandMarksComputed(tagID,5),0]'));
                         initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),3)), Point3([LandMarksComputed(tagID,6),LandMarksComputed(tagID,7),0]'));
                         initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),4)), Point3([LandMarksComputed(tagID,8),LandMarksComputed(tagID,9),0]'));
-                        estimatePose = truth.cameras{i}.pose.retract(0.1*randn(6,1));
-                        initialEstimate.insert(X(i), estimatePose);
+			if i~=1
+                        	estimatePose = truth.cameras{i}.pose.retract(0.1*randn(6,1));
+                        	initialEstimate.insert(X(i), estimatePose);
+			end
                    end
                    
-                   if i~=c
+                   if i~=length(dat.Z)
                         graph_container.add(BetweenFactorPose3(X(i),X(i+1), Pose3(Rot3(eye(3)), Point3([0 0 0]')), posePriorNoise));
                    end
         end
