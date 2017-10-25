@@ -136,11 +136,11 @@ end
                                             % end
 %% Create graph container and add factors to it from GTSAM library
 
-graph_container = NonlinearFactorGraph;
+% graph_container = NonlinearFactorGraph;
 
 
 %% Add Gaussian priors for a pose and a landmark to constrain the system
-graph_container.add(PriorFactorPose3(X(1), truth.cameras{1}.pose, posePriorNoise));
+% graph_container.add(PriorFactorPose3(X(1), truth.cameras{1}.pose, posePriorNoise));
 % graph_container.add(PriorFactorPoint3(ar_tag(10,1), Point3([0 0 0]'), pointPriorNoise));
 % graph_container.add(PriorFactorPoint3(ar_tag(10,2), Point3([TagSize 0 0]'), pointPriorNoise));
 % graph_container.add(PriorFactorPoint3(ar_tag(10,3), Point3([TagSize TagSize 0]'), pointPriorNoise));
@@ -154,7 +154,7 @@ graph_container.add(PriorFactorPose3(X(1), truth.cameras{1}.pose, posePriorNoise
 % end
 
 %% Initialize cameras and points close to ground truth
-initialEstimate = Values;
+% initialEstimate = Values;
 
                         % Camera Poses
                         % for i = 1:size(Pose_lock,1)
@@ -190,11 +190,15 @@ tag(3) = Point3([0, -TagSize, 0]');
 tag(4) = Point3([-TagSize, 0, 0]');
 tag(5) = Point3([TagSize, TagSize, 0]');
 tag(6) = Point3([-TagSize, TagSize,0]');
-
+initialEstimate = Values;
 for c = 3:2:length(dat.Z)
+    graph_container = NonlinearFactorGraph;
         for i = c-2:1:c
                    for k = 1:length(dat.Z{i})
                        j = dat.J{i}{k};
+                       if i==1 
+                            graph_container.add(PriorFactorPose3(X(1), truth.cameras{1}.pose, posePriorNoise)); 
+                       end
                        graph_container.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,1}, measurementNoise, X(i), uint64(ar_tag(j,1)), dat.K));
                        graph_container.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,2}, measurementNoise, X(i), uint64(ar_tag(j,2)), dat.K));
                        graph_container.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,3}, measurementNoise, X(i), uint64(ar_tag(j,3)), dat.K));
@@ -239,11 +243,14 @@ for c = 3:2:length(dat.Z)
                    end
                    
         end
-      isam.update(graph_container, initialEstimate);
+%       isam.update(graph_container, initialEstimate);
+      batchOptimizer = LevenbergMarquardtOptimizer(graph_container, initialEstimate);
+      fullyOptimized = batchOptimizer.optimize();
+      isam.update(graph_container, fullyOptimized);
 end
-  batchOptimizer = LevenbergMarquardtOptimizer(graph_container, initialEstimate);
-  fullyOptimized = batchOptimizer.optimize();
-  isam.update(graph_container, fullyOptimized);
+%   batchOptimizer = LevenbergMarquardtOptimizer(graph_container, initialEstimate);
+%   fullyOptimized = batchOptimizer.optimize();
+%   isam.update(graph_container, fullyOptimized);
 %% Fine grain optimization, allowing user to iterate step by step
 %isam.update(graph_container, fullyOptimized);
 result = isam.calculateEstimate();
