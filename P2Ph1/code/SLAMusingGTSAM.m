@@ -36,10 +36,10 @@ end
 
 measurementNoiseSigma = 1.0;
 %pointNoiseSigma = 0.1;
-pointNoiseSigma = 0.00001;
+pointNoiseSigma = 0.01;
 
 %poseNoiseSigmas = [0.00 0.00 0.00 0 0 0]';
-poseNoiseSigmas = [0.01 0.01 0.01 0.01 0.01 0.01]';
+poseNoiseSigmas = [0.1 0.1 0.1 0.1 0.1 0.1]';
 
 %% Create graph container and add factors to it from GTSAM library
 graph_container = NonlinearFactorGraph;
