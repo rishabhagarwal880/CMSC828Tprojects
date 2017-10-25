@@ -191,14 +191,17 @@ tag(4) = Point3([-TagSize, 0, 0]');
 tag(5) = Point3([TagSize, TagSize, 0]');
 tag(6) = Point3([-TagSize, TagSize,0]');
 initialEstimate = Values;
+blah=1;
 for c = 3:2:length(dat.Z)
     graph_container = NonlinearFactorGraph;
-        for i = c-2:1:c
+        for i = c-2:c
                    for k = 1:length(dat.Z{i})
                        j = dat.J{i}{k};
+                       
                        if i==1 
                             graph_container.add(PriorFactorPose3(X(1), truth.cameras{1}.pose, posePriorNoise)); 
                        end
+                       
                        graph_container.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,1}, measurementNoise, X(i), uint64(ar_tag(j,1)), dat.K));
                        graph_container.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,2}, measurementNoise, X(i), uint64(ar_tag(j,2)), dat.K));
                        graph_container.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,3}, measurementNoise, X(i), uint64(ar_tag(j,3)), dat.K));
@@ -210,6 +213,7 @@ for c = 3:2:length(dat.Z)
 %                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,1)), uint64(ar_tag(j,3)), tag(5), pointPriorNoise));
 %                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,2)), uint64(ar_tag(j,4)), tag(6), pointPriorNoise));
                        tagID=find(DetAll{i}(k,1)==LandMarksComputed(:,1));
+                       
                         if ~initialEstimate.exists(uint64(ar_tag(LandMarksComputed(tagID,1),1)))
                             graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,1)), uint64(ar_tag(j,2)), tag(2), pointPriorNoise));
                             graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,2)), uint64(ar_tag(j,3)), tag(1), pointPriorNoise));
@@ -227,10 +231,10 @@ for c = 3:2:length(dat.Z)
                             initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),4)), Point3([LandMarksComputed(tagID,8),LandMarksComputed(tagID,9),0]'));
                         end
 			
-                   if ~initialEstimate.exists(X(i))
-                        estimatePose = truth.cameras{i}.pose.retract(0.1*randn(6,1));
-                        initialEstimate.insert(X(i), estimatePose);
-                   end
+                       if ~initialEstimate.exists(X(i))
+                            estimatePose = truth.cameras{i}.pose.retract(0.1*randn(6,1));
+                            initialEstimate.insert(X(i), estimatePose);
+                       end
 			
                    end
                    
@@ -241,19 +245,29 @@ for c = 3:2:length(dat.Z)
                             graph_container.add(BetweenFactorPose3(X(i-1),X(i), Pose3(Rot3(eye(3)), Point3([0 0 0]')), posePriorNoise));
                        end
                    end
-                   
         end
-%       isam.update(graph_container, initialEstimate);
-      batchOptimizer = LevenbergMarquardtOptimizer(graph_container, initialEstimate);
-      fullyOptimized = batchOptimizer.optimize();
+        
+        if c~=3
+            for a=1:i
+                 graph_container.add(PriorFactorPose3(X(a), Pose3([result.at(X(a)).x, result.at(X(a)).y, result.at(X(a)).z]'), posePriorNoise)); 
+            end
+        end
+        
+        blah=blah+1;
+    lbparameters = LevenbergMarquardtParams;
+    lbparameters.setlambdaInitial(0.01);
+    lbparameters.setVerbosityLM('trylambda');
+      batchOptimizer = LevenbergMarquardtOptimizer(graph_container, initialEstimate, lbparameters);
+      fullyOptimized = batchOptimizer.optimizeSafely();
       isam.update(graph_container, fullyOptimized);
+      result = isam.calculateEstimate();
 end
 %   batchOptimizer = LevenbergMarquardtOptimizer(graph_container, initialEstimate);
 %   fullyOptimized = batchOptimizer.optimize();
 %   isam.update(graph_container, fullyOptimized);
 %% Fine grain optimization, allowing user to iterate step by step
 %isam.update(graph_container, fullyOptimized);
-result = isam.calculateEstimate();
+%result = isam.calculateEstimate();
 disp(result);
 %% Plot results with covariance ellipses
 CameraP2=[];
