@@ -1,4 +1,6 @@
-function [LandMarksComputed, AllPosesComputed] = SLAMusingGTSAM(DetAll, K, TagSize, qIMUToC, TIMUToC, IMU, LeftImgs, TLeftImgs, Mode)
+%function [LandMarksComputed, AllPosesComputed] = SLAMusingGTSAM(DetAll, K, TagSize, qIMUToC, TIMUToC, IMU, LeftImgs, TLeftImgs, Mode)
+function [LandMarksComputed, AllPosesComputed] = SLAMusingGTSAM(DetAll, K, TagSize)
+
 % For Input and Output specifications refer to the project pdf
 %AllPosesComputed
 import gtsam.*

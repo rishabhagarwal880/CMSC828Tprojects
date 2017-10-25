@@ -1,4 +1,4 @@
-function AllPosesComputed = LocalizationUsingiSAM2(DetAll, K, TagSize, LandMarksComputed, qIMUToC, TIMUToC, IMU, LeftImgs, TLeftImgs)
+function AllPosesComputed = LocalizationUsingiSAM2(DetAll, K, TagSize, LandMarksComputed)
 % For Input and Output specifications refer to the project pdf
 
 import gtsam.*
@@ -65,8 +65,23 @@ end
 % %    dat.odometry{i} = odometry;
 % % end
 
-%% Create graph container and add factors to it from GTSAM library
-graph_container = NonlinearFactorGraph;
+%% Initialize iSAM
+params = gtsam.ISAM2Params;
+% iSAM Options                                                                                                     
+options.hardConstraint = false;                                                                                    
+options.pointPriors = false;                                                                                       
+options.batchInitialization = true;                                                                                
+options.reorderInterval = 3;                                                                                      
+options.alwaysRelinearize = false; 
+
+if options.alwaysRelinearize
+    params.setRelinearizeSkip(1);
+end
+
+isam = ISAM2(params);
+
+
+
 
 measurementNoiseSigma = 1.0;
 pointNoiseSigma = 0.01;
@@ -119,13 +134,17 @@ end
                                             %     r(totalLandmarks(j))=symbol('r',totalLandmarks(j));
                                             %     s(totalLandmarks(j))=symbol('s',totalLandmarks(j));
                                             % end
+%% Create graph container and add factors to it from GTSAM library
+
+graph_container = NonlinearFactorGraph;
+
 
 %% Add Gaussian priors for a pose and a landmark to constrain the system
 graph_container.add(PriorFactorPose3(X(1), truth.cameras{1}.pose, posePriorNoise));
-graph_container.add(PriorFactorPoint3(ar_tag(10,1), Point3([0 0 0]'), pointPriorNoise));
-graph_container.add(PriorFactorPoint3(ar_tag(10,2), Point3([TagSize 0 0]'), pointPriorNoise));
-graph_container.add(PriorFactorPoint3(ar_tag(10,3), Point3([TagSize TagSize 0]'), pointPriorNoise));
-graph_container.add(PriorFactorPoint3(ar_tag(10,4), Point3([0 TagSize 0]'), pointPriorNoise));
+% graph_container.add(PriorFactorPoint3(ar_tag(10,1), Point3([0 0 0]'), pointPriorNoise));
+% graph_container.add(PriorFactorPoint3(ar_tag(10,2), Point3([TagSize 0 0]'), pointPriorNoise));
+% graph_container.add(PriorFactorPoint3(ar_tag(10,3), Point3([TagSize TagSize 0]'), pointPriorNoise));
+% graph_container.add(PriorFactorPoint3(ar_tag(10,4), Point3([0 TagSize 0]'), pointPriorNoise));
 
 % for i=1:length(LandMarksComputed)
 %         graph_container.add(PriorFactorPoint3(ar_tag(LandMarksComputed(i,1),1), Point3([LandMarksComputed(i,2) LandMarksComputed(i,3) 0]'), pointPriorNoise));
@@ -150,10 +169,13 @@ initialEstimate = Values;
                         %     estimateLandmark3 = Point3([LandMarksComputed(i,6),LandMarksComputed(i,7),0]');%0.1*randn(3,1));
                         %     estimateLandmark4 = Point3([LandMarksComputed(i,8),LandMarksComputed(i,9),0]');%0.1*randn(3,1));
                         %     
+%                         initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),1)), Point3([LandMarksComputed(tagID,2),LandMarksComputed(tagID,3),0]'));
+%                         initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),2)), Point3([LandMarksComputed(tagID,4),LandMarksComputed(tagID,5),0]'));
+%                         initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),3)), Point3([LandMarksComputed(tagID,6),LandMarksComputed(tagID,7),0]'));
+%                         initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),4)), Point3([LandMarksComputed(tagID,8),LandMarksComputed(tagID,9),0]'));
                         % end
 
 %% Add factors for all measurements
-
                         % %% Add Gaussian priors for a pose and a landmark to constrain the system
                         % graph_container.add(PriorFactorPose3(X(1), truth.cameras{1}.pose, posePriorNoise));
                         % graph_container.add(PriorFactorPoint3(ar_tag(10,1), Point3([0 0 0]'), pointPriorNoise));
@@ -161,6 +183,7 @@ initialEstimate = Values;
                         % graph_container.add(PriorFactorPoint3(ar_tag(10,3), Point3([TagSize TagSize 0]'), pointPriorNoise));
                         % graph_container.add(PriorFactorPoint3(ar_tag(10,4), Point3([0 TagSize 0]'), pointPriorNoise));
                         % 
+                        
 tag(1) = Point3([0, TagSize, 0]');
 tag(2) = Point3([TagSize, 0, 0]');
 tag(3) = Point3([0, -TagSize, 0]');
@@ -176,32 +199,51 @@ for c = 3:2:length(dat.Z)
                        graph_container.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,2}, measurementNoise, X(i), uint64(ar_tag(j,2)), dat.K));
                        graph_container.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,3}, measurementNoise, X(i), uint64(ar_tag(j,3)), dat.K));
                        graph_container.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,4}, measurementNoise, X(i), uint64(ar_tag(j,4)), dat.K));
-                       graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,1)), uint64(ar_tag(j,2)), tag(2), pointPriorNoise));
-                       graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,2)), uint64(ar_tag(j,3)), tag(1), pointPriorNoise));
-                       graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,3)), uint64(ar_tag(j,4)), tag(4), pointPriorNoise));
-                       graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,4)), uint64(ar_tag(j,1)), tag(3), pointPriorNoise));
-                       graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,1)), uint64(ar_tag(j,3)), tag(5), pointPriorNoise));
-                       graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,2)), uint64(ar_tag(j,4)), tag(6), pointPriorNoise));
-                        tagID=find(DetAll{i}(k,1)==LandMarksComputed(:,1));
-                        initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),1)), Point3([LandMarksComputed(tagID,2),LandMarksComputed(tagID,3),0]'));
-                        initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),2)), Point3([LandMarksComputed(tagID,4),LandMarksComputed(tagID,5),0]'));
-                        initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),3)), Point3([LandMarksComputed(tagID,6),LandMarksComputed(tagID,7),0]'));
-                        initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),4)), Point3([LandMarksComputed(tagID,8),LandMarksComputed(tagID,9),0]'));
-			if i~=1
-                        	estimatePose = truth.cameras{i}.pose.retract(0.1*randn(6,1));
-                        	initialEstimate.insert(X(i), estimatePose);
-			end
+%                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,1)), uint64(ar_tag(j,2)), tag(2), pointPriorNoise));
+%                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,2)), uint64(ar_tag(j,3)), tag(1), pointPriorNoise));
+%                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,3)), uint64(ar_tag(j,4)), tag(4), pointPriorNoise));
+%                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,4)), uint64(ar_tag(j,1)), tag(3), pointPriorNoise));
+%                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,1)), uint64(ar_tag(j,3)), tag(5), pointPriorNoise));
+%                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,2)), uint64(ar_tag(j,4)), tag(6), pointPriorNoise));
+                       tagID=find(DetAll{i}(k,1)==LandMarksComputed(:,1));
+                        if ~initialEstimate.exists(uint64(ar_tag(LandMarksComputed(tagID,1),1)))
+                            graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,1)), uint64(ar_tag(j,2)), tag(2), pointPriorNoise));
+                            graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,2)), uint64(ar_tag(j,3)), tag(1), pointPriorNoise));
+                            graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,3)), uint64(ar_tag(j,4)), tag(4), pointPriorNoise));
+                            graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,4)), uint64(ar_tag(j,1)), tag(3), pointPriorNoise));
+                            graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,1)), uint64(ar_tag(j,3)), tag(5), pointPriorNoise));
+                            graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,2)), uint64(ar_tag(j,4)), tag(6), pointPriorNoise));
+                            graph_container.add(PriorFactorPoint3(uint64(ar_tag(LandMarksComputed(tagID,1),1)), Point3([LandMarksComputed(tagID,2) LandMarksComputed(tagID,3) 0]'), pointPriorNoise));
+                            graph_container.add(PriorFactorPoint3(uint64(ar_tag(LandMarksComputed(tagID,1),2)), Point3([LandMarksComputed(tagID,4) LandMarksComputed(tagID,5) 0]'), pointPriorNoise));
+                            graph_container.add(PriorFactorPoint3(uint64(ar_tag(LandMarksComputed(tagID,1),3)), Point3([LandMarksComputed(tagID,6) LandMarksComputed(tagID,7) 0]'), pointPriorNoise));
+                            graph_container.add(PriorFactorPoint3(uint64(ar_tag(LandMarksComputed(tagID,1),4)), Point3([LandMarksComputed(tagID,8) LandMarksComputed(tagID,9) 0]'), pointPriorNoise));
+                            initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),1)), Point3([LandMarksComputed(tagID,2),LandMarksComputed(tagID,3),0]'));
+                            initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),2)), Point3([LandMarksComputed(tagID,4),LandMarksComputed(tagID,5),0]'));
+                            initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),3)), Point3([LandMarksComputed(tagID,6),LandMarksComputed(tagID,7),0]'));
+                            initialEstimate.insert(uint64(ar_tag(LandMarksComputed(tagID,1),4)), Point3([LandMarksComputed(tagID,8),LandMarksComputed(tagID,9),0]'));
+                        end
+			
+                   if ~initialEstimate.exists(X(i))
+                        estimatePose = truth.cameras{i}.pose.retract(0.1*randn(6,1));
+                        initialEstimate.insert(X(i), estimatePose);
+                   end
+			
                    end
                    
                    if i~=length(dat.Z)
-                        graph_container.add(BetweenFactorPose3(X(i),X(i+1), Pose3(Rot3(eye(3)), Point3([0 0 0]')), posePriorNoise));
+                       if i==1
+                            graph_container.add(BetweenFactorPose3(X(1),X(2), Pose3(Rot3(eye(3)), Point3([0 0 0]')), posePriorNoise));
+                       else
+                            graph_container.add(BetweenFactorPose3(X(i-1),X(i), Pose3(Rot3(eye(3)), Point3([0 0 0]')), posePriorNoise));
+                       end
                    end
+                   
         end
-        batchOptimizer = LevenbergMarquardtOptimizer(graph_container, initialEstimate);
-        fullyOptimized = batchOptimizer.optimize();
-        isam.update(graph_container, fullyOptimized);
+      isam.update(graph_container, initialEstimate);
 end
-
+  batchOptimizer = LevenbergMarquardtOptimizer(graph_container, initialEstimate);
+  fullyOptimized = batchOptimizer.optimize();
+  isam.update(graph_container, fullyOptimized);
 %% Fine grain optimization, allowing user to iterate step by step
 %isam.update(graph_container, fullyOptimized);
 result = isam.calculateEstimate();
