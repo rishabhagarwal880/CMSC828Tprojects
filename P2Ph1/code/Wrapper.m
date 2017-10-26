@@ -11,11 +11,12 @@ addpath('gtsam_toolbox');
 %% Load DatagGTSAM
 % Download data from the following link: 
 % https://drive.google.com/drive/folders/0B6NXn7BBGQf5MS0tUGR0Nno0Nk0
-load('DataMapping.mat','DetAll','Pose');
+load('DataSquare.mat','DetAll','Pose');
 load('CalibParams.mat');
+load('LandMarksComputed.mat');
 
 %% SLAM Using GTSAM
-[LandMarksComputed,AllPosesComputed] = SLAMusingGTSAM(DetAll, K, TagSize);
+% [LandMarksComputed,AllPosesComputed] = SLAMusingGTSAM(DetAll, K, TagSize);
                                             
                                             
 %% Localization usin iSAM2

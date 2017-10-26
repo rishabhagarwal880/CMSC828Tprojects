@@ -146,12 +146,6 @@ end
 % graph_container.add(PriorFactorPoint3(ar_tag(10,3), Point3([TagSize TagSize 0]'), pointPriorNoise));
 % graph_container.add(PriorFactorPoint3(ar_tag(10,4), Point3([0 TagSize 0]'), pointPriorNoise));
 
-% for i=1:length(LandMarksComputed)
-%         graph_container.add(PriorFactorPoint3(ar_tag(LandMarksComputed(i,1),1), Point3([LandMarksComputed(i,2) LandMarksComputed(i,3) 0]'), pointPriorNoise));
-%         graph_container.add(PriorFactorPoint3(ar_tag(LandMarksComputed(i,1),2), Point3([LandMarksComputed(i,4) LandMarksComputed(i,5) 0]'), pointPriorNoise));
-%         graph_container.add(PriorFactorPoint3(ar_tag(LandMarksComputed(i,1),3), Point3([LandMarksComputed(i,6) LandMarksComputed(i,7) 0]'), pointPriorNoise));
-%         graph_container.add(PriorFactorPoint3(ar_tag(LandMarksComputed(i,1),4), Point3([LandMarksComputed(i,8) LandMarksComputed(i,9) 0]'), pointPriorNoise));
-% end
 
 %% Initialize cameras and points close to ground truth
 % initialEstimate = Values;
@@ -190,11 +184,23 @@ tag(3) = Point3([0, -TagSize, 0]');
 tag(4) = Point3([-TagSize, 0, 0]');
 tag(5) = Point3([TagSize, TagSize, 0]');
 tag(6) = Point3([-TagSize, TagSize,0]');
+
+graph_container = NonlinearFactorGraph;
 initialEstimate = Values;
+
+% for i=1:length(LandMarksComputed)
+%         graph_container.add(PriorFactorPoint3(ar_tag(LandMarksComputed(i,1),1), Point3([LandMarksComputed(i,2) LandMarksComputed(i,3) 0]'), pointPriorNoise));
+%         graph_container.add(PriorFactorPoint3(ar_tag(LandMarksComputed(i,1),2), Point3([LandMarksComputed(i,4) LandMarksComputed(i,5) 0]'), pointPriorNoise));
+%         graph_container.add(PriorFactorPoint3(ar_tag(LandMarksComputed(i,1),3), Point3([LandMarksComputed(i,6) LandMarksComputed(i,7) 0]'), pointPriorNoise));
+%         graph_container.add(PriorFactorPoint3(ar_tag(LandMarksComputed(i,1),4), Point3([LandMarksComputed(i,8) LandMarksComputed(i,9) 0]'), pointPriorNoise));
+% end
+% graph_container.add(PriorFactorPose3(X(1), truth.cameras{1}.pose, posePriorNoise)); 
+% 
 blah=1;
-for c = 3:2:length(dat.Z)
-    graph_container = NonlinearFactorGraph;
-        for i = c-2:c
+% isam.update(graph_container, initialEstimate);
+
+for c = 11:10:length(dat.Z)
+        for i = c-10:c
                    for k = 1:length(dat.Z{i})
                        j = dat.J{i}{k};
                        
@@ -206,12 +212,12 @@ for c = 3:2:length(dat.Z)
                        graph_container.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,2}, measurementNoise, X(i), uint64(ar_tag(j,2)), dat.K));
                        graph_container.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,3}, measurementNoise, X(i), uint64(ar_tag(j,3)), dat.K));
                        graph_container.add(GenericProjectionFactorCal3_S2(dat.Z{i}{k,4}, measurementNoise, X(i), uint64(ar_tag(j,4)), dat.K));
-%                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,1)), uint64(ar_tag(j,2)), tag(2), pointPriorNoise));
-%                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,2)), uint64(ar_tag(j,3)), tag(1), pointPriorNoise));
-%                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,3)), uint64(ar_tag(j,4)), tag(4), pointPriorNoise));
-%                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,4)), uint64(ar_tag(j,1)), tag(3), pointPriorNoise));
-%                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,1)), uint64(ar_tag(j,3)), tag(5), pointPriorNoise));
-%                        graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,2)), uint64(ar_tag(j,4)), tag(6), pointPriorNoise));
+                       graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,1)), uint64(ar_tag(j,2)), tag(2), pointPriorNoise));
+                       graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,2)), uint64(ar_tag(j,3)), tag(1), pointPriorNoise));
+                       graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,3)), uint64(ar_tag(j,4)), tag(4), pointPriorNoise));
+                       graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,4)), uint64(ar_tag(j,1)), tag(3), pointPriorNoise));
+                       graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,1)), uint64(ar_tag(j,3)), tag(5), pointPriorNoise));
+                       graph_container.add(BetweenFactorPoint3(uint64(ar_tag(j,2)), uint64(ar_tag(j,4)), tag(6), pointPriorNoise));
                        tagID=find(DetAll{i}(k,1)==LandMarksComputed(:,1));
                        
                         if ~initialEstimate.exists(uint64(ar_tag(LandMarksComputed(tagID,1),1)))
@@ -235,7 +241,6 @@ for c = 3:2:length(dat.Z)
                             estimatePose = truth.cameras{i}.pose.retract(0.1*randn(6,1));
                             initialEstimate.insert(X(i), estimatePose);
                        end
-			
                    end
                    
                    if i~=length(dat.Z)
@@ -247,31 +252,39 @@ for c = 3:2:length(dat.Z)
                    end
         end
         
-        if c~=3
-            for a=1:i
-                 graph_container.add(PriorFactorPose3(X(a), Pose3([result.at(X(a)).x, result.at(X(a)).y, result.at(X(a)).z]'), posePriorNoise)); 
-            end
-        end
+%         if c~=3
+%             for a=1:i
+%                  graph_container.add(PriorFactorPose3(X(a), Pose3([result.at(X(a)).x, result.at(X(a)).y, result.at(X(a)).z]'), posePriorNoise)); 
+%             end
+%         end
         
-        blah=blah+1;
-    lbparameters = LevenbergMarquardtParams;
-    lbparameters.setlambdaInitial(0.01);
-    lbparameters.setVerbosityLM('trylambda');
-      batchOptimizer = LevenbergMarquardtOptimizer(graph_container, initialEstimate, lbparameters);
-      fullyOptimized = batchOptimizer.optimizeSafely();
-      isam.update(graph_container, fullyOptimized);
-      result = isam.calculateEstimate();
+        blah=blah+1
+        if c==11
+                lbparameters = LevenbergMarquardtParams;
+                lbparameters.setlambdaInitial(0.1);
+                lbparameters.setVerbosityLM('trylambda');
+                batchOptimizer = LevenbergMarquardtOptimizer(graph_container, initialEstimate);
+                fullyOptimized = batchOptimizer.optimize();
+                isam.update(graph_container, fullyOptimized);
+                
+        else
+                batchOptimizer = LevenbergMarquardtOptimizer(graph_container, initialEstimate);
+                fullyOptimized = batchOptimizer.optimize();
+                isam.update;
+        end
 end
+result = isam.calculateEstimate();
 %   batchOptimizer = LevenbergMarquardtOptimizer(graph_container, initialEstimate);
 %   fullyOptimized = batchOptimizer.optimize();
 %   isam.update(graph_container, fullyOptimized);
 %% Fine grain optimization, allowing user to iterate step by step
 %isam.update(graph_container, fullyOptimized);
 %result = isam.calculateEstimate();
+
 disp(result);
 %% Plot results with covariance ellipses
 CameraP2=[];
-for i= 1:size(Pose_lock,1)
+for i= 1:size(X)
     CameraP2=[CameraP2;result.at(symbol('x',i)).x, result.at(symbol('x',i)).y,result.at(symbol('x',i)).z];
 end
 AllPosesComputed=0;
