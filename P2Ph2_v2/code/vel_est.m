@@ -72,12 +72,12 @@ for i=1:Ni-1
     % Ransac Implementation
     [up_img_flow, up_M_conversion] = ransac(3, img_velocity, .002, M_conversion, camera_vel, false);
     v = up_M_conversion\up_img_flow;
-    v2 = M_conversion\camera_vel;
+%    v2 = M_conversion\camera_vel;
 
     R2*v(1:3);
     vel(i,:) = R2*v(1:3);
     omg(i,:) = R2*v(4:end);
-    vel_nr(i,:) = R2*v2(1:3);
+ %   vel_nr(i,:) = R2*v2(1:3);
 
 %     
 %     if isempty(DetAll{i+1})
@@ -87,38 +87,37 @@ for i=1:Ni-1
 end
 x=linspace(1,Ni,Ni);
 vel =[0 0 0;vel];
-vel_nr =[0 0 0;vel_nr];
+%vel_nr =[0 0 0;vel_nr];
 
-error = vel - VelGTSAM; 
-% plot(x,ve(:,1));
+% plot(x,vel(:,1),x,VelGTSAM(:,1),'--');
 % plot(x,vel(:,2),x,VelGTSAM(:,2),'--');
 % plot(x,vel(:,3),x,VelGTSAM(:,3),'--');
 
-figure
-subplot(3,1,1)       % add first plot in 2 x 1 grid
-plot(x,error(:,1))
-title('Velocity in X')
-
-subplot(3,1,2)       % add second plot in 2 x 1 grid
-plot(x,error(:,2))       % plot using + markers
-title('Velocity in Y')
+ figure
+ subplot(3,1,1)       % add first plot in 2 x 1 grid
+ plot(x,vel(:,1),x,VelGTSAM(:,1),'--')
+ title('Velocity in X')
  
-subplot(3,1,3)       % add second plot in 2 x 1 grid
-plot(x,error(:,3))       % plot using + markers
-title('Velocity in Z')
-% 
-% figure
-% subplot(3,1,1)       % add first plot in 2 x 1 grid
-% plot(x,vel(:,1),x,vel_nr(:,1),'--')
-% title('Velocity in X')
-% 
-% subplot(3,1,2)       % add second plot in 2 x 1 grid
-% plot(x,vel(:,2),x,vel_nr(:,2),':')       % plot using + markers
-% title('Velocity in Y')
-% 
-% subplot(3,1,3)       % add second plot in 2 x 1 grid
-% plot(x,vel(:,3),x,vel_nr(:,3),'--')       % plot using + markers
-% title('Velocity in Z')
+ subplot(3,1,2)       % add second plot in 2 x 1 grid
+ plot(x,vel(:,2),x,VelGTSAM(:,2),':')       % plot using + markers
+ title('Velocity in Y')
+ 
+ subplot(3,1,3)       % add second plot in 2 x 1 grid
+ plot(x,vel(:,3),x,VelGTSAM(:,3),'--')       % plot using + markers
+ title('Velocity in Z')
+
+%%figure
+%subplot(3,1,1)       % add first plot in 2 x 1 grid
+%plot(x,vel(:,1),x,vel_nr(:,1),'--')
+%title('Velocity in X')
+
+%subplot(3,1,2)       % add second plot in 2 x 1 grid
+%plot(x,vel(:,2),x,vel_nr(:,2),':')       % plot using + markers
+%title('Velocity in Y')
+
+%subplot(3,1,3)       % add second plot in 2 x 1 grid
+%plot(x,vel(:,3),x,vel_nr(:,3),'--')       % plot using + markers
+%title('Velocity in Z')
 vel
 omg
-
+velocity_estimation = vel; 
