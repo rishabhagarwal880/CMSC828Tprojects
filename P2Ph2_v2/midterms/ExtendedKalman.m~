@@ -1,0 +1,303 @@
+function Pose_extended = ExtendedKalman(DetAll, TLeftImgs, IMU,qIMUToC, TIMUToC, K, PoseGTSAM, PoseiSAM2, VelGTSAM, VeliSAM2)
+load('sym.mat');
+final_pose_x=[];
+final_pose_y=[];
+final_pose_z=[];
+count=1;
+or_x=[];
+or_y=[];
+or_z=[];
+vel_x=[];
+vel_y=[];
+vel_z=[];
+GT_ang=[];
+i_ang=[];
+%% Time syncronization
+T_val=[];
+% for syncing the IMU data with Camera Frames
+for j=1:size(TLeftImgs)
+    lowest=100;
+    for i=1:size(IMU)
+        mini=abs(IMU(i,11)-TLeftImgs(j));
+        if(mini<lowest)
+            lowest=mini;
+            id=i;
+        end
+    end
+    T_val=[T_val;lowest,id];
+end
+
+
+for m=1:size(T_val)
+    if(T_val(m,1)>0.9)
+        T_val(m,1)=1000;
+    end
+end
+
+[M,r,c]=unique(T_val(:,2),'stable');
+
+for i=1:size(T_val)
+    if(isempty(find(i==r(:,1), 1)))
+        T_val(i,1)=1000;
+    end
+end
+
+[indc,indr]=find(T_val(:,1)~=1000);
+
+%% IMU Data Transform
+
+K_mat=K;
+R_Robot=quat2rotm(qIMUToC');
+T_Robot=TIMUToC;
+
+%Transform the data
+for i=1:size(IMU,1)
+IMU(i,5:7) = R_Robot*IMU(i,5:7)'+T_Robot;
+IMU(i,8:10) = R_Robot*IMU(i,8:10)'+T_Robot;
+end
+
+counter=1;
+for j=1:size(IMU)
+    if(isempty(find(j==indc, 1)))
+        continue;
+    else
+        Updated_IMU(counter,:)=IMU(j,:);
+        counter=counter+1;
+    end
+end
+variances=var(Updated_IMU);
+aXb = variances(1,5);
+aYb = variances(1,6);
+aZb = variances(1,7);
+%% Initialization
+
+%Noise Variables IMU bias
+
+ba = [0.4109; 0.4024; 9.6343];
+bg = [-2.6667e-04; 6.6667e-05; -0.0024];
+
+
+% The state vector from GTSAM and Vel_Estimation
+for i=1:length(PoseGTSAM)
+     % Assuming PoseExtimation will give p and q
+    X_init(:,i) = [PoseGTSAM(i,1:3)';...
+                   quat2eul(PoseGTSAM(i,4:7))';... 
+                   VelGTSAM(i,:)';...
+                   bg;...
+                   ba];
+end
+
+
+% IMU Data
+for j = 1:length(IMU)
+    % Time Stamp seperate
+  %  U_time(j) = Updated_IMU(j,11);
+    U_init(:, j) = [IMU(j,5:7)';...
+                    IMU(j,8:10)'];               
+end
+
+% Error matrix
+errVn(1:6) = 0;
+errVn(7:9) = sqrt((diag([aXb, aYb, aZb]))) * ones(3,1);
+
+%% Initialize EKF with first two frames
+index=T_val(2,2);
+U = U_init(:,index);
+prevU = U; %update prevU whenever have an input signal.
+
+%% Start the Kalman 
+
+P = 0*eye(15);  % State
+%Q = diag([0.05, 0.05, 0.09, 1e-3, 1e-3, 1e-3, 0.05, 0.05, 0.09]);  % Process
+Q = diag([0.1, 0.1, 0.1, 0.5, 0.5, 0.5, 10, 10, 10]);
+R = diag([0.01, 0.01, 0.01, 0.001, 0.001, 0.008, 0.001, 0.01, 0.001]); % Measurement
+C = [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+    0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+    0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+    0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+    0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0;
+    0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0;
+    0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0;
+    0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0];
+
+prevTime = TLeftImgs(1);
+Xest = X_init(:,2); 
+
+for i=3:size(PoseGTSAM,1)
+    if(~isempty(find(i==indc, 1)))
+        
+        index=T_val(i,2);
+        deltaT = TLeftImgs(i) - prevTime;
+        
+       %input signal
+       % U = Updated_IMU(index,5:10);
+        U = U_init(:,index);
+
+        %EKF Prediction
+        %State Vector
+        Xn=Xest;
+        
+        %IMU Error in Accelerometer/Gyro
+         errVn(1:6) = 0; %0 Mean Noise for Process Update (Prediction)
+         errVn(7:9) = sqrt((diag([aXb, aYb, aZb]))) * ones(3,1);
+        
+        
+        ft = fEqn(U(1),U(2),U(3),U(4),U(5),U(6),...
+             Xn(4),Xn(5),Xn(6),Xn(7),...
+             Xn(8),Xn(9),Xn(10),Xn(11),Xn(12),Xn(13),Xn(14),Xn(15),...
+             errVn(1),errVn(2),errVn(3),errVn(4),errVn(5),errVn(6),...
+             errVn(7),errVn(8),errVn(9));
+        
+        
+        
+        At = AtFunc(U(1),U(2),U(3),U(4),U(5),U(6),...
+             Xn(4),Xn(5),Xn(6),Xn(10),...
+             Xn(11),Xn(12),Xn(13),Xn(14),Xn(15),...
+             errVn(1),errVn(2),errVn(3),errVn(4),errVn(5),errVn(6));
+        Ft = eye(15) + At.*deltaT;
+        
+        Ut = UtFunc(Xn(4),Xn(5),Xn(6));
+        Vt =Ut.*deltaT;
+        
+        Xest = Xest + ft.*deltaT;
+        P=Ft*P*Ft'+Vt*Q*Vt';
+        Z=X_init(1:9,i);
+        
+        
+        %Kalman Filter 
+        K = P * C' * inv(C * P * C' + R);
+        Xest = Xest + K * (Z - C*Xest); 
+        P =(eye(15) - K * C) * P;
+        
+        prevTime = TLeftImgs(i);
+
+        %2-norm of a matrix => largest singuluar value => sq.rt(largest eigen value(P'P))
+        final_pose_x=[final_pose_x,Xest(1)];
+        final_pose_y=[final_pose_y,Xest(2)];
+        final_pose_z=[final_pose_z,Xest(3)];
+        or_x=[or_x;Xest(4)];
+        or_y=[or_y;Xest(5)];
+        or_z=[or_z;Xest(6)];
+        vel_x=[vel_x;Xest(7)];
+        vel_y=[vel_y;Xest(8)];
+        vel_z=[vel_z;Xest(9)];
+        
+        NewPoseGTSAM(count,:)=PoseGTSAM(i,:);
+        NewPoseiSAM2(count,:)=PoseiSAM2(i,:);
+        NewVelGTSAM(count,:)=VelGTSAM(i,:);
+        NewVeliSAM2(count,:)=VeliSAM2(i,:);
+        count=count+1;
+    end
+end
+
+for j=1:size(NewPoseGTSAM)
+   GT_ang=[GT_ang; quat2eul(NewPoseGTSAM(j,4:7))];
+   i_ang =[i_ang; quat2eul(NewPoseiSAM2(j,4:7))];
+end
+
+err=NewPoseGTSAM(:,1:3)-[final_pose_x' final_pose_y' final_pose_z'];
+err(~any(err,2),:)=[];
+err1=mean(err);
+ 
+figure(2),
+plot3(final_pose_x',final_pose_y',final_pose_z','b');
+hold on
+plot3(NewPoseiSAM2(2:end,1),NewPoseiSAM2(2:end,2),NewPoseiSAM2(2:end,3),'r');
+hold on
+
+figure(3),
+subplot(3,1,1)
+plot(1:size(final_pose_x, 2), final_pose_x', 'b-')
+hold on
+plot(2:size(NewPoseiSAM2), NewPoseiSAM2(2:end,1), 'g')
+hold on
+plot(2:size(NewPoseiSAM2), NewPoseGTSAM(2:end,1), 'r')
+hold on
+title('X Component')
+xlabel('Frames')
+ylabel('Position')
+subplot(3,1,2)
+plot(1:size(final_pose_x, 2), final_pose_y', 'b')
+hold on
+plot(2:size(NewPoseiSAM2), NewPoseiSAM2(2:end,2), 'g')
+hold on
+plot(2:size(NewPoseiSAM2), NewPoseGTSAM(2:end,2), 'r')
+hold on
+title('Y Component')
+xlabel('Frames')
+ylabel('Position')
+subplot(3,1,3)
+plot(1:size(final_pose_x, 2), final_pose_z', 'b')
+hold on
+plot(2:size(NewPoseiSAM2), NewPoseiSAM2(2:end,3), 'g')
+hold on
+plot(2:size(NewPoseiSAM2), NewPoseGTSAM(2:end,3), 'r')
+hold on
+title('Z Component')
+xlabel('Frames')
+ylabel('Position')
+
+figure(4),
+subplot(3,1,1)
+plot(1:size(final_pose_x, 2), or_x, 'b')
+hold on
+plot(2:size(NewPoseiSAM2), i_ang(2:end,1), 'g')
+hold on
+plot(2:size(NewPoseiSAM2), GT_ang(2:end,1), 'r')
+hold on
+title('Phi Component')
+xlabel('Frames')
+ylabel('Angle')
+subplot(3,1,2)
+plot(1:size(final_pose_x, 2), or_y, 'b')
+hold on
+plot(2:size(NewPoseiSAM2), i_ang(2:end,2), 'g')
+hold on
+plot(2:size(NewPoseiSAM2), GT_ang(2:end,2), 'r')
+hold on
+title('Theta Component')
+xlabel('Frames')
+ylabel('Angle')
+subplot(3,1,3)
+plot(1:size(final_pose_x, 2), or_z, 'b')
+hold on
+plot(2:size(NewPoseiSAM2), i_ang(2:end,3), 'g')
+hold on
+plot(2:size(NewPoseiSAM2), GT_ang(2:end,3), 'r')
+hold on
+title('Psi Component')
+xlabel('Frames')
+ylabel('Angle')
+
+figure(5),
+subplot(3,1,1)
+plot(1:size(final_pose_x, 2), vel_x, 'b')
+hold on
+plot(2:size(NewPoseiSAM2), NewVeliSAM2(2:end,1), 'g')
+hold on
+plot(2:size(NewPoseiSAM2), NewVelGTSAM(2:end,1), 'r')
+hold on
+title('X dot Component')
+xlabel('Frames')
+ylabel('Velocity')
+subplot(3,1,2)
+plot(1:size(final_pose_x, 2), vel_y, 'b')
+hold on
+plot(2:size(NewPoseiSAM2), NewVeliSAM2(2:end,2), 'g')
+hold on
+plot(2:size(NewPoseiSAM2), NewVelGTSAM(2:end,2), 'r')
+hold on
+title('Y dot Component')
+xlabel('Frames')
+ylabel('Velocity')
+subplot(3,1,3)
+plot(1:size(final_pose_x, 2), vel_z, 'b')
+hold on
+plot(2:size(NewPoseiSAM2), NewVeliSAM2(2:end,3), 'g')
+hold on
+plot(2:size(NewPoseiSAM2), NewVelGTSAM(2:end,3), 'r')
+hold on
+title('Z dot Component')
+xlabel('Frames')
+ylabel('Velocity')
